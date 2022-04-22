@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var blindingClass:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        blindingClass = ActivityMainBinding.inflate(layoutInflater)
+        blindingClass = ActivityMainBinding.inflate(layoutInflater)
 //        blindingClass - это основной контейнер где хранятся все эелементы с MainActivity
 //        пример работы blindingClass.beginButton.width = 100
           setContentView(blindingClass.root)
