@@ -1,5 +1,5 @@
 package Logic
-import java.util.Stack
+import java.util.*
 import kotlin.reflect.typeOf
 
 open class MainBlock {
@@ -42,8 +42,10 @@ class Arithmetic : MainBlock() {
       for (i in text) {
           if(i.isDigit()){
             RPN+=i
+
           }
         else{
+              RPN+=" "
             if (i == '-' || i == '+'){
                 if(!stack.isEmpty()) {
                     if (stack.peek() == '-' || stack.peek() == '+' || stack.peek() == '/' || stack.peek() == '*') {
@@ -76,53 +78,59 @@ class Arithmetic : MainBlock() {
                  }
               }
         }
+
       while(!stack.isEmpty()) RPN+= stack.pop()
-      var answer = 0
-      for (i in RPN){
-          if (i.isDigit()) {
-            stack.push(i)
+        println(RPN)
+      val stackInt: Stack<String> = Stack<String>()
+      var value = ""
+      for (i in 0..RPN.length){
+          if (RPN[i] != '-' && RPN[i] != '+' && RPN[i] != '/' && RPN[i] != '*') {
+              if (RPN[i+1].isDigit())
+              value+=RPN[i]
           }
           else {
-              if (i == '+'){
-                  val x = stack.pop().digitToInt()
-                  val y = stack.pop().digitToInt()
-                  val value = x+y
-                //  println(value)
-//                  val count = stack.pop().code + stack.pop().code
-                 stack.push(value.digitToChar())
+              stackInt.push(value)
+              println(stackInt)
+              value = ""
+              if (RPN[i] == '+'){
+                  val x = stackInt.pop()
+                  val y = stackInt.pop()
+                  val count = x.toInt() + y.toInt()
+                  //print(count)
+                  stackInt.push(count.toString())
               }
               else
-              if (i == '-'){
-                  val x = stack.pop().digitToInt()
-                  val y = stack.pop().digitToInt()
-                  val value = x-y
+              if (RPN[i] == '-'){
+                  val x = stackInt.pop()
+                  val y = stackInt.pop()
+                  val count = y.toInt() - x.toInt()
                  // println(value)
 //                  val count = stack.pop().code + stack.pop().code
-                  stack.push(value.digitToChar())
+                  stackInt.push(count.toString())
               }
               else
-              if (i == '*'){
-                  val x = stack.pop().digitToInt()
-                  val y = stack.pop().digitToInt()
-                  val value = x*y
+              if (RPN[i] == '*'){
+                  val x = stackInt.pop()
+                  val y = stackInt.pop()
+                  val count = x.toInt() * y.toInt()
                   //println(value)
 //                  val count = stack.pop().code + stack.pop().code
-                  stack.push(value.digitToChar())
+                  stackInt.push(count.toString())
               }
               else
-              if (i == '/'){
-                  val x = stack.pop().digitToInt()
-                  val y = stack.pop().digitToInt()
-                  val value = x/y
+              if (RPN[i] == '/'){
+                  val x = stackInt.pop()
+                  val y = stackInt.pop()
+                  val count = x.toInt() / y.toInt()
                   //println(value)
 //                  val count = stack.pop().code + stack.pop().code
-                  stack.push(value.digitToChar())
+                  stackInt.push(count.toString())
               }
 
           }
-          println(stack)
+          //println(stackInt)
       }
-      println(stack.pop())
+      println(stackInt.pop())
   }
 }
 
@@ -131,6 +139,7 @@ fun main(){
         val a = ContainerVariables()
         a.indetify("aaa,b,a2,aaw233,    awd        ,a23,   adwadwadawdadwa,wdadsawd")
         val b = Arithmetic()
-         b.cacluate("3+4")
-      // b.cacluate("(6+9-5)/(8+1*2)+7")
+
+             b.cacluate("3+4+2")
+       //b.cacluate("(3+2)")
     }
