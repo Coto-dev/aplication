@@ -7,13 +7,12 @@
             <solid android:color="@color/button_color"/>
         </shape>
     </item>
-    <item android:gravity="top">
+    <item android:gravity="top" >
         <shape android:shape="rectangle">
             <size android:height="30dp"/>
             <corners android:radius="10dp" />
             <solid android:color="@color/button_sheet"/>
-           <stroke android:color="@color/black"/>
+           <stroke android:color="@color/black" />
         </shape>
     </item>
-
 </layer-list>
