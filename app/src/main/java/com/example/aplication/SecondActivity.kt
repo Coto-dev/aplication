@@ -22,18 +22,12 @@ class SecondActivity : AppCompatActivity() {
         val bottomSheetBehavior: BottomSheetBehavior<*> =
             BottomSheetBehavior.from<View>(frame)
 
-
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        bottomSheetBehavior.peekHeight = 200
+        bottomSheetBehavior.peekHeight = 150
         bottomSheetBehavior.isHideable = false
-
-        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {}
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-        })
 
     }
 
