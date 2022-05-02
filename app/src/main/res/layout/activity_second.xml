@@ -9,7 +9,7 @@
     tools:context=".MainActivity"
     android:background="@color/background_color">
 
-    
+
 <FrameLayout
     android:id="@+id/sheet"
     android:layout_width="match_parent"
@@ -25,19 +25,20 @@
         android:layout_gravity="center|top"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_baseline_remove_24"></ImageView>
-</FrameLayout>
 
+
+</FrameLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
         android:layout_marginBottom="60dp"
-        android:background="@color/button_color"
+        android:layout_marginEnd="12dp"
         android:backgroundTint="@color/button_color"
         android:src="@drawable/ic_baseline_play_arrow_24"
-        app:backgroundTint="@color/button_color">
+        app:layout_anchor="@+id/sheet"
+        app:layout_anchorGravity="top|end">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
