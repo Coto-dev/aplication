@@ -14,7 +14,7 @@
     android:layout_width="match_parent"
     android:layout_height="400dp"
     app:behavior_hideable="true"
-    app:behavior_peekHeight="50dp"
+    app:behavior_peekHeight="30dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     android:background="@drawable/bottom_sheet">
 
@@ -32,7 +32,7 @@
             android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_gravity="center"
@@ -42,8 +42,13 @@
                     android:isScrollContainer="true"
                     tools:ignore="ScrollViewSize">
                     <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/block_button"/>
+                    <Button
+                        android:layout_marginTop="20dp"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/block_button"/>
 
                 </LinearLayout>
