@@ -24,8 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_baseline_remove_24"></ImageView>
-
+        android:src="@drawable/ic_baseline_remove_24" />
 
 </FrameLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,8 +36,6 @@
         android:backgroundTint="@color/button_color"
         android:src="@drawable/ic_baseline_play_arrow_24"
         app:layout_anchor="@+id/sheet"
-        app:layout_anchorGravity="top|end">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        app:layout_anchorGravity="top|end"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
