@@ -2,7 +2,7 @@ package com.example.aplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import com.example.aplication.databinding.ActivityMainBinding
@@ -18,10 +18,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     fun onClickStart(view: View){
         val intent = Intent(this, SecondActivity::class.java)
         startActivity(intent)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) finish()
+        return true
+    }
 }
+//:)
