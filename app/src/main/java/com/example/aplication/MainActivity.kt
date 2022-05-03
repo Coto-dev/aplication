@@ -1,5 +1,5 @@
 package com.example.aplication
-
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,18 +8,22 @@ import android.widget.Button
 import com.example.aplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var blindingClass:ActivityMainBinding
+    lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        blindingClass = ActivityMainBinding.inflate(layoutInflater)
-//        blindingClass - это основной контейнер где хранятся все эелементы с MainActivity
-//        пример работы blindingClass.beginButton.width = 100
-          setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+        binding.beginButton.setOnClickListener{
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
+
     }
-    fun OnClickStart(view: View){ // функция привязана к кнопке с id beginButton
-        //val beginButton = findViewById<Button>(R.id.beginButton)
-        setContentView(R.layout.activity_second)
+
+    fun onClickStart(view: View){
+        val intent = Intent(this, SecondActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

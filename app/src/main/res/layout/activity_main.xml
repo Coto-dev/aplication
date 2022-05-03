@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DCDDF8"
+    android:backgroundTint="#DCDDF8"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/beginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="OnClickStart"
-        android:text="Начать"
+        android:layout_width="293dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="@dimen/buttonMargin"
+        android:layout_marginEnd="@dimen/buttonMargin"
+        android:background="@drawable/button"
+        android:text="@string/Hello"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.829" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
