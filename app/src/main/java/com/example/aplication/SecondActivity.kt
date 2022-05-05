@@ -13,6 +13,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.aplication.databinding.ActivitySecondBinding
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,7 +38,7 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.isHideable = false
 
         binding.govno.setOnClickListener {
-            val Params = CoordinatorLayout.LayoutParams(600, 300)
+            val Params = CoordinatorLayout.LayoutParams(1750, 300)
             var SHIT = ForCustomView(this)
             binding.root.addView(SHIT, Params)
             SHIT.setOnTouchListener(getDragNDrop())
@@ -48,22 +49,18 @@ class SecondActivity : AppCompatActivity() {
     var touchPoint = Point(0f, 0f)
     @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
     private fun getDragNDrop() = View.OnTouchListener { view, event ->
-        Log.i("hello", "you're gay")
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    Log.i("hello", "hello1")
                     touchPoint.x = event.x
                     touchPoint.y = event.y
                     true
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    Log.i("hello", "hello2")
                             view.x += event.x - touchPoint.x
                             view.y += event.y - touchPoint.y
                     false
                 }
                 else -> {
-                    Log.i("hello", "hello3")
                     true
                 }
             }

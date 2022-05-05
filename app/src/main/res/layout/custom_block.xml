@@ -16,7 +16,7 @@
         android:id="@+id/text_input"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:background="#000000"
+        android:background="#00000000"
         android:inputType="text"/>
 
 </merge>
