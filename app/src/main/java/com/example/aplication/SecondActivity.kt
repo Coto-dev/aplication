@@ -1,5 +1,6 @@
 package com.example.aplication
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.content.Intent
@@ -7,16 +8,19 @@ import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.example.aplication.databinding.ActivityMainBinding
+import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class SecondActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySecondBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding= ActivitySecondBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
-
+        setContentView(binding.root)
         val frame = findViewById<FrameLayout>(R.id.sheet)
         val bottomSheetBehavior: BottomSheetBehavior<*> =
             BottomSheetBehavior.from<View>(frame)
@@ -28,7 +32,11 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.peekHeight = 150
         bottomSheetBehavior.isHideable = false
 
+
     }
 
+
 }
+
+
 
