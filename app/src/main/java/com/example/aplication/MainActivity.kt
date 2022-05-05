@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.aplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
     fun onClickStart(view: View){
         val intent = Intent(this, SecondActivity::class.java)

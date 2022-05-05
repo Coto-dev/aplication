@@ -10,10 +10,6 @@
     tools:context=".MainActivity"
     android:background="@color/background_color">
 
-    <com.example.aplication.ForCustomView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <FrameLayout
         android:id="@+id/sheet"
         android:layout_width="match_parent"
@@ -50,7 +46,8 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:layout_marginTop="60dp"
+                    android:id="@+id/govno"
+                    android:layout_marginTop="80dp"
                     android:layout_gravity="center"
                     android:text="@string/initialization"
                     android:layout_width="250dp"
