@@ -7,11 +7,13 @@ class Arithmetic : MainBlock() {
     val name :String? = null
     val previousBlock : MainBlock? = null
     val nextBlock : MainBlock? = null
+    var textBar: String?=null
+    var variable: String?=null
     fun assign(textBar: String,variable:String){
         vars.replace(assignmentVar(variable),calculate(recognize(textBar)))
         println(vars)
     }
-    fun assignmentVar(textBar:String): String {
+    private fun assignmentVar(textBar:String): String {
         var variable:String =""
         if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)|^a-zA-Z])"""))) {
             val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(textBar)
@@ -24,7 +26,7 @@ class Arithmetic : MainBlock() {
         }
         return variable
     }
-    fun recognize(textBar:String):String{
+    private fun recognize(textBar:String):String{
         var text = textBar
         if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)|^a-zA-Z])"""))) {
             val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").findAll(textBar)
@@ -48,7 +50,7 @@ class Arithmetic : MainBlock() {
         println(text)
         return text
     }
-    fun calculate(textBar:String):Int{
+    private fun calculate(textBar:String):Int{
         println(textBar)
         val stack: Stack<Char> = Stack<Char>()
         val text = textBar.replace("""\s""".toRegex(), "")
