@@ -2,4 +2,8 @@
     <string name="app_name">Menu</string>
     <string name="Hello">Let\'s Go!!!!</string>
     <string name="initialization">Инициализация</string>
+    <string name="forcycle">Цикл for</string>
+    <string name="whilecycle"> Цикл While</string>
+    <string name="OperatorIf">Оператор if</string>
+    <string name="OperatorIfElse">Оператор if else</string>
 </resources>

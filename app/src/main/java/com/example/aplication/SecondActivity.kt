@@ -34,10 +34,34 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        bottomSheetBehavior.peekHeight = 150
+        bottomSheetBehavior.peekHeight = 135
         bottomSheetBehavior.isHideable = false
 
-        binding.govno.setOnClickListener {
+        binding.forInitialization.setOnClickListener {
+            val Params = CoordinatorLayout.LayoutParams(1750, 300)
+            var SHIT = ForCustomView(this)
+            binding.root.addView(SHIT, Params)
+            SHIT.setOnTouchListener(getDragNDrop())
+        }
+        binding.forCycleFor.setOnClickListener {
+            val Params = CoordinatorLayout.LayoutParams(1750, 300)
+            var SHIT = ForCustomView(this)
+            binding.root.addView(SHIT, Params)
+            SHIT.setOnTouchListener(getDragNDrop())
+        }
+        binding.forCycleWhile.setOnClickListener {
+            val Params = CoordinatorLayout.LayoutParams(1750, 300)
+            var SHIT = ForCustomView(this)
+            binding.root.addView(SHIT, Params)
+            SHIT.setOnTouchListener(getDragNDrop())
+        }
+        binding.forOperatorIf.setOnClickListener {
+            val Params = CoordinatorLayout.LayoutParams(1750, 300)
+            var SHIT = ForCustomView(this)
+            binding.root.addView(SHIT, Params)
+            SHIT.setOnTouchListener(getDragNDrop())
+        }
+        binding.forOperatorIfElse.setOnClickListener {
             val Params = CoordinatorLayout.LayoutParams(1750, 300)
             var SHIT = ForCustomView(this)
             binding.root.addView(SHIT, Params)

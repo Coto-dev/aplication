@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
+
 
     <View
         android:layout_gravity="center"
         android:layout_width="350dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:id="@+id/for_arifmetic"
-        android:background="@drawable/button" />
+        android:background="@drawable/button">
+    </View>
+
+  <!--  <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/initialization"
+        app:layout_anchor="@+id/for_arifmetic"
+        app:layout_anchorGravity="top|center" />-->
 
     <EditText
-        android:layout_gravity="center"
         android:id="@+id/text_input"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:background="#00000000"
-        android:inputType="text"/>
+        android:inputType="text"
+        app:layout_anchor="@+id/for_arifmetic"
+        app:layout_anchorGravity="center" />
 
 </merge>

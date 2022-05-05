@@ -16,7 +16,7 @@
         android:layout_height="400dp"
         android:background="@drawable/bottom_sheet"
         app:behavior_hideable="true"
-        app:behavior_peekHeight="30dp"
+        app:behavior_peekHeight="40dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
@@ -46,7 +46,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/govno"
+                    android:id="@+id/for_initialization"
                     android:layout_marginTop="80dp"
                     android:layout_gravity="center"
                     android:text="@string/initialization"
@@ -55,6 +55,35 @@
                     android:background="@drawable/block_button" />
 
                 <Button
+                    android:id="@+id/for_cycle_for"
+                    android:layout_gravity="center"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:text="@string/forcycle"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/block_button" />
+
+                <Button
+                    android:id="@+id/for_cycle_while"
+                    android:text="@string/whilecycle"
+                    android:layout_gravity="center"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/block_button" />
+
+                <Button
+                    android:id="@+id/for_operator_if"
+                    android:text="@string/OperatorIf"
+                    android:layout_gravity="center"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/block_button" />
+
+                <Button
+                    android:id="@+id/for_operator_if_else"
+                    android:text="@string/OperatorIfElse"
                     android:layout_gravity="center"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
@@ -68,33 +97,6 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/block_button" />
 
-                <Button
-                    android:layout_gravity="center"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
-
-                <Button
-                    android:layout_gravity="center"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
-
-                <Button
-                    android:layout_gravity="center"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
-
-                <Button
-                    android:layout_gravity="center"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
             </LinearLayout>
 
         </ScrollView>
