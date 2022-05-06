@@ -10,10 +10,12 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplication.databinding.ActivitySecondBinding
-
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,6 +28,9 @@ class SecondActivity : AppCompatActivity() {
         binding = ActivitySecondBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val linearLayout=findViewById<LinearLayout>(R.id.container)
+
         val frame = findViewById<FrameLayout>(R.id.sheet)
         val bottomSheetBehavior: BottomSheetBehavior<*> =
            BottomSheetBehavior.from<View>(frame)
@@ -40,31 +45,31 @@ class SecondActivity : AppCompatActivity() {
         binding.forInitialization.setOnClickListener {
             val Params = CoordinatorLayout.LayoutParams(1750, 300)
             var SHIT = ForCustomView(this)
-            binding.root.addView(SHIT, Params)
+            linearLayout.addView(SHIT, Params)
             SHIT.setOnTouchListener(getDragNDrop())
         }
         binding.forCycleFor.setOnClickListener {
             val Params = CoordinatorLayout.LayoutParams(1750, 300)
             var SHIT = ForCustomView(this)
-            binding.root.addView(SHIT, Params)
+            linearLayout.addView(SHIT, Params)
             SHIT.setOnTouchListener(getDragNDrop())
         }
         binding.forCycleWhile.setOnClickListener {
             val Params = CoordinatorLayout.LayoutParams(1750, 300)
             var SHIT = ForCustomView(this)
-            binding.root.addView(SHIT, Params)
+            linearLayout.addView(SHIT, Params)
             SHIT.setOnTouchListener(getDragNDrop())
         }
         binding.forOperatorIf.setOnClickListener {
             val Params = CoordinatorLayout.LayoutParams(1750, 300)
             var SHIT = ForCustomView(this)
-            binding.root.addView(SHIT, Params)
+            linearLayout.addView(SHIT, Params)
             SHIT.setOnTouchListener(getDragNDrop())
         }
         binding.forOperatorIfElse.setOnClickListener {
             val Params = CoordinatorLayout.LayoutParams(1750, 300)
             var SHIT = ForCustomView(this)
-            binding.root.addView(SHIT, Params)
+            linearLayout.addView(SHIT, Params)
             SHIT.setOnTouchListener(getDragNDrop())
         }
     }
@@ -92,5 +97,10 @@ class SecondActivity : AppCompatActivity() {
     }
 
 
+class CustomRecyclerAdapter(private val names: List<String>) {
 
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+    }
+}
 
