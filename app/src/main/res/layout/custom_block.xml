@@ -7,8 +7,7 @@
 
 
     <View
-        android:layout_gravity="center"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="55dp"
         android:id="@+id/for_arifmetic"
         android:background="@drawable/button">

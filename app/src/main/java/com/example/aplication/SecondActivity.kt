@@ -85,8 +85,8 @@ class SecondActivity : AppCompatActivity() {
                     true
                 }
                 MotionEvent.ACTION_MOVE -> {
-                            view.x += event.x - touchPoint.x
-                            view.y += event.y - touchPoint.y
+                            view.x += event.x -touchPoint.x
+                            view.y += event.y -touchPoint.y
                     false
                 }
                 else -> {
