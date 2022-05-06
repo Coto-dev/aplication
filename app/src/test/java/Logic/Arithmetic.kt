@@ -1,17 +1,25 @@
 package Logic
 
+import Logic.MainBlock.Companion.variables
 import java.util.*
 
-class Arithmetic : MainBlock() {
+class Arithmetic : MainBlock {
     val vars = variables
     val name :String? = null
     val previousBlock : MainBlock? = null
     val nextBlock : MainBlock? = null
     var textBar: String?=null
-    var variable: String?=null
-    fun assign(textBar: String,variable:String){
-        vars.replace(assignmentVar(variable),calculate(recognize(textBar)))
-        println(vars)
+    var variable: String? =null
+    override fun start() = assign()
+    fun assign(){
+        variable?.let { assignmentVar(it) }?.let {
+            textBar?.let { it1 ->
+                recognize(
+                    it1
+                )
+            }?.let { it2 -> calculate(it2) }?.let { it3 -> vars.replace(it, it3) }
+        }
+
     }
     private fun assignmentVar(textBar:String): String {
         var variable:String =""
@@ -47,11 +55,11 @@ class Arithmetic : MainBlock() {
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
             println("false")
         }
-        println(text)
+       // println(text)
         return text
     }
     private fun calculate(textBar:String):Int{
-        println(textBar)
+       // println(textBar)
         val stack: Stack<Char> = Stack<Char>()
         val text = textBar.replace("""\s""".toRegex(), "")
         var RPN:String = ""
@@ -104,11 +112,9 @@ class Arithmetic : MainBlock() {
         }
         RPN = RPN.replace("""\s+""".toRegex(), " ")
         RPN = RPN.replace("""^\s+""".toRegex(), "")
-        println(RPN)
         val stackInt: Stack<String> = Stack<String>()
         var value = ""
         for (i in RPN.indices){
-            println(stackInt)
             if (RPN[i]==' ') {
                 if(value!="")
                     stackInt.push(value)

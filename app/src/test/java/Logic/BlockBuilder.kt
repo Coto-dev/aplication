@@ -2,14 +2,17 @@ package Logic
 
 import Logic.MainBlock.Companion.listOfBlocks
 
-fun GetDataForContainerVariables(textBar:String): ContainerVariables {
-    val a = ContainerVariables()
-    a.textBar = textBar
-    return a
+fun pushDataForInitialization(editText:String,index:Int) {
+    val a = Initialization()
+    a.textBar = editText
+    listOfBlocks[index] = a
 }
-fun GetDataForArithmetic(textBar:String,variable:String): Arithmetic {
+fun pushDataForArithmetic(editText:String,variable:String,index:Int){
     val a = Arithmetic()
-    a.textBar = textBar
+    a.textBar = editText
     a.variable = variable
-    return a
+    listOfBlocks[index] = a
+}
+fun swapBlocks(blockIndexA:Int,blockIndexB:Int){
+    listOfBlocks[blockIndexA] = listOfBlocks[blockIndexB].also {listOfBlocks[blockIndexB] = listOfBlocks[blockIndexA]  }
 }

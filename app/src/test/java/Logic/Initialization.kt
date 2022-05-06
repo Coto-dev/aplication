@@ -1,14 +1,16 @@
 package Logic
+import Logic.MainBlock.Companion.variables
 import java.util.*
-class ContainerVariables : MainBlock() {
+class Initialization : MainBlock {
     val variablesForContainer = variables
     val name :String? = null
     val previousBlock : MainBlock? = null
     val nextBlock : MainBlock? = null
     var textBar: String?=null
-    fun indetify(textBar:String){
-        if (!textBar.contains(Regex("""([^\w|,|\s]|((^|,)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})"""))) {
-            val matches = Regex("""[a-zA-Z]+[0-9]*""").findAll(textBar)
+   override fun start() = indetify()
+    fun indetify(){
+        if (!textBar?.contains(Regex("""([^\w|,|\s]|((^|,)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})"""))!!) {
+            val matches = Regex("""[a-zA-Z]+[0-9]*""").findAll(textBar!!)
             for(name in matches){
                 variablesForContainer+= name.value to 0
             }
