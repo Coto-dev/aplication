@@ -9,4 +9,9 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet</item>
     </style>
+    android:style="@style/mystyle"
+
+    <style name="my_style">
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
 </resources>

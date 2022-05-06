@@ -18,8 +18,9 @@ class ForCustomView  constructor (
     private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context),this)
 
 
-    fun GetText(){
-       // val editText = findViewById<EditText>(R.id.text_input)
+
+    fun GetLastBox(x:Int,y:Int){
+return
 
     }
 
