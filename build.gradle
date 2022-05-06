@@ -8,6 +8,3 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-dependencies {
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-}
