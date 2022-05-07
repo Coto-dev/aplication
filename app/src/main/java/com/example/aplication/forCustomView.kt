@@ -13,15 +13,12 @@ import com.example.aplication.databinding.CustomBlockBinding
 class ForCustomView  constructor (
     context: Context,
     attrs: AttributeSet?=null,
-    defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr)
-{
-    private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context),this)
+    defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
+    private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context), this)
 
 
-
-    fun GetLastBox(x:Int,y:Int){
-return
-
+    fun GetLastBox(x: Int, y: Int) {
+        return
     }
 
 }

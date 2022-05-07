@@ -2,34 +2,32 @@
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-    <View
-        style="@style/my_style"
-        android:layout_width="320dp"
-        android:layout_height="55dp"
-        android:id="@+id/for_arifmetic"
-        android:background="@drawable/button">
-    </View>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-  <!--  <TextView
-        android:id="@+id/textView"
-        android:layout_width="300dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/initialization"
-        app:layout_anchor="@+id/for_arifmetic"
-        app:layout_anchorGravity="top|center" />-->
-
-    <EditText
-        android:id="@+id/text_input"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="#00000000"
-        android:inputType="text"
-        app:layout_anchor="@+id/for_arifmetic"
-        app:layout_anchorGravity="center" />
-
+        <View
+            style="@style/my_style"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:id="@+id/forArifmetic"
+            android:background="@drawable/button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <!--<EditText
+            android:id="@+id/text_input"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="#00000000"
+            android:inputType="text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>
