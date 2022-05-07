@@ -64,7 +64,7 @@ class SecondActivity : AppCompatActivity() {
             }
         }
         var params = LinearLayout.LayoutParams(1750, 200)
-        binding.container.addView(view, params)
+        binding.root.addView(view, params)
         view.setOnTouchListener(getTouchListener())
         if(lowerBlock == null) {
             view.y = 0f
@@ -140,7 +140,7 @@ class SecondActivity : AppCompatActivity() {
             }
         }
         if(count > 2) {
-            Log.e("log", "TI JIDKO OBOSRALSYA!!!")
+            Log.e("log", "pizdec")
         }
         count = 1
         for(block in listOfBlocks) {
