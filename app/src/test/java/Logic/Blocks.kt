@@ -10,13 +10,20 @@ fun main(){
     createArithmetic()
     createInitialization()
     createArithmetic()
+    createArithmetic()
+    createInitialization()
+   createOutput()
 
-    pushDataForInitialization("aaa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
-    pushDataForInitialization("abvgd",2)
-    pushDataForInitialization("clone",4)
+    pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
     pushDataForArithmetic("a+2","a23",1)
+    pushDataForInitialization("abvgd",2)
     pushDataForArithmetic("a23+3","abvgd",3)
-    pushDataForArithmetic("abvgd+1","clone",5)
+    pushDataForInitialization("clone",4)
+    pushDataForArithmetic("abvgd+a23","clone",5)
+    pushDataForArithmetic("(abvgd+a23)*clone","a",6)
+    pushDataForInitialization("ex",7)
+    pushDataForOutput("clone,ex",8)
+
 
     fun start() {
         for (name in listOfBlocks)

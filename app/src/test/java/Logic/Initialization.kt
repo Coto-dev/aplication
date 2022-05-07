@@ -2,7 +2,7 @@ package Logic
 import Logic.MainBlock.Companion.variables
 import java.util.*
 class Initialization : MainBlock {
-    val variablesForContainer = variables
+    val vars = variables
     val name :String? = null
     val previousBlock : MainBlock? = null
     val nextBlock : MainBlock? = null
@@ -12,15 +12,15 @@ class Initialization : MainBlock {
         if (!textBar?.contains(Regex("""([^\w|,|\s]|((^|,)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})"""))!!) {
             val matches = Regex("""[a-zA-Z]+[0-9]*""").findAll(textBar!!)
             for(name in matches){
-                variablesForContainer+= name.value to 0
+                vars+= name.value to 0
             }
 
         }
         else{
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
-            println("false")
+            println("input error")
         }
-        println(variablesForContainer)
+        println(vars)
     }
 
 }

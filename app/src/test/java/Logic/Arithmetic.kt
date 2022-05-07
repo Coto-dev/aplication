@@ -27,7 +27,11 @@ class Arithmetic : MainBlock {
             val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(textBar)
             if (vars.containsKey(matches?.value))
                 variable = matches?.value.toString()
-            else println("variable is not exist")
+            else {
+                println("variable is not exist")
+                return "variable is not exist"
+            }
+
         }
         else{
             println("the value of the variable was entered incorrectly")
@@ -37,17 +41,18 @@ class Arithmetic : MainBlock {
     private fun recognize(textBar:String):String{
         var text = textBar
         if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)|^a-zA-Z])"""))) {
-            val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").findAll(textBar)
-            for(name in matches){
-                if (vars.containsKey(name.value)) {
-                    text = text.replaceRange(name.range, vars.getValue(name.value).toString())
-
+            var matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
+            while (matches != null)
+            {
+                if (vars.containsKey(matches.value)) {
+                    text = text.replaceRange(matches.range, vars.getValue(matches.value).toString())
                 }
                 else{
                     // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
-                    return name.value // та самая переменная c
+                    return matches.value // та самая переменная c
                     break
                 }
+                 matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             }
 
         }

@@ -9,3 +9,7 @@ fun createArithmetic(){
 
     listOfBlocks.add(Arithmetic())
 }
+fun createOutput(){
+
+    listOfBlocks.add(Output())
+}
