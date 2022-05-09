@@ -16,9 +16,9 @@ class ForCustomView  constructor (
     defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
     private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context), this)
 
-
-    fun GetLastBox(x: Int, y: Int) {
-        return
+   public fun SetText(text:String) {
+       val textview= binding.nupizda
+        textview.text=text
     }
 
 }

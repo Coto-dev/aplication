@@ -10,16 +10,22 @@
         android:layout_height="wrap_content">
 
         <View
-            style="@style/my_style"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:id="@+id/forArifmetic"
             android:background="@drawable/button"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-        <!--<EditText
+        <TextView
+            android:id="@+id/nupizda"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/Hello"/>
+        <EditText
             android:id="@+id/text_input"
             android:layout_width="200dp"
             android:layout_height="50dp"
@@ -28,6 +34,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>-->
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>
