@@ -18,6 +18,11 @@ fun pushDataForOutput(editText:String,index:Int){
     a.textBar = editText
     listOfBlocks[index] = a
 }
+fun pushDataForMassive(editText:String,index:Int){
+    val a = Massive()
+    a.textBar = editText
+    listOfBlocks[index] = a
+}
 fun swapBlocks(blockIndexA:Int,blockIndexB:Int){
     listOfBlocks[blockIndexA] = listOfBlocks[blockIndexB].also {listOfBlocks[blockIndexB] = listOfBlocks[blockIndexA]  }
 }

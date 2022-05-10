@@ -13,6 +13,7 @@ fun main(){
     createArithmetic()
     createInitialization()
    createOutput()
+    createMassive()
 
     pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
     pushDataForArithmetic("a+2","a23",1)
@@ -20,9 +21,10 @@ fun main(){
     pushDataForArithmetic("-(a23+3)","abvgd",3)
     pushDataForInitialization("clone",4)
     pushDataForArithmetic("  abvgd","clone",5)
-    pushDataForArithmetic("-(3*-3)-5","a",6)
+    pushDataForArithmetic(" ((2+2)*3 +(3+3)*2)+2 ","a",6)
     pushDataForInitialization("ex",7)
     pushDataForOutput("clone,ex",8)
+    pushDataForMassive("mas[100],ad[21],a1[12]",9)
 
 
     fun start() {

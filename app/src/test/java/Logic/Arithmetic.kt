@@ -94,7 +94,7 @@ class Arithmetic : MainBlock {
             else{
 
                 RPN+=' '
-              
+
                 if (i == '-' || i == '+'){
                     if(!stack.isEmpty()) {
                         if (stack.peek() == '-' || stack.peek() == '+' || stack.peek() == '/' || stack.peek() == '*'|| stack.peek() == '%') {

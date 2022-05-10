@@ -13,3 +13,7 @@ fun createOutput(){
 
     listOfBlocks.add(Output())
 }
+fun createMassive(){
+
+    listOfBlocks.add(Massive())
+}
