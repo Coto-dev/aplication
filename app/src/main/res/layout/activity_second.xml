@@ -13,8 +13,11 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="50dp">
+
         <LinearLayout
+            android:padding="1dp"
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,28 +27,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-
-
-    <!--ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:isScrollContainer="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-    </ScrollView-->
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -97,11 +78,11 @@
                     android:background="@drawable/block_button" />
 
                 <Button
-                    android:id="@+id/for_cycle_for"
+                    android:id="@+id/for_operator_if"
+                    android:text="@string/OperatorIf"
                     android:layout_gravity="center"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:text="@string/forcycle"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/block_button" />
 
@@ -115,11 +96,11 @@
                     android:background="@drawable/block_button" />
 
                 <Button
-                    android:id="@+id/for_operator_if"
-                    android:text="@string/OperatorIf"
+                    android:id="@+id/for_cycle_for"
                     android:layout_gravity="center"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
+                    android:text="@string/forcycle"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/block_button" />
 

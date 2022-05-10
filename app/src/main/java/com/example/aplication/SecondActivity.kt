@@ -2,6 +2,7 @@ package com.example.aplication
 
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +21,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
 
-    data class Block(var index: Int, var view: View)
+    data class Block(var view: View,
+                     var startInd: Int, var finishInd: Int)
     private var listOfBlocks: MutableList<Block> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySecondBinding.inflate(layoutInflater)
@@ -42,99 +44,44 @@ class SecondActivity : AppCompatActivity() {
             listOfBlocks.add(addViewToScreen(ForCustomView(this)))
         }
         binding.forCycleFor.setOnClickListener {
-            listOfBlocks.add(addViewToScreen(ForCustomView(this)))
+           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forCycleWhile.setOnClickListener {
-            listOfBlocks.add(addViewToScreen(ForCustomView(this)))
+            addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIf.setOnClickListener {
-            listOfBlocks.add(addViewToScreen(ForCustomView(this)))
+            addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
-            listOfBlocks.add(addViewToScreen(ForCustomView(this)))
+           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
-        val view = View(this)
-        //view.background = getDrawable(R.drawable.button)
-        //var params = LinearLayout.LayoutParams(1750, 250)
-        binding.container.addView(view, listOfBlocks.size)
-        binding.container.setOnDragListener(choiceDragListener())
+
+//        addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+//        addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+//        addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+//        listOfBlocks.add(addViewToScreen(ForCustomView(this)))
     }
 
     private fun addViewToScreen(view: View): Block {
-//        // val lastTouchDownXY = FloatArray(2)
-//        var maxY = -1f
-//        var lowerBlock: View? = null
-//        for (block in listOfBlocks) {
-//            if (block.y > maxY) {
-////                maxY = block.y
-//                lowerBlock = block
-//            }
-//        }
- //       val params = LinearLayout.LayoutParams(200, 250)
-        //var view = ForCustomView(this)
         (view as ForCustomView).SetText(listOfBlocks.size.toString())
         binding.container.addView(view)
         view.setOnTouchListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(listOfBlocks.size, view)
+        val newBlock = Block(view, listOfBlocks.size, listOfBlocks.size)
         return newBlock
-//        private fun getTouchListener() = View.OnTouchListener { view, event ->
-//            when (event.action) {
-//                MotionEvent.ACTION_DOWN -> {
-//                    startPoint = Point(view.x, view.y)
-//                    touchPoint.x = event.x
-//                    touchPoint.y = event.y
-//                    true
-//                }
-//                MotionEvent.ACTION_MOVE -> {
-//                    //moveChain(chain, event.x, event.y)
-//                    val newPoint =
-//                        Point(view.x + event.x - touchPoint.x, view.y + event.y - touchPoint.y)
-//                    if (0 <= newPoint.x) {
-//                        view.x += event.x - touchPoint.x
-//                    }
-//                    MotionEvent.ACTION_MOVE -> {
-//                        view.x += event.x -touchPoint.x
-//                        view.y += event.y -touchPoint.y
-//                        false
-//                        if (0 <= newPoint.y) {
-//                            view.y += event.y - touchPoint.y
-//                        }
-//                        else -> {
-//                        true
-//                        false
-//                    }
-//                        MotionEvent.ACTION_UP -> {
-//                        attachView(view, startPoint)
-//                        true
-//                    }
-//                        else -> {
-//                        true
-//                    }
-//                    }
-//                }
-//        val touchListener = OnTouchListener { View: v, event -> // save the X,Y coordinates
-//            if (event.actionMasked == MotionEvent.ACTION_DOWN) {
-//                lastTouchDownXY[0] = event.x
-//                lastTouchDownXY[1] = event.y
-//            }
-//
-//            // let the touch event pass on to whoever needs it
-//            false
-//        }
-
-//        val longClickListener = OnLongClickListener { // retrieve the stored coordinates
-//            val x = lastTouchDownXY[0]
-//            val y = lastTouchDownXY[1]
-//
-//            // use the coordinates for whatever
-//            Log.i("TAG", "onLongClick: x = $x, y = $y")
-//
-//            // we have consumed the touch event
-//            true
-//        }
-//        mview.setOnTouchListener(touchListener);
-//        mview.setOnLongClickListener(longClickListener);
+    }
+    private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int){
+        for(i in startInd..finishInd) {
+            Log.i("hello", "$i")
+            var view = ForCustomView(this)
+            (view as ForCustomView).SetText(listOfBlocks.size.toString())
+            (view as ForCustomView).SetText("vlojen")
+            binding.container.addView(view)
+            view.setOnTouchListener(choiceTouchListener())
+            view.setOnDragListener(choiceDragListener())
+            val newBlock = Block(view, startInd, finishInd)
+            listOfBlocks.add(newBlock)
+        }
     }
 
     private lateinit var draggingView: View
@@ -156,123 +103,49 @@ class SecondActivity : AppCompatActivity() {
     private fun choiceDragListener() = View.OnDragListener { view, event ->
         when (event.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
-                //draggingView.visibility = INVISIBLE
-            }
-            DragEvent.ACTION_DRAG_LOCATION -> {
-
+//                var second = listOfBlocks[0]
+//                for(i in listOfBlocks) {
+//                    if(i.view == draggingView) {
+//                        second = i
+//                    }
+//                }
+//                for(i in second.finishInd downTo second.startInd) {
+//                    listOfBlocks[i].view.visibility = INVISIBLE
+//                }
             }
             DragEvent.ACTION_DROP -> {
                 if(view != binding.container) {
-                    var count1 = 0
-                    for(block in listOfBlocks) {
-                        if(view == block.view){
-                            break
+                    if (view != draggingView) {
+                        var first = listOfBlocks[0]
+                        var ind = 0
+                        var second = listOfBlocks[0]
+                        for (i in listOfBlocks) {
+                            if (view != first.view) {
+                                ind++
+                            }
+                            if (i.view == view) {
+                                first = i
+                            } else if (i.view == draggingView) {
+                                second = i
+                            }
                         }
-                        count1++
-                    }
-                    var count2 = 0
-                    for(block in listOfBlocks) {
-                        if(draggingView == block.view) {
-                            swapTwoBlocks(count1, count2, view, draggingView)
-                            val buff1 = block.index
-                            block.index = listOfBlocks[count1].index
-                            listOfBlocks[count1].index = buff1
-                            val buff2 = block.view
-                            block.view = listOfBlocks[count1].view
-                            listOfBlocks[count1].view = buff2
-
-                            break
+                        if(first.finishInd != second.finishInd) {
+                            attach(ind - 1, second, Point(event.x, event.y))
+                            calculateNewIndexes()
                         }
-                        count2++
                     }
                 }
             }
             DragEvent.ACTION_DRAG_ENDED -> {
-                //draggingView.visibility = VISIBLE
+//                for(i in listOfBlocks) {
+//                    i.view.visibility = VISIBLE
+//                }
             }
-
         }
         true
     }
 
     data class Point(var x: Float, var y: Float)
-
- //   var touchPoint = Point(0f, 0f)
-   // var startPoint = Point(0f, 0f)
-
-//    @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
-//    private fun getTouchListener() = View.OnTouchListener { view, event ->
-//        when (event.action) {
-//            MotionEvent.ACTION_DOWN -> {
-//                startPoint = Point(view.x, view.y)
-//                touchPoint.x = event.x
-//                touchPoint.y = event.y
-//                true
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//                //moveChain(chain, event.x, event.y)
-//                val newPoint =
-//                    Point(view.x + event.x - touchPoint.x, view.y + event.y - touchPoint.y)
-//                if (0 <= newPoint.x) {
-//                    view.x += event.x - touchPoint.x
-//                }
-//                if (0 <= newPoint.y) {
-//                    view.y += event.y - touchPoint.y
-//                }
-//                false
-//            }
-//            MotionEvent.ACTION_UP -> {
-//                attachView(view, startPoint)
-//                //Detour()
-//                true
-//            }
-//            else -> {
-//                true
-//            }
-//        }
-//    }
-
-//    private fun isPointInBlock(view: View, point: Point) =
-//        view.x <= point.x && point.x <= view.x + view.width &&
-//                view.y <= point.y && point.y <= view.y + view.height
-//
-//    private fun attachView(view: View) {
-//        val newPoint = Point(0f, 0f)
-//        var count = 0
-//        for (block in listOfBlocks) {
-//            if (block != view) {
-//                var point = Point(view.x, view.y)
-//                if (isPointInBlock(block, point)) {
-//                    count++
-//                    newPoint.x = block.x
-//                    newPoint.y = block.y + block.height + 2
-//                    Log.i("hello", "up")
-//                }
-//                point = Point(view.x, view.y + block.height)
-//                if (isPointInBlock(block, point)) {
-//                    count++
-//                    newPoint.x = block.x
-//                    newPoint.y = block.y
-//                    Log.i("hello", "down")
-//
-//                }
-//            }
-//        }
-//        if (count > 2) {
-//            Log.e("log", "pizdec")
-//        }
-//        count = 1
-//        for (block in listOfBlocks) {
-//            if (block != view) {
-//                if (block.y >= newPoint.y) {
-//                    block.y = block.y + block.height + 2
-//                    count++
-//                }
-//            }
-//        }
-//        view.x = newPoint.x
-//        view.y = newPoint.y
-//    }
 
     private fun swapTwoBlocks(firstInd: Int, secondInd: Int, firstView: View, secondView: View) {
         if(firstInd > secondInd) { //Todo: добавить в параметры функции родительского контейнера, например, binding.container
@@ -290,4 +163,107 @@ class SecondActivity : AppCompatActivity() {
 
 
     }
+
+
+    private fun attach(toBlockInd: Int, fromBlock: Block, dropPoint: Point) {
+
+        val buff = mutableListOf<Block>()
+        var ind = toBlockInd
+        if(toBlockInd == -1) {
+            ind = 0
+        }
+        val toBlock = listOfBlocks[ind]
+        val size = listOfBlocks.size - 1
+        for (i in fromBlock.finishInd downTo fromBlock.startInd) {
+            buff.add(listOfBlocks[i])
+
+            //binding.container.removeView(listOfBlocks[i].view)
+            //listOfBlocks.removeAt(i)
+        }
+//        for(i in (fromBlock.finishInd-fromBlock.startInd) downTo 0) {
+//            var c = 0
+//            if(toBlockInd>fromBlock.startInd) c-= buff.size
+//            if(toBlockInd == listOfBlocks[toBlockInd].startInd) {
+//                Log.i("hello", "start, $toBlockInd, ${listOfBlocks[toBlockInd].startInd}")
+//                if (dropPoint.y < toBlock.view.height / 2) {
+//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.startInd + c)
+//                    listOfBlocks.add(toBlock.startInd + c, buff[buff.size - i - 1])
+//                } else {
+//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.startInd + 1 + c)
+//                    listOfBlocks.add(toBlock.startInd + 1 + c, buff[buff.size - i - 1])
+//                }
+//            }
+//            else {
+//                Log.i("hello", "finish $toBlockInd ${listOfBlocks[toBlockInd].startInd}")
+//                if (dropPoint.y < toBlock.view.height / 2) {
+//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.finishInd + c)
+//                    listOfBlocks.add(toBlock.finishInd + c, buff[buff.size - i - 1])
+//                } else {
+//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.finishInd + 1 + c)
+//                    listOfBlocks.add(toBlock.finishInd + 1 + c, buff[buff.size - i - 1])
+//                }
+//            }
+        val newList = mutableListOf<Block>()
+        for (i in 0..size) {
+            if ((fromBlock.startInd >  i|| i > fromBlock.finishInd) && i != ind) {
+                newList.add(listOfBlocks[i])
+            } else if(i == ind) {
+                if(dropPoint.y > toBlock.view.height/2) {
+                    newList.add(listOfBlocks[ind])
+                    for(j in buff.size - 1 downTo  0) {
+                        newList.add(buff[j])
+                    }
+                }
+                else {
+                    for(j in buff.size - 1 downTo  0) {
+                        newList.add(buff[j])
+                    }
+                    newList.add(listOfBlocks[ind])
+                }
+            }
+        }
+        for(i in newList.size - 1 downTo 0) {
+            binding.container.removeView(listOfBlocks[i].view)
+        }
+        for(i in newList) {
+            binding.container.addView(i.view)
+        }
+        Log.i("zalupa", "ne, nu pravda je zalupa")
+    }
+
+    private fun calculateNewIndexes() {
+        val buffList =  listOfBlocks
+        val checkList = mutableListOf<Boolean>()
+        for(i in 0 until listOfBlocks.size) {
+            checkList.add(false)
+        }
+        for(i in 0 until listOfBlocks.size - 1) {
+            if(checkList[i]) continue
+            for(j in i + 1 until listOfBlocks.size) {
+                if(checkList[j]) continue
+                if(listOfBlocks[i].startInd == listOfBlocks[j].startInd) {
+                    buffList[i].startInd = i
+                    buffList[j].startInd = i
+                    buffList[i].finishInd = j
+                    buffList[j].finishInd = j
+                    checkList[i] = true
+                    checkList[j] = true
+                }
+            }
+            if(!checkList[i]) {
+                buffList[i].finishInd = i
+                buffList[i].startInd = i
+            }
+        }
+        if(!checkList[listOfBlocks.size-1]) {
+            buffList[listOfBlocks.size - 1].finishInd = listOfBlocks.size - 1
+            buffList[listOfBlocks.size - 1].startInd = listOfBlocks.size - 1
+        }
+        listOfBlocks = buffList
+    }
+
+    /*
+    listOfBlocks.add(toBlock.startInd + i, fromBlock)
+    listOfBlocks.removeAt(fromBlock.startInd)
+    */
 }

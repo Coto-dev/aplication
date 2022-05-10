@@ -10,21 +10,15 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.aplication.databinding.CustomBlockBinding
 
 
-class ForCustomView  constructor (
+class While  constructor (
     context: Context,
     attrs: AttributeSet?=null,
     defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
     private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context), this)
 
-   public fun SetText(text:String) {
-       val textview= binding.nupizda
-       if (textview.text!=null){
-           var a:String=textview.text.toString()
-           textview.text=text+" "+a
-       }
-       else{
-           textview.text=text
-       }
-
+    public fun SetText(text:String) {
+        val textview= binding.nupizda
+        textview.text=text
     }
+
 }
