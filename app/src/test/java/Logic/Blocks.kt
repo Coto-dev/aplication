@@ -17,10 +17,10 @@ fun main(){
     pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
     pushDataForArithmetic("a+2","a23",1)
     pushDataForInitialization("abvgd",2)
-    pushDataForArithmetic("a23+3","abvgd",3)
-    pushDataForInitialization("1233clone",4)
+    pushDataForArithmetic("-(a23+3)","abvgd",3)
+    pushDataForInitialization("clone",4)
     pushDataForArithmetic("  abvgd","clone",5)
-    pushDataForArithmetic("(abvgd+a23)*clone","a",6)
+    pushDataForArithmetic("-(3*-3)-5","a",6)
     pushDataForInitialization("ex",7)
     pushDataForOutput("clone,ex",8)
 

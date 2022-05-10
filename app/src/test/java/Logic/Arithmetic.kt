@@ -91,13 +91,18 @@ class Arithmetic : MainBlock {
             if(i.isDigit()){
                 RPN+=i
             }
-            else{println(RPN)
+            else{
+
                 RPN+=' '
+              
                 if (i == '-' || i == '+'){
                     if(!stack.isEmpty()) {
-                        if (stack.peek() == '-' || stack.peek() == '+' || stack.peek() == '/' || stack.peek() == '*') {
-                            RPN += stack.pop()
-                            RPN+=' '
+                        if (stack.peek() == '-' || stack.peek() == '+' || stack.peek() == '/' || stack.peek() == '*'|| stack.peek() == '%') {
+                            if (!(RPN[RPN.length-1] == '-' || RPN[RPN.length-1] == '+' || RPN[RPN.length-1] == '/' || RPN[RPN.length-1] == '*' || RPN[RPN.length-1] ==  '%')) {
+                                RPN += stack.pop()
+                                RPN += ' '
+                            }
+
                         }
                         stack.push(i)
                     }
@@ -105,7 +110,7 @@ class Arithmetic : MainBlock {
                 }
                 if (i == '*' || i == '/'|| i == '%') {
                     if(!stack.isEmpty()) {
-                        if (stack.peek() == '/' || stack.peek() == '*'|| i == '%') {
+                        if (stack.peek() == '/' || stack.peek() == '*'|| stack.peek() == '%') {
                             RPN += stack.pop()
                             RPN+=' '
                         }
@@ -126,66 +131,151 @@ class Arithmetic : MainBlock {
                         stack.pop()
                     }
                 }
-
             }
+
         }
 
         while(!stack.isEmpty()){
             RPN+=' '
             RPN+= stack.pop()
         }
+
         RPN = RPN.replace("""\s+""".toRegex(), " ")
         RPN = RPN.replace("""^\s+""".toRegex(), "")
-        val stackInt: Stack<String> = Stack<String>()
+        val stackString: Stack<String> = Stack<String>()
         var value = ""
+        var temp:String = ""
         for (i in RPN.indices){
             if (RPN[i]==' ') {
                 if(value!="")
-                    stackInt.push(value)
+                    stackString.push(value)
                 value = ""
             }
             else if(RPN[i].isDigit()) value += RPN[i]
+            if (temp!= "" && stackString.size>1) {
+                if (temp == "+") {
+                    var x = stackString.pop()
+                    if (!stackString.isEmpty()) {
+                        val y = stackString.pop()
+                        val count = y.toInt() + x.toInt()
+                        stackString.push(count.toString())
+                    }
+
+                } else
+                    if (temp == "-") {
+
+                        var x = stackString.pop()
+                        if (!stackString.isEmpty()) {
+                            val y = stackString.pop()
+                            val count = y.toInt() - x.toInt()
+                            stackString.push(count.toString())
+                        }
+                        else{
+                            val count =-x.toInt()
+                            stackString.push(count.toString())
+                        }
+
+                    } else
+                        if (temp == "*") {
+                            var x = stackString.pop()
+
+                            if (!stackString.isEmpty()) {
+                                val y = stackString.pop()
+                                val count = y.toInt() * x.toInt()
+                                stackString.push(count.toString())
+                            }
+
+
+                        } else
+                            if (temp == "/") {
+                                var x = stackString.pop()
+                                if (!stackString.isEmpty()) {
+                                    val y = stackString.pop()
+                                    val count = y.toInt() / x.toInt()
+                                    stackString.push(count.toString())
+                                }
+
+
+                            }
+                            else
+                                if (temp == "%") {
+                                    var x = stackString.pop()
+                                    if (!stackString.isEmpty()) {
+                                        val y = stackString.pop()
+                                        val count = y.toInt() % x.toInt()
+                                        stackString.push(count.toString())
+                                    }
+
+
+                                }
+                temp = ""
+            }
             if (RPN[i] == '-' || RPN[i] == '+' || RPN[i] == '/' || RPN[i] == '*'|| RPN[i] == '%') {
+
                 if (RPN[i] == '+') {
-                    val x = stackInt.pop()
-                    val y = stackInt.pop()
-                    val count = x.toInt() + y.toInt()
-                    stackInt.push(count.toString())
+                    var x = stackString.pop()
+                    if (!stackString.isEmpty()) {
+                        val y = stackString.pop()
+                        val count = y.toInt() + x.toInt()
+                        stackString.push(count.toString())
+                    }
+                    else{
+                        stackString.push(x)
+                        temp = RPN[i].toString()
+                    }
                 } else
                     if (RPN[i] == '-') {
-                        val x = stackInt.pop()
-                        val y = stackInt.pop()
-                        val count = y.toInt() - x.toInt()
-                        stackInt.push(count.toString())
+
+                        var x = stackString.pop()
+                        if (!stackString.isEmpty()) {
+                            val y = stackString.pop()
+                            val count = y.toInt() - x.toInt()
+                            stackString.push(count.toString())
+                        }
+                        else{
+                            val count =-x.toInt()
+                            stackString.push(count.toString())
+                        }
+// (-5+2)*-5
+//5 - 2 +  * 5 -
                     } else
                         if (RPN[i] == '*') {
-                            val x = stackInt.pop()
-                            val y = stackInt.pop()
-                            val count = x.toInt() * y.toInt()
-                            stackInt.push(count.toString())
+                            var x = stackString.pop()
+                            if (!stackString.isEmpty()) {
+                                val y = stackString.pop()
+                                val count = y.toInt() * x.toInt()
+                                stackString.push(count.toString())
+                            }
+                            else{
+                                stackString.push(x)
+                                temp = RPN[i].toString()
+                            }
+
                         } else
                             if (RPN[i] == '/') {
-                                val x = stackInt.pop()
-                                val y = stackInt.pop()
-                                try {
+                                var x = stackString.pop()
+                                if (!stackString.isEmpty()) {
+                                    val y = stackString.pop()
                                     val count = y.toInt() / x.toInt()
-                                    stackInt.push(count.toString())
+                                    stackString.push(count.toString())
                                 }
-                                catch (e: NumberFormatException) {
-                                    return 0
+                                else{
+                                    stackString.push(x)
+                                    temp = RPN[i].toString()
                                 }
 
                             }
                             else
                                 if (RPN[i] == '%') {
-                                    val x = stackInt.pop()
-                                    val y = stackInt.pop()
-                                    try {
+                                    var x = stackString.pop()
+                                    if (!stackString.isEmpty()) {
+                                        val y = stackString.pop()
                                         val count = y.toInt() % x.toInt()
-                                        stackInt.push(count.toString())
+                                        stackString.push(count.toString())
                                     }
-                                    catch (e: NumberFormatException) {
-                                        return 0
+                                    else{
+                                        stackString.push(x)
+                                        temp = RPN[i].toString()
                                     }
 
                                 }
@@ -194,6 +284,7 @@ class Arithmetic : MainBlock {
 
 
         }
-        return(stackInt.pop().toInt())
+
+        return(stackString.pop().toInt())
     }
 }
