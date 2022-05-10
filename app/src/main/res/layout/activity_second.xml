@@ -69,10 +69,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/for_initialization"
+                    android:id="@+id/for_arifmetic"
                     android:layout_marginTop="80dp"
                     android:layout_gravity="center"
-                    android:text="@string/initialization"
+                    android:text="Присваивание"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:background="@drawable/block_button" />
@@ -114,6 +114,8 @@
                     android:background="@drawable/block_button" />
 
                 <Button
+                    android:text="@string/initialization"
+                    android:id="@+id/for_initialization"
                     android:layout_gravity="center"
                     android:layout_width="250dp"
                     android:layout_height="50dp"

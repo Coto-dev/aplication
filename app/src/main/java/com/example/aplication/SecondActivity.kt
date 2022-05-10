@@ -3,6 +3,7 @@ package com.example.aplication
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.graphics.drawable.Drawable
+import android.nfc.Tag
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.View.*
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -22,7 +24,6 @@ class SecondActivity : AppCompatActivity() {
 
     data class Block(var view: View, var startInd: Int, var finishInd: Int)
     private var listOfBlocks: MutableList<Block> = mutableListOf()
-    var isPressedButton = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySecondBinding.inflate(layoutInflater)
@@ -49,18 +50,24 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.peekHeight = 135
         bottomSheetBehavior.isHideable = false
 
-       // if (bottomSheetBehavior.peekHeight == 135){
-            binding.floating.setOnClickListener{//компиляция
-                bottomSheetBehavior.peekHeight = 0
-                bottomSheetConsol.peekHeight = 135
 
+        // if (bottomSheetBehavior.peekHeight == 135){
+        binding.floating.setOnClickListener{//компиляция
+            bottomSheetBehavior.peekHeight = 0
+            bottomSheetConsol.peekHeight = 135
+
+            for(block in listOfBlocks){
+
+                Log.d("gfdhj",(block.view as ForCustomView).GetText())
             }
+
+        }
         //}
 
-
         //обработка нажатий на кнопки создания блоков
-        binding.forInitialization.setOnClickListener {
+        binding.forArifmetic.setOnClickListener {
             listOfBlocks.add(addViewToScreen(ForCustomView(this)))
+            createArithmetic
         }
         binding.forCycleFor.setOnClickListener {
            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
@@ -74,10 +81,13 @@ class SecondActivity : AppCompatActivity() {
         binding.forOperatorIfElse.setOnClickListener {
            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
-
-
+        binding.forInitialization.setOnClickListener {
+            createInitialization()
+            listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
+        }
 
     }
+
 //появление обычного блока
     private fun addViewToScreen(view: View): Block {
         (view as ForCustomView).SetText(listOfBlocks.size.toString())
@@ -87,7 +97,18 @@ class SecondActivity : AppCompatActivity() {
         val newBlock = Block(view, listOfBlocks.size, listOfBlocks.size)
         return newBlock
     }
-    //пояление вложенного блока
+
+    private fun addViewToScreen2(view: View): Block {
+        (view as For_inizalitation).SetText(listOfBlocks.size.toString())
+        binding.container.addView(view)
+        view.setOnTouchListener(choiceTouchListener())
+        view.setOnDragListener(choiceDragListener())
+        val newBlock = Block(view, listOfBlocks.size, listOfBlocks.size)
+        return newBlock
+    }
+
+
+    //  пояление вложенного блока
     private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int){
         for(i in startInd..finishInd) {
             Log.i("hello", "$i")
@@ -101,6 +122,11 @@ class SecondActivity : AppCompatActivity() {
             listOfBlocks.add(newBlock)
         }
     }
+
+
+
+
+
 
     private lateinit var draggingView: View
 

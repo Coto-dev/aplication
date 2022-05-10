@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.aplication.databinding.CustomBlockBinding
-
+import com.example.aplication.databinding.ForInitializationBinding
 
 class ForCustomView  constructor (
     context: Context,
@@ -16,7 +16,7 @@ class ForCustomView  constructor (
     defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
     private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context), this)
 
-   public fun SetText(text:String) {
+    fun SetText(text:String) {
        val textview= binding.nupizda
        if (textview.text!=null){
            var a:String=textview.text.toString()
@@ -27,4 +27,26 @@ class ForCustomView  constructor (
        }
 
     }
+
+    fun GetText():String {
+        val textview= binding.textInput
+        val textview2= binding.textInput2
+        var a:String=textview.text.toString()
+        var b:String=textview2.text.toString()
+        return a
+
+    }
+
+    fun GetText1():String {
+        val textview= binding.textInput
+        var a:String=textview.text.toString()
+        return a
+    }
+
+    fun GetText2():String {
+        val textview2= binding.textInput2
+        var b:String=textview2.text.toString()
+        return b
+    }
+
 }

@@ -3,33 +3,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_gravity="center"
-    android:layout_width="320dp"
-    android:layout_height="65dp"
-    android:id="@+id/for_arifmetic"
-    android:background="@drawable/button"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
+    <View
+        android:id="@+id/forArifmetic"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
-        android:layout_width="250dp"
-        android:layout_height="15dp"
-        android:gravity="top"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="5dp" />
+        android:id="@+id/nupizda"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
 
     <EditText
+        android:id="@+id/for_initialization"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:background="#00000000"
+        android:background="@color/white"
         android:inputType="text"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="12dp" />
-
-    <Button
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/block_button"
-        tools:layout_editor_absoluteX="274dp"
-        tools:layout_editor_absoluteY="10dp" />
+         android:gravity="center" />
 
 </merge>
