@@ -17,21 +17,30 @@ import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
-
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
 
-    data class Block(var view: View,
-                     var startInd: Int, var finishInd: Int)
+    data class Block(var view: View, var startInd: Int, var finishInd: Int)
     private var listOfBlocks: MutableList<Block> = mutableListOf()
+    var isPressedButton = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySecondBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+        //консоль и bottom sheet
         val frame = findViewById<FrameLayout>(R.id.sheet)
+        val consol = findViewById<FrameLayout>(R.id.sheet2)
+
         val bottomSheetBehavior: BottomSheetBehavior<*> =
             BottomSheetBehavior.from<View>(frame)
+
+        val bottomSheetConsol: BottomSheetBehavior<*> =
+            BottomSheetBehavior.from<View>(consol)
+
+        bottomSheetConsol.peekHeight = 0
 
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -40,6 +49,16 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.peekHeight = 135
         bottomSheetBehavior.isHideable = false
 
+       // if (bottomSheetBehavior.peekHeight == 135){
+            binding.floating.setOnClickListener{//компиляция
+                bottomSheetBehavior.peekHeight = 0
+                bottomSheetConsol.peekHeight = 135
+
+            }
+        //}
+
+
+        //обработка нажатий на кнопки создания блоков
         binding.forInitialization.setOnClickListener {
             listOfBlocks.add(addViewToScreen(ForCustomView(this)))
         }
@@ -56,12 +75,10 @@ class SecondActivity : AppCompatActivity() {
            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
 
-//        addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
-//        addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
-//        addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
-//        listOfBlocks.add(addViewToScreen(ForCustomView(this)))
-    }
 
+
+    }
+//появление обычного блока
     private fun addViewToScreen(view: View): Block {
         (view as ForCustomView).SetText(listOfBlocks.size.toString())
         binding.container.addView(view)
@@ -70,6 +87,7 @@ class SecondActivity : AppCompatActivity() {
         val newBlock = Block(view, listOfBlocks.size, listOfBlocks.size)
         return newBlock
     }
+    //пояление вложенного блока
     private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int){
         for(i in startInd..finishInd) {
             Log.i("hello", "$i")
@@ -147,22 +165,22 @@ class SecondActivity : AppCompatActivity() {
 
     data class Point(var x: Float, var y: Float)
 
-    private fun swapTwoBlocks(firstInd: Int, secondInd: Int, firstView: View, secondView: View) {
-        if(firstInd > secondInd) { //Todo: добавить в параметры функции родительского контейнера, например, binding.container
-            binding.container.removeViewAt(firstInd + 1)
-            binding.container.removeViewAt(secondInd + 1)
-            binding.container.addView(firstView, secondInd + 1)
-            binding.container.addView(secondView, firstInd + 1)
-        }
-        else if(secondInd > firstInd){
-            binding.container.removeViewAt(secondInd + 1)
-            binding.container.removeViewAt(firstInd + 1)
-            binding.container.addView(secondView, firstInd + 1)
-            binding.container.addView(firstView, secondInd + 1)
-        }
-
-
-    }
+//    private fun swapTwoBlocks(firstInd: Int, secondInd: Int, firstView: View, secondView: View) {
+//        if(firstInd > secondInd) { //Todo: добавить в параметры функции родительского контейнера, например, binding.container
+//            binding.container.removeViewAt(firstInd + 1)
+//            binding.container.removeViewAt(secondInd + 1)
+//            binding.container.addView(firstView, secondInd + 1)
+//            binding.container.addView(secondView, firstInd + 1)
+//        }
+//        else if(secondInd > firstInd){
+//            binding.container.removeViewAt(secondInd + 1)
+//            binding.container.removeViewAt(firstInd + 1)
+//            binding.container.addView(secondView, firstInd + 1)
+//            binding.container.addView(firstView, secondInd + 1)
+//        }
+//
+//
+//    }
 
 
     private fun attach(toBlockInd: Int, fromBlock: Block, dropPoint: Point) {
