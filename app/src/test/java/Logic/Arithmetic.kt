@@ -1,55 +1,59 @@
 package Logic
 
 import Logic.MainBlock.Companion.variables
+import android.text.TextUtils.replace
+import androidx.core.text.isDigitsOnly
+import java.lang.Error
 import java.util.*
 
 class Arithmetic : MainBlock {
+    override var ErrorString = ""
+        override var status = true
     val vars = variables
     val name :String? = null
     val previousBlock : MainBlock? = null
     val nextBlock : MainBlock? = null
-    var textBar: String?=null
-    var variable: String? =null
+    var textBar: String=""
+    var variable: String =""
     override fun start() = assign()
     fun assign(){
-        variable?.let { assignmentVar(it) }?.let {
-            textBar?.let { it1 ->
-                recognize(
-                    it1
-                )
-            }?.let { it2 -> calculate(it2) }?.let { it3 -> vars.replace(it, it3) }
-        }
-
+       vars.replace(assignmentVar(variable),calculate(recognize(textBar)))
     }
     private fun assignmentVar(textBar:String): String {
         var variable:String =""
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)|^a-zA-Z])"""))) {
+        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%|^a-zA-Z])"""))) {
             val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(textBar)
             if (vars.containsKey(matches?.value))
                 variable = matches?.value.toString()
             else {
-                println("variable is not exist")
-                return "variable is not exist"
+               ErrorString = "variable is not exist : ${matches?.value}"
+                status = false
             }
 
         }
         else{
-            println("the value of the variable was entered incorrectly")
+            status = false
+            val matches = Regex("""([^\d|\s|^\+\-\/\*\(\)\%|^a-zA-Z])""").find(textBar)
+            ErrorString = "the value of the variable was entered incorrectly : ${matches?.value}"
         }
+
         return variable
     }
     private fun recognize(textBar:String):String{
         var text = textBar
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)|^a-zA-Z])"""))) {
+        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%|^a-zA-Z])"""))) {
             var matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             while (matches != null)
             {
                 if (vars.containsKey(matches.value)) {
+                   // println(matches.value)
                     text = text.replaceRange(matches.range, vars.getValue(matches.value).toString())
                 }
                 else{
                     // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
-                    return matches.value // та самая переменная c
+                    //return matches.value // та самая переменная c
+                   status = false
+                    ErrorString = "undefined variable : ${matches.value}"
                     break
                 }
                  matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
@@ -58,21 +62,36 @@ class Arithmetic : MainBlock {
         }
         else{
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
-            println("false")
+                val matches = Regex("""([^\d|\s|^\+\-\/\*\(\)\%|^a-zA-Z])""").find(textBar)
+            ErrorString = "incorrect expression : ${matches?.value}"
+            status = false
         }
-       // println(text)
+        if (textBar.contains(Regex("""([a-zA-Z]+[0-9]*)\s+([a-zA-Z]+[0-9]*)"""))) {
+            val matches = Regex("""([a-zA-Z]+[0-9]*)\s+([a-zA-Z]+[0-9]*)""").find(textBar)
+            ErrorString = "incorrect expression : ${matches?.value}"
+            status = false
+        }
         return text
     }
     private fun calculate(textBar:String):Int{
-       // println(textBar)
-        val stack: Stack<Char> = Stack<Char>()
+        println(textBar)
+        if (textBar.contains(Regex("""((\d\s*\/\s*0))"""))) {
+            val matches = Regex("""((\d\s*\/\s*0))""").find(textBar)
+            ErrorString = "incorrect expression : ${matches?.value}"
+            status = false
+        }
+        if (!status)
+            return 0
         val text = textBar.replace("""\s""".toRegex(), "")
+    if (!text.contains(Regex("""([\+\-\/\*\%])""")))
+        return text.toInt()
+        val stack: Stack<Char> = Stack<Char>()
         var RPN:String = ""
         for (i in text) {
             if(i.isDigit()){
                 RPN+=i
             }
-            else{
+            else{println(RPN)
                 RPN+=' '
                 if (i == '-' || i == '+'){
                     if(!stack.isEmpty()) {
@@ -84,9 +103,9 @@ class Arithmetic : MainBlock {
                     }
                     else stack.push(i)
                 }
-                if (i == '*' || i == '/') {
+                if (i == '*' || i == '/'|| i == '%') {
                     if(!stack.isEmpty()) {
-                        if (stack.peek() == '/' || stack.peek() == '*') {
+                        if (stack.peek() == '/' || stack.peek() == '*'|| i == '%') {
                             RPN += stack.pop()
                             RPN+=' '
                         }
@@ -126,7 +145,7 @@ class Arithmetic : MainBlock {
                 value = ""
             }
             else if(RPN[i].isDigit()) value += RPN[i]
-            if (RPN[i] == '-' || RPN[i] == '+' || RPN[i] == '/' || RPN[i] == '*') {
+            if (RPN[i] == '-' || RPN[i] == '+' || RPN[i] == '/' || RPN[i] == '*'|| RPN[i] == '%') {
                 if (RPN[i] == '+') {
                     val x = stackInt.pop()
                     val y = stackInt.pop()
@@ -157,6 +176,19 @@ class Arithmetic : MainBlock {
                                 }
 
                             }
+                            else
+                                if (RPN[i] == '%') {
+                                    val x = stackInt.pop()
+                                    val y = stackInt.pop()
+                                    try {
+                                        val count = y.toInt() % x.toInt()
+                                        stackInt.push(count.toString())
+                                    }
+                                    catch (e: NumberFormatException) {
+                                        return 0
+                                    }
+
+                                }
 
             }
 

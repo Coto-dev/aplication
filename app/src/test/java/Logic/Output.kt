@@ -3,11 +3,13 @@ package Logic
 import Logic.MainBlock.Companion.variables
 
 class Output : MainBlock {
+    override var ErrorString = ""
+    override var status = true
     val vars = variables
     val name :String? = null
     val previousBlock : MainBlock? = null
     val nextBlock : MainBlock? = null
-    var textBar: String?=null
+    var textBar: String=""
 
     override fun start() = output()
     fun output(){
@@ -20,7 +22,8 @@ class Output : MainBlock {
                 }
                 else{
                     // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
-                    println("Variable is not exist : ${name.value}") // та самая переменная c
+                    status = false
+                    ErrorString = ("Variable is not exist : ${name.value}") // та самая переменная c
                     break
                 }
             }
@@ -28,7 +31,8 @@ class Output : MainBlock {
         }
         else{
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
-            println("false")
+            ErrorString = "the value of the variable was entered incorrectly : ${Regex("""([^\w|,|\s]|((^|,)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})""").find(textBar)}"
+            status = false
         }
     }
 

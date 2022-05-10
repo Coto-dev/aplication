@@ -18,16 +18,22 @@ fun main(){
     pushDataForArithmetic("a+2","a23",1)
     pushDataForInitialization("abvgd",2)
     pushDataForArithmetic("a23+3","abvgd",3)
-    pushDataForInitialization("clone",4)
-    pushDataForArithmetic("abvgd+a23","clone",5)
+    pushDataForInitialization("1233clone",4)
+    pushDataForArithmetic("  abvgd","clone",5)
     pushDataForArithmetic("(abvgd+a23)*clone","a",6)
     pushDataForInitialization("ex",7)
     pushDataForOutput("clone,ex",8)
 
 
     fun start() {
-        for (name in listOfBlocks)
+        for (name in listOfBlocks) {
             name.start()
+            if (!name.status)
+            {
+                println(name.ErrorString)
+                break
+            }
+        }
        //println(variables)
     }
     start()
