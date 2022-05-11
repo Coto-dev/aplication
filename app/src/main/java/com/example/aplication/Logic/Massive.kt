@@ -1,7 +1,6 @@
-package Logic
+package com.example.aplication.Logic
 
-import Logic.MainBlock.Companion.MapArray
-import androidx.core.text.isDigitsOnly
+import com.example.aplication.Logic.MainBlock.Companion.MapArray
 
 class Massive : MainBlock {
     val map = MapArray

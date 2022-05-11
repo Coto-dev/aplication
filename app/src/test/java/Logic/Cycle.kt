@@ -1,4 +1,0 @@
-package Logic
-
-class Cycle {
-}

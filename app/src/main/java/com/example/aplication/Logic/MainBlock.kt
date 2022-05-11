@@ -1,4 +1,4 @@
-package Logic
+package com.example.aplication.Logic
 
 interface MainBlock {
     fun start()

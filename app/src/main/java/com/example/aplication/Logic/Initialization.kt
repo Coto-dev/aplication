@@ -1,6 +1,6 @@
-package Logic
-import Logic.MainBlock.Companion.variables
-import java.util.*
+package com.example.aplication.Logic
+import com.example.aplication.Logic.MainBlock.Companion.variables
+
 class Initialization : MainBlock {
     override var ErrorString = ""
     override var status = true

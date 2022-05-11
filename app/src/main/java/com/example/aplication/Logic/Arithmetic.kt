@@ -1,9 +1,6 @@
-package Logic
+package com.example.aplication.Logic
 
-import Logic.MainBlock.Companion.variables
-import android.text.TextUtils.replace
-import androidx.core.text.isDigitsOnly
-import java.lang.Error
+import com.example.aplication.Logic.MainBlock.Companion.variables
 import java.util.*
 
 class Arithmetic : MainBlock {

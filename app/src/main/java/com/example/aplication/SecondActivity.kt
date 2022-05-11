@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.example.aplication.Logic.createArithmetic
 
 
 class SecondActivity : AppCompatActivity() {
@@ -51,7 +52,7 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.isHideable = false
 
 
-        // if (bottomSheetBehavior.peekHeight == 135){
+         if (bottomSheetBehavior.peekHeight == 135){
         binding.floating.setOnClickListener{//компиляция
             bottomSheetBehavior.peekHeight = 0
             bottomSheetConsol.peekHeight = 135
@@ -62,12 +63,12 @@ class SecondActivity : AppCompatActivity() {
             }
 
         }
-        //}
+        }
 
         //обработка нажатий на кнопки создания блоков
         binding.forArifmetic.setOnClickListener {
             listOfBlocks.add(addViewToScreen(ForCustomView(this)))
-            createArithmetic
+           // createArithmetic
         }
         binding.forCycleFor.setOnClickListener {
            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
@@ -82,7 +83,7 @@ class SecondActivity : AppCompatActivity() {
            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forInitialization.setOnClickListener {
-            createInitialization()
+            //createInitialization()
             listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
 
@@ -272,6 +273,8 @@ class SecondActivity : AppCompatActivity() {
         for(i in newList) {
             binding.container.addView(i.view)
         }
+        listOfBlocks = newList
+
         Log.i("zalupa", "ne, nu pravda je zalupa")
     }
 

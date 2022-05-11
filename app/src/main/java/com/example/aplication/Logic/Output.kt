@@ -1,6 +1,6 @@
-package Logic
+package com.example.aplication.Logic
 
-import Logic.MainBlock.Companion.variables
+import com.example.aplication.Logic.MainBlock.Companion.variables
 
 class Output : MainBlock {
     override var ErrorString = ""

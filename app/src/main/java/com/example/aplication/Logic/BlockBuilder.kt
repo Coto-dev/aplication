@@ -1,6 +1,6 @@
-package Logic
+package com.example.aplication.Logic
 
-import Logic.MainBlock.Companion.listOfBlocks
+import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 
 fun pushDataForInitialization(editText:String,index:Int) {
     val a = Initialization()

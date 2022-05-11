@@ -1,7 +1,5 @@
-package Logic
-import Logic.MainBlock.Companion.listOfBlocks
-import Logic.MainBlock.Companion.variables
-import java.util.*
+package com.example.aplication.Logic
+import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 
 fun main(){
     createInitialization()

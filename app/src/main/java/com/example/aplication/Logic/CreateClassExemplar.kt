@@ -1,6 +1,6 @@
-package Logic
+package com.example.aplication.Logic
 
-import Logic.MainBlock.Companion.listOfBlocks
+import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 
 fun createInitialization(){
     listOfBlocks.add(Initialization())

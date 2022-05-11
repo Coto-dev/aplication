@@ -1,5 +1,5 @@
 /*
-package Logic
+package com.example.aplication.Logic
 
 open class MainBlock {
     companion object {
