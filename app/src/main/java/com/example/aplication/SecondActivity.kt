@@ -130,7 +130,7 @@ class SecondActivity : AppCompatActivity() {
             Log.i("hello", "$i")
             var view = ForCustomView(this)
             (view as ForCustomView).SetText(listOfBlocks.size.toString())
-            (view as ForCustomView).SetText("vlojen")
+            (view as ForCustomView).SetText("я вложен")
             binding.container.addView(view)
             view.setOnTouchListener(choiceTouchListener())
             view.setOnDragListener(choiceDragListener())
