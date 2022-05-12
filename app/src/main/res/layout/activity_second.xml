@@ -69,12 +69,30 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/for_arifmetic"
-                    android:layout_marginTop="80dp"
+                    android:text="@string/initialization"
+                    android:id="@+id/for_initialization"
                     android:layout_gravity="center"
-                    android:text="Присваивание"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
+                    android:layout_marginTop="80dp"
+                    android:background="@drawable/block_button" />
+
+                <Button
+                    android:id="@+id/for_arifmetic"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:text="@string/Equal"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/block_button" />
+
+                <Button
+                    android:id="@+id/for_print"
+                    android:text="@string/Output"
+                    android:layout_gravity="center"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/block_button" />
 
                 <Button
@@ -113,14 +131,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/block_button" />
 
-                <Button
-                    android:text="@string/initialization"
-                    android:id="@+id/for_initialization"
-                    android:layout_gravity="center"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
+
 
             </LinearLayout>
 

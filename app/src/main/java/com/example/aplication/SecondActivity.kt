@@ -17,20 +17,24 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.example.aplication.Logic.createInitialization
 import com.example.aplication.Logic.createArithmetic
-
+import com.example.aplication.Logic.pushDataForArithmetic
+import com.example.aplication.Logic.pushDataForInitialization
+import com.example.aplication.Logic.main
+import com.example.aplication.databinding.ForInitializationBinding
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
 
-    data class Block(var view: View, var startInd: Int, var finishInd: Int)
+    data class Block(var view: View, var name: String, var startInd: Int, var finishInd: Int)
+
     private var listOfBlocks: MutableList<Block> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySecondBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
 
         //консоль и bottom sheet
         val frame = findViewById<FrameLayout>(R.id.sheet)
@@ -51,27 +55,36 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.peekHeight = 135
         bottomSheetBehavior.isHideable = false
 
+        if (bottomSheetBehavior.peekHeight == 135) {
+            binding.floating.setOnClickListener {//компиляция
+                bottomSheetBehavior.peekHeight = 0
+                bottomSheetConsol.peekHeight = 135
 
-         if (bottomSheetBehavior.peekHeight == 135){
-        binding.floating.setOnClickListener{//компиляция
-            bottomSheetBehavior.peekHeight = 0
-            bottomSheetConsol.peekHeight = 135
+                var i = 0
 
-            for(block in listOfBlocks){
-
-                Log.d("gfdhj",(block.view as ForCustomView).GetText())
+                for (block in listOfBlocks) {
+                    if (block.name == "ForCustomView") {
+                        var string = (block.view as ForCustomView).GetText1()
+                        var string2 = (block.view as ForCustomView).GetText2()
+                        pushDataForArithmetic(string2, string, i)
+                    }
+                    if (block.name == "For_inizalitation") {
+                        var string = (block.view as For_inizalitation).GetText2()
+                        pushDataForInitialization(string, i)
+                    }
+                    i++
+                }
+                main()
             }
-
-        }
         }
 
         //обработка нажатий на кнопки создания блоков
         binding.forArifmetic.setOnClickListener {
             listOfBlocks.add(addViewToScreen(ForCustomView(this)))
-           // createArithmetic
+            createArithmetic()
         }
         binding.forCycleFor.setOnClickListener {
-           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forCycleWhile.setOnClickListener {
             addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
@@ -80,22 +93,25 @@ class SecondActivity : AppCompatActivity() {
             addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
-           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forInitialization.setOnClickListener {
+            createInitialization()
+            listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
+        }
+        binding.forPrint.setOnClickListener {
             //createInitialization()
             listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
-
     }
 
-//появление обычного блока
+    //появление обычного блока
     private fun addViewToScreen(view: View): Block {
         (view as ForCustomView).SetText(listOfBlocks.size.toString())
         binding.container.addView(view)
         view.setOnTouchListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, listOfBlocks.size, listOfBlocks.size)
+        val newBlock = Block(view, "ForCustomView", listOfBlocks.size, listOfBlocks.size)
         return newBlock
     }
 
@@ -104,14 +120,13 @@ class SecondActivity : AppCompatActivity() {
         binding.container.addView(view)
         view.setOnTouchListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, listOfBlocks.size, listOfBlocks.size)
+        val newBlock = Block(view, "For_inizalitation", listOfBlocks.size, listOfBlocks.size)
         return newBlock
     }
 
-
     //  пояление вложенного блока
-    private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int){
-        for(i in startInd..finishInd) {
+    private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int) {
+        for (i in startInd..finishInd) {
             Log.i("hello", "$i")
             var view = ForCustomView(this)
             (view as ForCustomView).SetText(listOfBlocks.size.toString())
@@ -119,12 +134,10 @@ class SecondActivity : AppCompatActivity() {
             binding.container.addView(view)
             view.setOnTouchListener(choiceTouchListener())
             view.setOnDragListener(choiceDragListener())
-            val newBlock = Block(view, startInd, finishInd)
+            val newBlock = Block(view, "ForCustomView", startInd, finishInd)
             listOfBlocks.add(newBlock)
         }
     }
-
-
 
     private lateinit var draggingView: View
 
@@ -146,17 +159,17 @@ class SecondActivity : AppCompatActivity() {
         when (event.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
                 var second = listOfBlocks[0]
-                for(i in listOfBlocks) {
-                    if(i.view == draggingView) {
+                for (i in listOfBlocks) {
+                    if (i.view == draggingView) {
                         second = i
-                   }
+                    }
                 }
-                for(i in second.finishInd downTo second.startInd) {
+                for (i in second.finishInd downTo second.startInd) {
                     listOfBlocks[i].view.visibility = INVISIBLE
                 }
             }
             DragEvent.ACTION_DROP -> {
-                if(view != binding.container) {
+                if (view != binding.container) {
                     if (view != draggingView) {
                         var first = listOfBlocks[0]
                         var ind = 0
@@ -171,7 +184,7 @@ class SecondActivity : AppCompatActivity() {
                                 second = i
                             }
                         }
-                        if(first.finishInd != second.finishInd) {
+                        if (first.finishInd != second.finishInd) {
                             attach(ind - 1, second, Point(event.x, event.y))
                             calculateNewIndexes()
                         }
@@ -179,11 +192,11 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
             DragEvent.ACTION_DRAG_ENDED -> {
-                for(i in listOfBlocks) {
-                    i.view.post{
+                for (i in listOfBlocks) {
+                    i.view.post {
                         i.view.visibility = VISIBLE
                     }
-               }
+                }
 
             }
         }
@@ -192,85 +205,41 @@ class SecondActivity : AppCompatActivity() {
 
     data class Point(var x: Float, var y: Float)
 
-//    private fun swapTwoBlocks(firstInd: Int, secondInd: Int, firstView: View, secondView: View) {
-//        if(firstInd > secondInd) { //Todo: добавить в параметры функции родительского контейнера, например, binding.container
-//            binding.container.removeViewAt(firstInd + 1)
-//            binding.container.removeViewAt(secondInd + 1)
-//            binding.container.addView(firstView, secondInd + 1)
-//            binding.container.addView(secondView, firstInd + 1)
-//        }
-//        else if(secondInd > firstInd){
-//            binding.container.removeViewAt(secondInd + 1)
-//            binding.container.removeViewAt(firstInd + 1)
-//            binding.container.addView(secondView, firstInd + 1)
-//            binding.container.addView(firstView, secondInd + 1)
-//        }
-//
-//
-//    }
-
-
     private fun attach(toBlockInd: Int, fromBlock: Block, dropPoint: Point) {
 
         val buff = mutableListOf<Block>()
         var ind = toBlockInd
-        if(toBlockInd == -1) {
+        if (toBlockInd == -1) {
             ind = 0
         }
         val toBlock = listOfBlocks[ind]
         val size = listOfBlocks.size - 1
         for (i in fromBlock.finishInd downTo fromBlock.startInd) {
             buff.add(listOfBlocks[i])
-
-            //binding.container.removeView(listOfBlocks[i].view)
-            //listOfBlocks.removeAt(i)
         }
-//        for(i in (fromBlock.finishInd-fromBlock.startInd) downTo 0) {
-//            var c = 0
-//            if(toBlockInd>fromBlock.startInd) c-= buff.size
-//            if(toBlockInd == listOfBlocks[toBlockInd].startInd) {
-//                Log.i("hello", "start, $toBlockInd, ${listOfBlocks[toBlockInd].startInd}")
-//                if (dropPoint.y < toBlock.view.height / 2) {
-//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.startInd + c)
-//                    listOfBlocks.add(toBlock.startInd + c, buff[buff.size - i - 1])
-//                } else {
-//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.startInd + 1 + c)
-//                    listOfBlocks.add(toBlock.startInd + 1 + c, buff[buff.size - i - 1])
-//                }
-//            }
-//            else {
-//                Log.i("hello", "finish $toBlockInd ${listOfBlocks[toBlockInd].startInd}")
-//                if (dropPoint.y < toBlock.view.height / 2) {
-//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.finishInd + c)
-//                    listOfBlocks.add(toBlock.finishInd + c, buff[buff.size - i - 1])
-//                } else {
-//                    binding.container.addView(buff[buff.size - i - 1].view, toBlock.finishInd + 1 + c)
-//                    listOfBlocks.add(toBlock.finishInd + 1 + c, buff[buff.size - i - 1])
-//                }
-//            }
+
         val newList = mutableListOf<Block>()
         for (i in 0..size) {
-            if ((fromBlock.startInd >  i|| i > fromBlock.finishInd) && i != ind) {
+            if ((fromBlock.startInd > i || i > fromBlock.finishInd) && i != ind) {
                 newList.add(listOfBlocks[i])
-            } else if(i == ind) {
-                if(dropPoint.y > toBlock.view.height/2) {
+            } else if (i == ind) {
+                if (dropPoint.y > toBlock.view.height / 2) {
                     newList.add(listOfBlocks[ind])
-                    for(j in buff.size - 1 downTo  0) {
+                    for (j in buff.size - 1 downTo 0) {
                         newList.add(buff[j])
                     }
-                }
-                else {
-                    for(j in buff.size - 1 downTo  0) {
+                } else {
+                    for (j in buff.size - 1 downTo 0) {
                         newList.add(buff[j])
                     }
                     newList.add(listOfBlocks[ind])
                 }
             }
         }
-        for(i in newList.size - 1 downTo 0) {
+        for (i in newList.size - 1 downTo 0) {
             binding.container.removeView(listOfBlocks[i].view)
         }
-        for(i in newList) {
+        for (i in newList) {
             binding.container.addView(i.view)
         }
         listOfBlocks = newList
@@ -279,16 +248,16 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun calculateNewIndexes() {
-        val buffList =  listOfBlocks
+        val buffList = listOfBlocks
         val checkList = mutableListOf<Boolean>()
-        for(i in 0 until listOfBlocks.size) {
+        for (i in 0 until listOfBlocks.size) {
             checkList.add(false)
         }
-        for(i in 0 until listOfBlocks.size - 1) {
-            if(checkList[i]) continue
-            for(j in i + 1 until listOfBlocks.size) {
-                if(checkList[j]) continue
-                if(listOfBlocks[i].startInd == listOfBlocks[j].startInd) {
+        for (i in 0 until listOfBlocks.size - 1) {
+            if (checkList[i]) continue
+            for (j in i + 1 until listOfBlocks.size) {
+                if (checkList[j]) continue
+                if (listOfBlocks[i].startInd == listOfBlocks[j].startInd) {
                     buffList[i].startInd = i
                     buffList[j].startInd = i
                     buffList[i].finishInd = j
@@ -297,27 +266,15 @@ class SecondActivity : AppCompatActivity() {
                     checkList[j] = true
                 }
             }
-            if(!checkList[i]) {
+            if (!checkList[i]) {
                 buffList[i].finishInd = i
                 buffList[i].startInd = i
             }
         }
-        if(!checkList[listOfBlocks.size-1]) {
+        if (!checkList[listOfBlocks.size - 1]) {
             buffList[listOfBlocks.size - 1].finishInd = listOfBlocks.size - 1
             buffList[listOfBlocks.size - 1].startInd = listOfBlocks.size - 1
         }
         listOfBlocks = buffList
     }
-
-    private fun Check(){
-
-    }
-
-
-
-
-    /*
-    listOfBlocks.add(toBlock.startInd + i, fromBlock)
-    listOfBlocks.removeAt(fromBlock.startInd)
-    */
 }

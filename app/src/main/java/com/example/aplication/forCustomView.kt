@@ -9,6 +9,8 @@ import android.widget.EditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.aplication.databinding.CustomBlockBinding
 import com.example.aplication.databinding.ForInitializationBinding
+import com.example.aplication.Logic.pushDataForArithmetic
+import com.example.aplication.Logic.pushDataForInitialization
 
 class ForCustomView  constructor (
     context: Context,
@@ -25,15 +27,6 @@ class ForCustomView  constructor (
        else{
            textview.text=text
        }
-
-    }
-
-    fun GetText():String {
-        val textview= binding.textInput
-        val textview2= binding.textInput2
-        var a:String=textview.text.toString()
-        var b:String=textview2.text.toString()
-        return a
 
     }
 

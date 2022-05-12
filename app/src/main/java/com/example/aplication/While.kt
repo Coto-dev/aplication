@@ -14,11 +14,11 @@ class While  constructor (
     context: Context,
     attrs: AttributeSet?=null,
     defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
-    private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context), this)
-
-    public fun SetText(text:String) {
-        val textview= binding.nupizda
-        textview.text=text
-    }
+//    private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context), this)
+//
+//    public fun SetText(text:String) {
+//        val textview= binding.nupizda
+//        textview.text=text
+//    }
 
 }
