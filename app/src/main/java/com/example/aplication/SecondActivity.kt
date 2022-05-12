@@ -126,9 +126,6 @@ class SecondActivity : AppCompatActivity() {
 
 
 
-
-
-
     private lateinit var draggingView: View
 
     @SuppressLint("ClickableViewAccessibility")
@@ -148,15 +145,15 @@ class SecondActivity : AppCompatActivity() {
     private fun choiceDragListener() = View.OnDragListener { view, event ->
         when (event.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
-//                var second = listOfBlocks[0]
-//                for(i in listOfBlocks) {
-//                    if(i.view == draggingView) {
-//                        second = i
-//                    }
-//                }
-//                for(i in second.finishInd downTo second.startInd) {
-//                    listOfBlocks[i].view.visibility = INVISIBLE
-//                }
+                var second = listOfBlocks[0]
+                for(i in listOfBlocks) {
+                    if(i.view == draggingView) {
+                        second = i
+                   }
+                }
+                for(i in second.finishInd downTo second.startInd) {
+                    listOfBlocks[i].view.visibility = INVISIBLE
+                }
             }
             DragEvent.ACTION_DROP -> {
                 if(view != binding.container) {
@@ -182,9 +179,12 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
             DragEvent.ACTION_DRAG_ENDED -> {
-//                for(i in listOfBlocks) {
-//                    i.view.visibility = VISIBLE
-//                }
+                for(i in listOfBlocks) {
+                    i.view.post{
+                        i.view.visibility = VISIBLE
+                    }
+               }
+
             }
         }
         true
@@ -308,6 +308,13 @@ class SecondActivity : AppCompatActivity() {
         }
         listOfBlocks = buffList
     }
+
+    private fun Check(){
+
+    }
+
+
+
 
     /*
     listOfBlocks.add(toBlock.startInd + i, fromBlock)
