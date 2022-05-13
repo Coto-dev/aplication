@@ -1,4 +1,4 @@
-package Logic
+/*package Logic
 
 import Logic.MainBlock.Companion.variables
 import android.text.TextUtils.replace
@@ -433,3 +433,4 @@ class If_else : MainBlock {
 }
 
 
+*/

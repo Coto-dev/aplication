@@ -17,3 +17,8 @@ fun createMassive(){
 
     listOfBlocks.add(Massive())
 }
+
+fun createIf_else(){
+
+    listOfBlocks.add(If_else())
+}
