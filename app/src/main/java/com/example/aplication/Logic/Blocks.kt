@@ -28,7 +28,6 @@ fun main(){
 //    pushDataForOutput("clone,ex",8)
 //    pushDataForMassive("mas[100],ad[21],a1[12]",9)
 
-
     fun start() {
         for (name in listOfBlocks) {
             name.start()

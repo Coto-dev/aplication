@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginStart
 import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.example.aplication.Logic.createInitialization
@@ -27,7 +28,13 @@ import com.example.aplication.Logic.main
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
 
-    data class Block(var view: View, var name: String, var startInd: Int, var finishInd: Int)
+    data class Block(
+        var view: View,
+        var type: String,
+        var name: String,
+        var startInd: Int,
+        var finishInd: Int
+    )
 
     private var listOfBlocks: MutableList<Block> = mutableListOf()
 
@@ -107,14 +114,13 @@ class SecondActivity : AppCompatActivity() {
     }
 
 
-
     //появление обычного блока
     private fun addViewToScreen(view: View): Block {
-       // (view as ForCustomView).SetText(listOfBlocks.size.toString())
+        // (view as ForCustomView).SetText(listOfBlocks.size.toString())
         binding.container.addView(view)
         view.setOnTouchListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, "ForCustomView", listOfBlocks.size, listOfBlocks.size)
+        val newBlock = Block(view, "no", "ForCustomView", listOfBlocks.size, listOfBlocks.size)
         return newBlock
     }
 
@@ -123,7 +129,7 @@ class SecondActivity : AppCompatActivity() {
         binding.container.addView(view)
         view.setOnTouchListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, "For_inizalitation", listOfBlocks.size, listOfBlocks.size)
+        val newBlock = Block(view, "no", "For_inizalitation", listOfBlocks.size, listOfBlocks.size)
         return newBlock
     }
 
@@ -132,12 +138,12 @@ class SecondActivity : AppCompatActivity() {
         for (i in startInd..finishInd) {
             Log.i("hello", "$i")
             var view = ForCustomView(this)
-          //  (view as ForCustomView).SetText(listOfBlocks.size.toString())
-           // (view as ForCustomView).SetText("я вложен")
+            //  (view as ForCustomView).SetText(listOfBlocks.size.toString())
+            // (view as ForCustomView).SetText("я вложен")
             binding.container.addView(view)
             view.setOnTouchListener(choiceTouchListener())
             view.setOnDragListener(choiceDragListener())
-            val newBlock = Block(view, "ForCustomView", startInd, finishInd)
+            val newBlock = Block(view, "nested", "ForCustomView", startInd, finishInd)
             listOfBlocks.add(newBlock)
         }
     }
@@ -200,6 +206,7 @@ class SecondActivity : AppCompatActivity() {
                         i.view.visibility = VISIBLE
                     }
                 }
+                createMargin()
 
             }
         }
@@ -279,4 +286,21 @@ class SecondActivity : AppCompatActivity() {
         }
         listOfBlocks = buffList
     }
+
+
+    private fun createMargin() {
+        for (block in listOfBlocks) {
+            block.view.x = 0f
+        }
+
+        for (block in listOfBlocks) {
+            if (block.finishInd - block.startInd >= 2) {
+                for (i in block.startInd + 1..block.finishInd - 1) {
+                    listOfBlocks[i].view.x += 30f
+                }
+            }
+        }
+
+    }
+
 }

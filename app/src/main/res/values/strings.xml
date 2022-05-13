@@ -12,5 +12,6 @@
     <string name="name">Name</string>
     <string name="expression">expression</string>
     <string name="Themes">Сменить тему</string>
+    <string name="output">Print</string>
 
 </resources>
