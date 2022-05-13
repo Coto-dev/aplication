@@ -22,7 +22,7 @@ import com.example.aplication.Logic.createArithmetic
 import com.example.aplication.Logic.pushDataForArithmetic
 import com.example.aplication.Logic.pushDataForInitialization
 import com.example.aplication.Logic.main
-import com.example.aplication.databinding.ForInitializationBinding
+
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
@@ -33,6 +33,7 @@ class SecondActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySecondBinding.inflate(layoutInflater)
+
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -105,9 +106,11 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
+
+
     //появление обычного блока
     private fun addViewToScreen(view: View): Block {
-        (view as ForCustomView).SetText(listOfBlocks.size.toString())
+       // (view as ForCustomView).SetText(listOfBlocks.size.toString())
         binding.container.addView(view)
         view.setOnTouchListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
@@ -129,8 +132,8 @@ class SecondActivity : AppCompatActivity() {
         for (i in startInd..finishInd) {
             Log.i("hello", "$i")
             var view = ForCustomView(this)
-            (view as ForCustomView).SetText(listOfBlocks.size.toString())
-            (view as ForCustomView).SetText("я вложен")
+          //  (view as ForCustomView).SetText(listOfBlocks.size.toString())
+           // (view as ForCustomView).SetText("я вложен")
             binding.container.addView(view)
             view.setOnTouchListener(choiceTouchListener())
             view.setOnDragListener(choiceDragListener())
@@ -244,7 +247,6 @@ class SecondActivity : AppCompatActivity() {
         }
         listOfBlocks = newList
 
-        Log.i("zalupa", "ne, nu pravda je zalupa")
     }
 
     private fun calculateNewIndexes() {

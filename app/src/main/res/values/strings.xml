@@ -7,5 +7,10 @@
     <string name="OperatorIf">Оператор if</string>
     <string name="OperatorIfElse">Оператор if else</string>
     <string name="Output">Вывод</string>
-    <string name="Equal">Присваивание</string>
+<string name="Equal">Присваивание</string>
+    <string name="While">while</string>
+    <string name="name">Name</string>
+    <string name="expression">expression</string>
+    <string name="Themes">Сменить тему</string>
+
 </resources>

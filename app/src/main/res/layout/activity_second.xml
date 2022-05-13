@@ -8,25 +8,27 @@
     tools:context=".MainActivity"
     android:background="@color/background_color">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="50dp">
-
-        <LinearLayout
-            android:padding="1dp"
-            android:id="@+id/container"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="50dp">
 
-        </LinearLayout>
-    </ScrollView>
+            <LinearLayout
+                android:padding="1dp"
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+            </LinearLayout>
+        </ScrollView>
+
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -73,18 +75,20 @@
                     android:id="@+id/for_initialization"
                     android:layout_gravity="center"
                     android:layout_width="250dp"
+                    android:textColor="@color/white"
                     android:layout_height="50dp"
                     android:layout_marginTop="80dp"
-                    android:background="@drawable/block_button" />
+                    android:background="@drawable/button_forbottom" />
 
                 <Button
                     android:id="@+id/for_arifmetic"
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center"
                     android:text="@string/Equal"
+                    android:textColor="@color/white"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/block_button" />
+                    android:background="@drawable/button_forbottom" />
 
                 <Button
                     android:id="@+id/for_print"
@@ -93,7 +97,7 @@
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
+                    android:background="@drawable/button_forbottom" />
 
                 <Button
                     android:id="@+id/for_operator_if"
@@ -102,7 +106,7 @@
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
+                    android:background="@drawable/button_forbottom" />
 
                 <Button
                     android:id="@+id/for_cycle_while"
@@ -111,7 +115,7 @@
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
+                    android:background="@drawable/button_forbottom" />
 
                 <Button
                     android:id="@+id/for_cycle_for"
@@ -120,7 +124,7 @@
                     android:layout_height="50dp"
                     android:text="@string/forcycle"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
+                    android:background="@drawable/button_forbottom" />
 
                 <Button
                     android:id="@+id/for_operator_if_else"
@@ -129,9 +133,16 @@
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/block_button" />
+                    android:background="@drawable/button_forbottom" />
 
-
+                <Button
+                    android:id="@+id/for_them"
+                    android:text="@string/Themes"
+                    android:layout_gravity="center"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_forbottom" />
 
             </LinearLayout>
 

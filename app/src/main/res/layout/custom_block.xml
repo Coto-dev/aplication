@@ -7,19 +7,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+
         <View
-            android:layout_margin="1dp"
+
             android:id="@+id/forArifmetic"
             android:layout_width="320dp"
             android:layout_height="50dp"
-            android:background="@drawable/button"
+            android:layout_margin="3dp"
+            android:background="@drawable/block_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-
-        <TextView
+        <ImageView
+            android:src="@drawable/ic_baseline_drag_handle_24"
+            android:textColor="@color/white"
             android:id="@+id/nupizda"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,27 +35,31 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:hint="@string/name"
+            android:textColorHint="@color/hint_color"
             android:id="@+id/text_input"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="start"
             android:inputType="text"
             android:layout_marginStart="10dp"
-            android:background="@color/white"
-            android:textColor="@color/black"
+            android:background="#00000000"
+            android:textColor="@color/text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:textColorHint="@color/hint_color"
+            android:hint="@string/expression"
             android:id="@+id/text_input2"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:layout_marginEnd="10dp"
             android:inputType="text"
-            android:background="@color/white"
-            android:textColor="@color/black"
+            android:background="#00000000"
+            android:textColor="@color/text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
