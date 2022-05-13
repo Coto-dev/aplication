@@ -16,12 +16,13 @@ fun main(){
     createIf_else()
 
     pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
-    pushDataForArithmetic("a+2","a23",1)
-    pushDataForInitialization("abvgd",2)
-    pushDataForArithmetic("-(a23+3)","abvgd",3)
-    pushDataForInitialization("clone",4)
-    pushDataForInitialization("clone",4)
-    pushDataForIf_Else("aa=b",5)
+    //pushDataForArithmetic("a+2","a23",1)
+    //pushDataForInitialization("abvgd",2)
+    //pushDataForArithmetic("-(a23+3)","abvgd",3)
+    //pushDataForInitialization("clone",4)
+    //pushDataForInitialization("clone",4)
+    //pushDataForIf_Else("(aa+a=b)||(a=b)",1)
+    //pushDataForIf_Else("(2=b)&(a=b)",2)
 //    pushDataForArithmetic("  abvgd","clone",5)
 //    pushDataForArithmetic(" ((2+2)*3 +(3+3)*2)+2 ","a",6)
 //    pushDataForInitialization("ex",7)
@@ -44,7 +45,9 @@ fun main(){
         //a.textBar = "aaa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd"
         //a.indetify()
         val b = If_else()
-    b.textBar = "3+4=1"
-    b.variable = "b"
+
+
+    b.textBar = "1&&(((1>1)||(1=2))&&(1=0)||0)"
+    //b.variable = "b"
     b.assign()
     }
