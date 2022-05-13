@@ -6,43 +6,26 @@ import java.lang.Error
 import java.util.*
 
 
-//class IfElse : MainBlock() {
-//    val variablesForContainer = variables
-//    val name :String? = null
-//    val previousBlock : MainBlock? = null
-//    val nextBlock : MainBlock? = null
-//    var textBar: String?=null
-//
-//}
-
-
-//package Logic
-
-
-
-class IfElse : MainBlock {
+class While : MainBlock {
     override var ErrorString = ""
     override var status = true
     val vars = MainBlock.variables
     val name: String? = null
 
     val variables = mutableMapOf<String,Int>()
-    val listOfBlocks_YES = mutableListOf<MainBlock>()
-    val listOfBlocks_NO = mutableListOf<MainBlock>()
+    val listOfBlocks = mutableListOf<MainBlock>()
     val MapArray = mutableMapOf<String,Array<Int>>()
 
     var textBar: String = ""
-    var variable: String = ""
+
     override fun start() = assign()
     fun assign() {
-        //textBar.replace(assignmentVar(variable), calculate(recognize(textBar)))
-        //println(textBar)
         textBar = (recognize(textBar));
-        //println(textBar)
-        //textBar = equality(textBar);
-        if (condition(textBar) == 1){
-            for (name in listOfBlocks_YES) {
+        //pushDataForArithmetic("aa","aa+1",0);
+       while (condition(textBar) == 1){
+            for (name in listOfBlocks) {
                 name.start()
+                println(variables);
                 if (!name.status)
                 {
                     println(name.ErrorString)
@@ -50,22 +33,11 @@ class IfElse : MainBlock {
                 }
             }
         }
-        else {
-            for (name in listOfBlocks_NO) {
-                name.start()
-                if (!name.status)
-                {
-                    println(name.ErrorString)
-                    break
-                }
-            }
-        }
-        //println(textBar)
     }
 
     private fun assignmentVar(textBar:String): String {
         var variable:String =""
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
+        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\!\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
             val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(textBar)
             if (vars.containsKey(matches?.value))
                 variable = matches?.value.toString()
@@ -299,11 +271,10 @@ class IfElse : MainBlock {
     }
     private fun recognize(textBar:String):String {
         var text = textBar
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\!\%\>\<\=\&\||^a-zA-Z])"""))) {
+        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
             var matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             while (matches != null) {
                 if (vars.containsKey(matches.value)) {
-                    // println(matches.value)
                     text = text.replaceRange(matches.range, vars.getValue(matches.value).toString())
                 } else {
                     // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
@@ -314,7 +285,6 @@ class IfElse : MainBlock {
                 }
                 matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             }
-            //println(text);
             //заменили переменные на числа, теперь заменим выражения на числа
             matches =
                 Regex("""\((([a-zA-Z]+[0-9]*)|([0-9]+))([\+\-\/\*\%](([a-zA-Z]+[0-9]*)|[0-9]+))+\)|(([a-zA-Z]+[0-9]*)|([0-9]+))([\+\-\/\*\%](([a-zA-Z]+[0-9]*)|[0-9]+))+""")
@@ -328,22 +298,17 @@ class IfElse : MainBlock {
                     )
             }
 
-            //println(text);
             //ну, чтож теперь заменяем равенства
             matches =
                 Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""")
                     .find(text)
-            //println(matches?.value.toString())
             while (matches != null) {
-                //print(equality(matches.value));
                 text = text.replace(matches.value, equality(matches.value))
                 matches =
                     Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""").find(
                         text
                     )
-
             }
-            //print(text);
         }
         else{
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
@@ -357,13 +322,12 @@ class IfElse : MainBlock {
             status = false
         }
         //print(text);
-            return text
+        return text
     }
 
     private fun equality(textBar: String): String {
         val x1:  MatchResult? = """([^>=<=!<\?\)\(])+""".toRegex().find(textBar)
         val x2:  MatchResult? = x1?.next();
-        //println(x1?.value); println(x2?.value);
         if(x1==null || x2==null) {
             ErrorString = "incorrect expression : ${textBar}"
             return "";
@@ -406,11 +370,7 @@ class IfElse : MainBlock {
         }
         if (textBar=="0")
             return "0";
-        if (textBar=="1")
-            return "1";
-        ErrorString = "incorrect expression : ${textBar}"
-        status = false
-        return "0"
+        else return "1";
     }
 
 
@@ -502,47 +462,47 @@ class IfElse : MainBlock {
                         val y = stackString.pop()
                         val count = y.toInt() + x.toInt()
                         if(count==0)
-                        stackString.push("0")
+                            stackString.push("0")
                         else stackString.push("1")
                     }
                 } else
-                        if (temp == "&") {
-                            var x = stackString.pop()
+                    if (temp == "&") {
+                        var x = stackString.pop()
 
-                            if (!stackString.isEmpty()) {
-                                val y = stackString.pop()
-                                val count = y.toInt() * x.toInt()
-                                stackString.push(count.toString())
-                            }
+                        if (!stackString.isEmpty()) {
+                            val y = stackString.pop()
+                            val count = y.toInt() * x.toInt()
+                            stackString.push(count.toString())
                         }
+                    }
                 temp = ""
             }
 
-                if (RPN[i] == '|') {
+            if (RPN[i] == '|') {
+                var x = stackString.pop()
+                if (!stackString.isEmpty()) {
+                    val y = stackString.pop()
+                    val count = y.toInt() + x.toInt()
+                    stackString.push(count.toString())
+                }
+                else{
+                    stackString.push(x)
+                    temp = RPN[i].toString()
+                }
+            } else
+                if (RPN[i] == '&') {
                     var x = stackString.pop()
                     if (!stackString.isEmpty()) {
                         val y = stackString.pop()
-                        val count = y.toInt() + x.toInt()
+                        val count = y.toInt() * x.toInt()
                         stackString.push(count.toString())
                     }
                     else{
                         stackString.push(x)
                         temp = RPN[i].toString()
                     }
-                } else
-                        if (RPN[i] == '&') {
-                            var x = stackString.pop()
-                            if (!stackString.isEmpty()) {
-                                val y = stackString.pop()
-                                val count = y.toInt() * x.toInt()
-                                stackString.push(count.toString())
-                            }
-                            else{
-                                stackString.push(x)
-                                temp = RPN[i].toString()
-                            }
-                        }
-            }
+                }
+        }
         println(stackString.pop().toInt())
         return(stackString.pop().toInt())
     }

@@ -7,8 +7,13 @@ fun pushDataForInitialization(editText:String,index:Int) {
     a.textBar = editText
     listOfBlocks[index] = a
 }
-fun pushDataForIf_Else(editText:String,index:Int) {
-    val a = If_else()
+fun pushDataForIfElse(editText:String,index:Int) {
+    val a = IfElse()
+    a.textBar = editText
+    listOfBlocks[index] = a
+}
+fun pushDataForWhile(editText:String,index:Int) {
+    val a = While()
     a.textBar = editText
     listOfBlocks[index] = a
 }
