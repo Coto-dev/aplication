@@ -80,6 +80,7 @@ class SecondActivity : AppCompatActivity() {
                         var string = (block.view as For_inizalitation).GetText2()
                         pushDataForInitialization(string, i)
                     }
+
                     i++
                 }
                 main()

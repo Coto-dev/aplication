@@ -44,10 +44,10 @@ fun main(){
         //val a = ContainerVariables()
         //a.textBar = "aaa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd"
         //a.indetify()
-        val b = While()
+        val b = IfElse()
 
 
-    b.textBar = "aa!=3"
+    b.textBar = "((aa+b<3)&&&&&&&&&&&&&&&&&&&1)||||||||||||||||0&1"
     //b.variable = "b"
     b.assign()
 

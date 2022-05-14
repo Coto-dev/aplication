@@ -6,26 +6,38 @@ import java.lang.Error
 import java.util.*
 
 
-class While : MainBlock {
+//class IfElse : MainBlock() {
+//    val variablesForContainer = variables
+//    val name :String? = null
+//    val previousBlock : MainBlock? = null
+//    val nextBlock : MainBlock? = null
+//    var textBar: String?=null
+//
+//}
+
+
+//package Logic
+
+
+
+class If : MainBlock {
     override var ErrorString = ""
     override var status = true
     val vars = MainBlock.variables
     val name: String? = null
 
     val variables = mutableMapOf<String,Int>()
-    val listOfBlocks = mutableListOf<MainBlock>()
+    val listOfBlocks_YES = mutableListOf<MainBlock>()
     val MapArray = mutableMapOf<String,Array<Int>>()
 
     var textBar: String = ""
-
+    var variable: String = ""
     override fun start() = assign()
     fun assign() {
         textBar = (recognize(textBar));
-        //pushDataForArithmetic("aa","aa+1",0);
-       while (condition(textBar) == 1){
-            for (name in listOfBlocks) {
+        if (condition(textBar) == 1){
+            for (name in listOfBlocks_YES) {
                 name.start()
-                println(variables);
                 if (!name.status)
                 {
                     println(name.ErrorString)
@@ -37,7 +49,7 @@ class While : MainBlock {
 
     private fun assignmentVar(textBar:String): String {
         var variable:String =""
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\!\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
+        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
             val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(textBar)
             if (vars.containsKey(matches?.value))
                 variable = matches?.value.toString()
@@ -271,10 +283,11 @@ class While : MainBlock {
     }
     private fun recognize(textBar:String):String {
         var text = textBar
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
+        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\!\%\>\<\=\&\||^a-zA-Z])"""))) {
             var matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             while (matches != null) {
                 if (vars.containsKey(matches.value)) {
+                    // println(matches.value)
                     text = text.replaceRange(matches.range, vars.getValue(matches.value).toString())
                 } else {
                     // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
@@ -285,6 +298,7 @@ class While : MainBlock {
                 }
                 matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             }
+            //println(text);
             //заменили переменные на числа, теперь заменим выражения на числа
             matches =
                 Regex("""\((([a-zA-Z]+[0-9]*)|([0-9]+))([\+\-\/\*\%](([a-zA-Z]+[0-9]*)|[0-9]+))+\)|(([a-zA-Z]+[0-9]*)|([0-9]+))([\+\-\/\*\%](([a-zA-Z]+[0-9]*)|[0-9]+))+""")
@@ -298,17 +312,22 @@ class While : MainBlock {
                     )
             }
 
+            //println(text);
             //ну, чтож теперь заменяем равенства
             matches =
                 Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""")
                     .find(text)
+            //println(matches?.value.toString())
             while (matches != null) {
+                //print(equality(matches.value));
                 text = text.replace(matches.value, equality(matches.value))
                 matches =
                     Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""").find(
                         text
                     )
+
             }
+            //print(text);
         }
         else{
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
@@ -328,6 +347,7 @@ class While : MainBlock {
     private fun equality(textBar: String): String {
         val x1:  MatchResult? = """([^>=<=!<\?\)\(])+""".toRegex().find(textBar)
         val x2:  MatchResult? = x1?.next();
+        //println(x1?.value); println(x2?.value);
         if(x1==null || x2==null) {
             ErrorString = "incorrect expression : ${textBar}"
             return "";
@@ -370,7 +390,11 @@ class While : MainBlock {
         }
         if (textBar=="0")
             return "0";
-        else return "1";
+        if (textBar=="1")
+            return "1";
+        ErrorString = "incorrect expression : ${textBar}"
+        status = false
+        return "0"
     }
 
 

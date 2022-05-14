@@ -400,7 +400,7 @@ class IfElse : MainBlock {
         }
         if(textBar.contains(Regex("""<""")))
         {
-            if(x1.value.toInt()>=x2.value.toInt())
+            if(x1.value.toInt()<x2.value.toInt())
                 return "1";
             else return "0"
         }
