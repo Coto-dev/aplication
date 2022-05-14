@@ -20,9 +20,9 @@ class While : MainBlock {
 
     override fun start() = assign()
     fun assign() {
-        textBar = (recognize(textBar));
+        //textBar = (recognize(textBar));
         //pushDataForArithmetic("aa","aa+1",0);
-       while (condition(textBar) == 1){
+       while (condition(recognize(textBar)) == 1){
             for (name in listOfBlocks) {
                 name.start()
                 println(variables);

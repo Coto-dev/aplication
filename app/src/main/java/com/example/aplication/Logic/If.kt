@@ -4,7 +4,7 @@ import android.text.TextUtils.replace
 import androidx.core.text.isDigitsOnly
 import java.lang.Error
 import java.util.*
-
+import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 
 //class IfElse : MainBlock() {
 //    val variablesForContainer = variables
@@ -25,9 +25,8 @@ class If : MainBlock {
     override var status = true
     val vars = MainBlock.variables
     val name: String? = null
-
     val variables = mutableMapOf<String,Int>()
-    val listOfBlocks_YES = mutableListOf<MainBlock>()
+    //val listOfBlocks_YES = mutableListOf<MainBlock>()
     val MapArray = mutableMapOf<String,Array<Int>>()
 
     var textBar: String = ""
@@ -36,7 +35,7 @@ class If : MainBlock {
     fun assign() {
         textBar = (recognize(textBar));
         if (condition(textBar) == 1){
-            for (name in listOfBlocks_YES) {
+            for (name in listOfBlocks) {
                 name.start()
                 if (!name.status)
                 {

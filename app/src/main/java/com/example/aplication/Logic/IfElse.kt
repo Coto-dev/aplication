@@ -4,6 +4,8 @@ import android.text.TextUtils.replace
 import androidx.core.text.isDigitsOnly
 import java.lang.Error
 import java.util.*
+import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
+
 
 
 //class IfElse : MainBlock() {
