@@ -1,7 +1,6 @@
 package com.example.aplication.Logic
 
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
-
 fun pushDataForInitialization(editText:String,index:Int) {
     val a = Initialization()
     a.textBar = editText

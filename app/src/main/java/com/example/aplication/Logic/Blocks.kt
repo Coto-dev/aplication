@@ -1,22 +1,23 @@
 package com.example.aplication.Logic
+import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 import com.example.aplication.Logic.createMassive as createMassive1
 
 fun main(){
-    createInitialization()
-    createArithmetic()
-    createInitialization()
-    createArithmetic()
-    createInitialization()
-   createArithmetic()
-    createArithmetic()
-    createInitialization()
-   createOutput()
-    createMassive1()
-    createIfElse()
-
-    pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
-    pushDataForArithmetic("a+2","a23",1)
+//    createInitialization()
+//    createArithmetic()
+//    createInitialization()
+//    createArithmetic()
+//    createInitialization()
+//   createArithmetic()
+//    createArithmetic()
+//    createInitialization()
+//   createOutput()
+//    createMassive1()
+//    createIfElse()
+//
+//    pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
+//    pushDataForArithmetic("a+2","a23",1)
     //pushDataForInitialization("abvgd",2)
     //pushDataForArithmetic("-(a23+3)","abvgd",3)
     //pushDataForInitialization("clone",4)
@@ -34,22 +35,25 @@ fun main(){
             name.start()
             if (!name.status)
             {
-                println(name.ErrorString)
+                consoleOutput+=name.ErrorString
                 break
             }
         }
  //      println(variables)
     }
+    fun getTextForConsole(text:String){
+
+    }
     start()
         //val a = ContainerVariables()
         //a.textBar = "aaa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd"
         //a.indetify()
-        val b = IfElse()
+//        val b = IfElse()
 
 
-    b.textBar = "((aa+b<3)&&&&&&&&&&&&&&&&&&&1)||||||||||||||||0&1"
+//    b.textBar = "((aa+b<3)&&&&&&&&&&&&&&&&&&&1)||||||||||||||||0&1"
     //b.variable = "b"
-    b.assign()
+//    b.assign()
 
 
     }
