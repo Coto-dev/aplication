@@ -2,6 +2,7 @@ package com.example.aplication.Logic
 import com.example.aplication.Logic.MainBlock.Companion.variables
 import android.text.TextUtils.replace
 import androidx.core.text.isDigitsOnly
+import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 import java.lang.Error
 import java.util.*
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
@@ -47,7 +48,8 @@ class IfElse : MainBlock {
                 name.start()
                 if (!name.status)
                 {
-                    println(name.ErrorString)
+                    consoleOutput+=name.ErrorString
+                    status = false
                     break
                 }
             }
@@ -57,7 +59,8 @@ class IfElse : MainBlock {
                 name.start()
                 if (!name.status)
                 {
-                    println(name.ErrorString)
+                    consoleOutput+=name.ErrorString
+                    status = false
                     break
                 }
             }
@@ -87,8 +90,8 @@ class IfElse : MainBlock {
     }
     private fun calculate(textBar:String):String{
         println(textBar)
-        if (textBar.contains(Regex("""((\d\s*\/\s*0))"""))) {
-            val matches = Regex("""((\d\s*\/\s*0))""").find(textBar)
+        if (textBar.contains(Regex("""((\s*\/\s*0))"""))) {
+            val matches = Regex("""((\s*\/\s*0))""").find(textBar)
             ErrorString = "incorrect expression : ${matches?.value}"
             status = false
         }
@@ -418,8 +421,8 @@ class IfElse : MainBlock {
 
     private fun condition(textBar:String):Int{
         println(textBar)
-        if (textBar.contains(Regex("""((\d\s*\/\s*0))"""))) {
-            val matches = Regex("""((\d\s*\/\s*0))""").find(textBar)
+        if (textBar.contains(Regex("""((\s*\/\s*0))"""))) {
+            val matches = Regex("""((\s*\/\s*0))""").find(textBar)
             ErrorString = "incorrect expression : ${matches?.value}"
             status = false
         }

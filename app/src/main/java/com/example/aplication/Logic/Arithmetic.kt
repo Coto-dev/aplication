@@ -72,8 +72,8 @@ class Arithmetic : MainBlock {
     }
     private fun calculate(textBar:String):Int{
         println(textBar)
-        if (textBar.contains(Regex("""((\d\s*\/\s*0))"""))) {
-            val matches = Regex("""((\d\s*\/\s*0))""").find(textBar)
+        if (textBar.contains(Regex("""((\s*\/\s*0))"""))) {
+            val matches = Regex("""((\s*\/\s*0))""").find(textBar)
             ErrorString = "incorrect expression : ${matches?.value}"
             status = false
         }
