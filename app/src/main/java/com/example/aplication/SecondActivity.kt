@@ -89,37 +89,62 @@ class SecondActivity : AppCompatActivity() {
 
         //обработка нажатий на кнопки создания блоков
         binding.forArifmetic.setOnClickListener {
-            listOfBlocks.add(addViewToScreen(ForCustomView(this)))
-            createArithmetic()
+            createBlock(ForCustomView(this), "MATH", false)
+            //listOfBlocks.add(addViewToScreen(ForCustomView(this)))
+            //createArithmetic()
         }
         binding.forCycleFor.setOnClickListener {
+            createBlock(ForCustomView(this), "FOR", true)
             // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forCycleWhile.setOnClickListener {
-            addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            createBlock(ForCustomView(this), "WHILE", true)
+            //addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIf.setOnClickListener {
-            addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            createBlock(ForCustomView(this), "IF", true)
+//addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
+            createBlock(ForCustomView(this), "IF", true)
             // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forInitialization.setOnClickListener {
+            createBlock(ForCustomView(this), "INIT", false)
             createInitialization()
-            listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
+            //listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
         binding.forPrint.setOnClickListener {
-            //createInitialization()
-            listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
+            createBlock(ForCustomView(this), "PRINT", false)
+            createInitialization()
+            //listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private fun createBlock(view: ForCustomView, name: String, isHaveChild: Boolean) {
+        view.setName(name)
+        binding.container.addView(view)
+        val start = listOfBlocks.size
+        listOfBlocks.add(Block(view, "", "", start, start))
+        view.setOnLongClickListener(choiceTouchListener())
+        view.setOnDragListener(choiceDragListener())
+        if(isHaveChild) {
+            val blockEnd = ForCustomView(this ) //TODO: change forCustomView on blockEnd
+                binding.container.addView(blockEnd)
+            listOfBlocks[start].finishInd++
+            listOfBlocks.add(Block(blockEnd, "", "", start, start+1))
+            blockEnd.setOnLongClickListener(choiceTouchListener())
+            blockEnd.setOnDragListener(choiceDragListener())
+        }
+
+    }
 
     //появление обычного блока
     private fun addViewToScreen(view: View): Block {
         // (view as ForCustomView).SetText(listOfBlocks.size.toString())
         binding.container.addView(view)
-        view.setOnTouchListener(choiceTouchListener())
+        view.setOnLongClickListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
         val newBlock = Block(view, "no", "ForCustomView", listOfBlocks.size, listOfBlocks.size)
         return newBlock
@@ -128,7 +153,7 @@ class SecondActivity : AppCompatActivity() {
     private fun addViewToScreen2(view: View): Block {
         (view as For_inizalitation).SetText(listOfBlocks.size.toString())
         binding.container.addView(view)
-        view.setOnTouchListener(choiceTouchListener())
+        view.setOnLongClickListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
         val newBlock = Block(view, "no", "For_inizalitation", listOfBlocks.size, listOfBlocks.size)
         return newBlock
@@ -137,12 +162,11 @@ class SecondActivity : AppCompatActivity() {
     //  пояление вложенного блока
     private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int) {
         for (i in startInd..finishInd) {
-            Log.i("hello", "$i")
             var view = ForCustomView(this)
-            //  (view as ForCustomView).SetText(listOfBlocks.size.toString())
-            // (view as ForCustomView).SetText("я вложен")
+              (view as ForCustomView).setName(listOfBlocks.size.toString())
+             (view as ForCustomView).setName("я вложен")
             binding.container.addView(view)
-            view.setOnTouchListener(choiceTouchListener())
+            view.setOnLongClickListener(choiceTouchListener())
             view.setOnDragListener(choiceDragListener())
             val newBlock = Block(view, "nested", "ForCustomView", startInd, finishInd)
             listOfBlocks.add(newBlock)
@@ -152,7 +176,7 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var draggingView: View
 
     @SuppressLint("ClickableViewAccessibility")
-    fun choiceTouchListener() = OnTouchListener { view, _ ->
+    fun choiceTouchListener() = OnLongClickListener { view ->
         val data = ClipData.newPlainText("", "")
         val shadowBuilder = View.DragShadowBuilder(view)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -176,9 +200,13 @@ class SecondActivity : AppCompatActivity() {
                 }
                 for (i in second.finishInd downTo second.startInd) {
                     listOfBlocks[i].view.visibility = INVISIBLE
+//                    if(i != second.finishInd) {
+//                        binding.container.removeView(listOfBlocks[i].view)
+//                    }
                 }
             }
             DragEvent.ACTION_DROP -> {
+                Log.i("hello", "take cumbag")
                 if (view != binding.container) {
                     if (view != draggingView) {
                         var first = listOfBlocks[0]
@@ -197,6 +225,7 @@ class SecondActivity : AppCompatActivity() {
                         if (first.finishInd != second.finishInd) {
                             attach(ind - 1, second, Point(event.x, event.y))
                             calculateNewIndexes()
+                            createMargin()
                         }
                     }
                 }
@@ -207,7 +236,7 @@ class SecondActivity : AppCompatActivity() {
                         i.view.visibility = VISIBLE
                     }
                 }
-                createMargin()
+
 
             }
         }
@@ -247,7 +276,7 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
         }
-        for (i in newList.size - 1 downTo 0) {
+        for (i in newList.size - 1 /*- (fromBlock.finishInd - fromBlock.startInd)*/ downTo 0) {
             binding.container.removeView(listOfBlocks[i].view)
         }
         for (i in newList) {
@@ -263,29 +292,29 @@ class SecondActivity : AppCompatActivity() {
         for (i in 0 until listOfBlocks.size) {
             checkList.add(false)
         }
-        for (i in 0 until listOfBlocks.size - 1) {
+        for (i in 0 until listOfBlocks.size) {
             if (checkList[i]) continue
-            for (j in i + 1 until listOfBlocks.size) {
+            for (j in i until listOfBlocks.size) {
                 if (checkList[j]) continue
-                if (listOfBlocks[i].startInd == listOfBlocks[j].startInd) {
-                    buffList[i].startInd = i
-                    buffList[j].startInd = i
-                    buffList[i].finishInd = j
-                    buffList[j].finishInd = j
+                if (listOfBlocks[i].startInd == listOfBlocks[j].startInd &&
+                    listOfBlocks[i].finishInd == listOfBlocks[j].finishInd &&
+                            i != j
+                ) {
+                    listOfBlocks[i].startInd = i
+                    listOfBlocks[j].startInd = i
+                    listOfBlocks[i].finishInd = j
+                    listOfBlocks[j].finishInd = j
                     checkList[i] = true
                     checkList[j] = true
                 }
             }
-            if (!checkList[i]) {
-                buffList[i].finishInd = i
-                buffList[i].startInd = i
+            if(!checkList[i]) {
+                listOfBlocks[i].startInd = i
+                listOfBlocks[i].finishInd = i
+                checkList[i] = true
             }
+            listOfBlocks = buffList
         }
-        if (!checkList[listOfBlocks.size - 1]) {
-            buffList[listOfBlocks.size - 1].finishInd = listOfBlocks.size - 1
-            buffList[listOfBlocks.size - 1].startInd = listOfBlocks.size - 1
-        }
-        listOfBlocks = buffList
     }
 
 
@@ -294,6 +323,7 @@ class SecondActivity : AppCompatActivity() {
             block.view.x = 0f
         }
 
+
         for (block in listOfBlocks) {
             if (block.finishInd - block.startInd >= 2) {
                 for (i in block.startInd + 1..block.finishInd - 1) {
@@ -301,6 +331,14 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
         }
+
+//        var length = 0
+//        for(i in listOfBlocks) {
+//            if(i.view.x > length) {
+//
+//            }
+//        }
+
 
     }
 
