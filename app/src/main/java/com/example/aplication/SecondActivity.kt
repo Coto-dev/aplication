@@ -24,6 +24,7 @@ import com.example.aplication.Logic.createArithmetic
 import com.example.aplication.Logic.pushDataForArithmetic
 import com.example.aplication.Logic.pushDataForInitialization
 import com.example.aplication.Logic.main
+import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 
 
 class SecondActivity : AppCompatActivity() {
@@ -99,29 +100,28 @@ class SecondActivity : AppCompatActivity() {
         }
         binding.forCycleFor.setOnClickListener {
             createBlock(ForCustomView(this), "FOR", true)
-            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forCycleWhile.setOnClickListener {
             createBlock(ForCustomView(this), "WHILE", true)
-            //addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIf.setOnClickListener {
-            createBlock(ForCustomView(this), "IF", true)
-//addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+             createBlock(ForCustomView(this), "IF", true)
+           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
             createBlock(ForCustomView(this), "IF", true)
-            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            //addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forInitialization.setOnClickListener {
             createBlock(ForCustomView(this), "INIT", false)
             createInitialization()
-            //listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
+           // listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
         binding.forPrint.setOnClickListener {
             createBlock(ForCustomView(this), "PRINT", false)
-            createInitialization()
-            //listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
+           // listOfBlocks.add(addViewToScreen3(Print_block(this)))
         }
     }
 
@@ -133,15 +133,14 @@ class SecondActivity : AppCompatActivity() {
         listOfBlocks.add(Block(view, "", "", start, start))
         view.setOnLongClickListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
-        if(isHaveChild) {
-            val blockEnd = ForCustomView(this ) //TODO: change forCustomView on blockEnd
-                binding.container.addView(blockEnd)
+        if (isHaveChild) {
+            val blockEnd = Block_end(this) //TODO: change forCustomView on blockEnd
+            binding.container.addView(blockEnd)
             listOfBlocks[start].finishInd++
-            listOfBlocks.add(Block(blockEnd, "", "", start, start+1))
+            listOfBlocks.add(Block(blockEnd, "", "", start, start + 1))
             blockEnd.setOnLongClickListener(choiceTouchListener())
             blockEnd.setOnDragListener(choiceDragListener())
         }
-
     }
 
     //появление обычного блока
@@ -163,18 +162,36 @@ class SecondActivity : AppCompatActivity() {
         return newBlock
     }
 
+    private fun addViewToScreen3(view: View): Block {
+        //(view as Print_block).setName(listOfBlocks.size.toString())
+        binding.container.addView(view)
+        view.setOnLongClickListener(choiceTouchListener())
+        view.setOnDragListener(choiceDragListener())
+        val newBlock = Block(view, "no", "Print_block", listOfBlocks.size, listOfBlocks.size)
+        return newBlock
+    }
+
+
     //  пояление вложенного блока
     private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int) {
-        for (i in startInd..finishInd) {
-            var view = ForCustomView(this)
-              (view as ForCustomView).setName(listOfBlocks.size.toString())
-             (view as ForCustomView).setName("я вложен")
-            binding.container.addView(view)
-            view.setOnLongClickListener(choiceTouchListener())
-            view.setOnDragListener(choiceDragListener())
-            val newBlock = Block(view, "nested", "ForCustomView", startInd, finishInd)
-            listOfBlocks.add(newBlock)
-        }
+        //for (i in startInd..finishInd) {
+        var view = ForCustomView(this)
+        (view as ForCustomView).setName(listOfBlocks.size.toString())
+        (view as ForCustomView).setName("я вложен")
+        binding.container.addView(view)
+        view.setOnLongClickListener(choiceTouchListener())
+        view.setOnDragListener(choiceDragListener())
+        val newBlock = Block(view, "nested", "ForCustomView", startInd, finishInd)
+        listOfBlocks.add(newBlock)
+        var view2 = ForCustomView(this)
+        (view2 as ForCustomView).setName(listOfBlocks.size.toString())
+        (view2 as ForCustomView).setName("я вложен")
+        binding.container.addView(view2)
+        view2.setOnLongClickListener(choiceTouchListener())
+        view2.setOnDragListener(choiceDragListener())
+        val newBlock2 = Block(view2, "nested", "end", startInd, finishInd)
+        listOfBlocks.add(newBlock2)
+        // }
     }
 
     private lateinit var draggingView: View
@@ -302,7 +319,7 @@ class SecondActivity : AppCompatActivity() {
                 if (checkList[j]) continue
                 if (listOfBlocks[i].startInd == listOfBlocks[j].startInd &&
                     listOfBlocks[i].finishInd == listOfBlocks[j].finishInd &&
-                            i != j
+                    i != j
                 ) {
                     listOfBlocks[i].startInd = i
                     listOfBlocks[j].startInd = i
@@ -312,7 +329,7 @@ class SecondActivity : AppCompatActivity() {
                     checkList[j] = true
                 }
             }
-            if(!checkList[i]) {
+            if (!checkList[i]) {
                 listOfBlocks[i].startInd = i
                 listOfBlocks[i].finishInd = i
                 checkList[i] = true
@@ -327,7 +344,6 @@ class SecondActivity : AppCompatActivity() {
             block.view.x = 0f
         }
 
-
         for (block in listOfBlocks) {
             if (block.finishInd - block.startInd >= 2) {
                 for (i in block.startInd + 1..block.finishInd - 1) {
@@ -335,14 +351,6 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
         }
-
-//        var length = 0
-//        for(i in listOfBlocks) {
-//            if(i.view.x > length) {
-//
-//            }
-//        }
-
 
     }
 

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/forArifmetic"
+            android:id="@+id/end"
             android:layout_width="280dp"
             android:layout_height="50dp"
             android:layout_margin="3dp"
@@ -23,32 +23,17 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/output"
-            android:textColor="@color/text_color"
+            android:layout_marginStart="20dp"
+            android:text="}"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"  />
 
-        <EditText
-            android:textColorHint="@color/hint_color"
-            android:id="@+id/for_print"
-            android:layout_width="wrap_content"
-            android:minWidth="120dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/name"
-            android:gravity="end"
-            android:inputType="text"
-            android:background="@color/transparent"
-            android:textColor="@color/text_color"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

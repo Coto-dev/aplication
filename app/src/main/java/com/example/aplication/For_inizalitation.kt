@@ -3,6 +3,7 @@ package com.example.aplication
 import android.R
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -32,6 +33,7 @@ class For_inizalitation  constructor (
     fun GetText2():String {
         val textview2= binding2.forInitialization
         var b:String=textview2.text.toString()
+        Log.i("fu","")
         return b
     }
 

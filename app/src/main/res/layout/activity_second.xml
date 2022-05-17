@@ -203,7 +203,10 @@ z
                 android:layout_height="match_parent"
                 android:layout_marginTop="50dp"
                 android:fillViewport="true">
-
+             <TextView
+                 android:id="@+id/for_consol"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
             </ScrollView>
 
         </FrameLayout>
