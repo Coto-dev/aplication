@@ -66,24 +66,24 @@ class SecondActivity : AppCompatActivity() {
                 bottomSheetBehavior.peekHeight = 0
                 bottomSheetConsol.peekHeight = 135
 
-
+               var i=0
                 for (block in listOfBlocks) {
                     if (block.name == "ForCustomView") {
                         var string = (block.view as ForCustomView).GetText1()
                         var string2 = (block.view as ForCustomView).GetText2()
-                        pushDataForArithmetic(string2, string, block.startInd)
+                        pushDataForArithmetic(string2, string, i)
                     }
                     if (block.name == "For_inizalitation") {
                         var string = (block.view as For_inizalitation).GetText2()
-                        pushDataForInitialization(string, block.startInd)
+                        pushDataForInitialization(string, i)
                     }
                     if (block.name == "IF") {
                         var string = (block.view as If_block).GetText2()
-                        pushDataForIf(string, block.startInd, block.finishInd)
+                        pushDataForIf(string, i, block.finishInd)
                     }
                     if (block.name == "WHILE") {
                         var string = (block.view as If_block).GetText2()
-                        pushDataForWhile(string, block.startInd, block.finishInd)
+                        pushDataForWhile(string, i, block.finishInd)
                     }
                     if (block.name == "PRINT") {
                         var string = (block.view as Print_block).GetText2()
@@ -94,6 +94,7 @@ class SecondActivity : AppCompatActivity() {
                         }
 
                     }
+                    i++
                 }
                 main()
             }
