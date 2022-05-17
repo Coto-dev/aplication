@@ -2,6 +2,7 @@ package com.example.aplication
 
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.nfc.Tag
 import android.os.Build
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.View.*
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -66,7 +68,7 @@ class SecondActivity : AppCompatActivity() {
                 bottomSheetBehavior.peekHeight = 0
                 bottomSheetConsol.peekHeight = 135
 
-               var i=0
+                var i = 0
                 for (block in listOfBlocks) {
                     println(block.name)
                     println(block.startInd)
@@ -92,11 +94,16 @@ class SecondActivity : AppCompatActivity() {
                     }
                     if (block.name == "PRINT") {
                         var string = (block.view as Print_block).GetText2()
-                        pushDataForOutput(string, block.startInd)
-                        var textview = binding.forConsol
+                        pushDataForOutput(string, i)
                         for (i in consoleOutput) {
-                            textview.text = i
+                            println("jdhbfvjkd $i" )
+                            var text = TextView(this)
+                            binding.containerForTextView.addView(text)
+                            text.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                            var string2 = i
+                            text.text = string2
                         }
+
 
                     }
                     if (block.name == "end") {
@@ -144,6 +151,7 @@ class SecondActivity : AppCompatActivity() {
             // listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
         binding.forPrint.setOnClickListener {
+            createOutput()
             createBlock(Print_block(this), "PRINT", false)
             // listOfBlocks.add(addViewToScreen3(Print_block(this)))
         }

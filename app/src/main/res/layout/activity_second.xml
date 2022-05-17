@@ -54,7 +54,6 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:padding="1dp">
-                z
             </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
@@ -92,7 +91,7 @@
                 android:fillViewport="true">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
@@ -187,7 +186,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:background="@drawable/bottom_sheet"
-            app:behavior_hideable="true"
+            app:behavior_hideable="false"
             app:behavior_peekHeight="40dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -205,10 +204,12 @@
                 android:layout_marginTop="50dp"
                 android:fillViewport="true">
 
-                <TextView
-                    android:id="@+id/for_consol"
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/container_for_text_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+                </LinearLayout>
 
             </ScrollView>
 
