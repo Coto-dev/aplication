@@ -31,7 +31,7 @@
 
         <EditText
             android:textColorHint="@color/hint_color"
-            android:id="@+id/for_initialization"
+            android:id="@+id/for_if"
             android:layout_width="wrap_content"
             android:minWidth="120dp"
             android:layout_height="wrap_content"

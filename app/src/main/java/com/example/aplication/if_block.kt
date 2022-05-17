@@ -18,7 +18,6 @@ class If_block  constructor (
     defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
     private val binding2 = IfBlockBinding.inflate(LayoutInflater.from(context), this)
 
-
 //    fun setName(text:String) {
 //        val textview= binding.nupizda
 //        if (textview.text!=null){
@@ -32,7 +31,7 @@ class If_block  constructor (
 //    }
 
     fun GetText2():String {
-        val textview2= binding2.forInitialization
+        val textview2= binding2.forIf
         var b:String=textview2.text.toString()
 
         return b
