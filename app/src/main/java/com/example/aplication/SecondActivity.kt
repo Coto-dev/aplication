@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.marginStart
 import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -87,11 +88,14 @@ class SecondActivity : AppCompatActivity() {
             }
         }
 
+//        val params=ConstraintLayout.LayoutParams(10000,1)
+//        binding.container.addView(ForCustomView(this),params)
+
         //обработка нажатий на кнопки создания блоков
         binding.forArifmetic.setOnClickListener {
             createBlock(ForCustomView(this), "MATH", false)
             //listOfBlocks.add(addViewToScreen(ForCustomView(this)))
-            //createArithmetic()
+            createArithmetic()
         }
         binding.forCycleFor.setOnClickListener {
             createBlock(ForCustomView(this), "FOR", true)
@@ -313,8 +317,8 @@ class SecondActivity : AppCompatActivity() {
                 listOfBlocks[i].finishInd = i
                 checkList[i] = true
             }
-            listOfBlocks = buffList
         }
+        listOfBlocks = buffList
     }
 
 
