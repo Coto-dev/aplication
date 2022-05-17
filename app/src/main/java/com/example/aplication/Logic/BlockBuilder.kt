@@ -32,6 +32,10 @@ fun pushDataForArithmetic(editText:String,variable:String,index:Int){
     a.variable = variable
     listOfBlocks[index] = a
 }
+fun pushDataForEnd(index:Int){
+    val a = Null()
+    listOfBlocks[index] = a
+}
 fun pushDataForOutput(editText:String,index:Int){
     val a = Output()
     a.textBar = editText

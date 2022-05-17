@@ -68,6 +68,9 @@ class SecondActivity : AppCompatActivity() {
 
                var i=0
                 for (block in listOfBlocks) {
+                    println(block.name)
+                    println(block.startInd)
+
                     if (block.name == "ForCustomView") {
                         var string = (block.view as ForCustomView).GetText1()
                         var string2 = (block.view as ForCustomView).GetText2()
@@ -78,10 +81,12 @@ class SecondActivity : AppCompatActivity() {
                         pushDataForInitialization(string, i)
                     }
                     if (block.name == "IF") {
+                        println(block.finishInd)
                         var string = (block.view as If_block).GetText2()
                         pushDataForIf(string, i, block.finishInd)
                     }
                     if (block.name == "WHILE") {
+                        println(block.finishInd)
                         var string = (block.view as If_block).GetText2()
                         pushDataForWhile(string, i, block.finishInd)
                     }
@@ -93,6 +98,10 @@ class SecondActivity : AppCompatActivity() {
                             textview.text = i
                         }
 
+                    }
+                    if (block.name == "end") {
+                        println(block.finishInd)
+                        pushDataForEnd(block.finishInd)
                     }
                     i++
                 }
@@ -116,11 +125,13 @@ class SecondActivity : AppCompatActivity() {
         binding.forCycleWhile.setOnClickListener {
             createBlock(If_block(this), "WHILE", true)
             createWhile()
+            createNull()
             // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIf.setOnClickListener {
             createBlock(If_block(this), "IF", true)
             createIf()
+            createNull()
             // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
