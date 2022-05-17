@@ -33,7 +33,6 @@ class For_inizalitation  constructor (
     fun GetText2():String {
         val textview2= binding2.forInitialization
         var b:String=textview2.text.toString()
-        Log.i("fu","")
         return b
     }
 
