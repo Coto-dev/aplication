@@ -8,57 +8,58 @@
     tools:context=".MainActivity">
 
 
-<!--        <com.otaliastudios.zoom.ZoomLayout-->
-<!--            android:layout_width="1000dp"-->
-<!--            android:layout_height="1000dp"-->
-<!--            android:scrollbars="vertical|horizontal"-->
-<!--            app:transformation="centerInside"-->
-<!--            app:transformationGravity="auto"-->
-<!--            app:alignment="left"-->
-<!--            app:overScrollHorizontal="true"-->
-<!--            app:overScrollVertical="true"-->
-<!--            app:overPinchable="true"-->
-<!--            app:horizontalPanEnabled="true"-->
-<!--            app:verticalPanEnabled="true"-->
-<!--            app:zoomEnabled="true"-->
-<!--            app:flingEnabled="true"-->
-<!--            app:scrollEnabled="true"-->
-<!--            app:oneFingerScrollEnabled="true"-->
-<!--            app:twoFingersScrollEnabled="true"-->
-<!--            app:threeFingersScrollEnabled="true"-->
-<!--            app:minZoom="0.01"-->
-<!--            app:minZoomType="zoom"-->
-<!--            app:maxZoom="0.4"-->
-<!--            app:maxZoomType="zoom"-->
-<!--            app:animationDuration="280"-->
-<!--            app:hasClickableChildren="true"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent">-->
+    <!--        <com.otaliastudios.zoom.ZoomLayout-->
+    <!--            android:layout_width="1000dp"-->
+    <!--            android:layout_height="1000dp"-->
+    <!--            android:scrollbars="vertical|horizontal"-->
+    <!--            app:transformation="centerInside"-->
+    <!--            app:transformationGravity="auto"-->
+    <!--            app:alignment="left"-->
+    <!--            app:overScrollHorizontal="true"-->
+    <!--            app:overScrollVertical="true"-->
+    <!--            app:overPinchable="true"-->
+    <!--            app:horizontalPanEnabled="true"-->
+    <!--            app:verticalPanEnabled="true"-->
+    <!--            app:zoomEnabled="true"-->
+    <!--            app:flingEnabled="true"-->
+    <!--            app:scrollEnabled="true"-->
+    <!--            app:oneFingerScrollEnabled="true"-->
+    <!--            app:twoFingersScrollEnabled="true"-->
+    <!--            app:threeFingersScrollEnabled="true"-->
+    <!--            app:minZoom="0.01"-->
+    <!--            app:minZoomType="zoom"-->
+    <!--            app:maxZoom="0.4"-->
+    <!--            app:maxZoomType="zoom"-->
+    <!--            app:animationDuration="280"-->
+    <!--            app:hasClickableChildren="true"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent">-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/container"
-                android:layout_gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="top"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:padding="1dp">
-z
+                z
             </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
 
-<!--        </com.otaliastudios.zoom.ZoomLayout>-->
+    <!--        </com.otaliastudios.zoom.ZoomLayout>-->
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -203,10 +204,12 @@ z
                 android:layout_height="match_parent"
                 android:layout_marginTop="50dp"
                 android:fillViewport="true">
-             <TextView
-                 android:id="@+id/for_consol"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/for_consol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
             </ScrollView>
 
         </FrameLayout>

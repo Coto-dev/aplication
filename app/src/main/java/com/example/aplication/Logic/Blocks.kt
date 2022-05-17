@@ -1,20 +1,21 @@
 package com.example.aplication.Logic
+
 import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 import com.example.aplication.Logic.MainBlock.Companion.index
 import com.example.aplication.Logic.createMassive as createMassive1
 
-fun main(){
-    createInitialization()
-    createArithmetic()
-    createInitialization()
-    createWhile()
-    createArithmetic()
-    createIf()
-    createArithmetic()
-    createNull()
-    createInitialization()
-    createNull()
+fun main() {
+//    createInitialization()
+//    createArithmetic()
+//    createInitialization()
+//    createWhile()
+//    createArithmetic()
+//    createIf()
+//    createArithmetic()
+//    createNull()
+//    createInitialization()
+//    createNull()
 //   createArithmetic()
 //    createArithmetic()
 //    createInitialization()
@@ -22,24 +23,23 @@ fun main(){
 //    createMassive1()
 //    createIfElse()
 //
-    createOutput()
-    createOutput()
+//    createOutput()
+//    createOutput()
 
 
-
-    pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
-    pushDataForArithmetic("10","a23",1)
-    pushDataForInitialization("abvgd",2)
-    pushDataForWhile("a23>1",3, 9)
-    pushDataForArithmetic("a23-1","a23",4)
-    pushDataForIf("aa=0",5, 7)
-    pushDataForArithmetic("-(a23+5)","abvgd",6)
-
-    pushDataForInitialization("w",8)
-
-    pushDataForOutput("a23+10", 10)
-    pushDataForOutput("abvgd", 11)
-    //pushDataForInitialization("clone",4)
+//    pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
+//    pushDataForArithmetic("10","a23",1)
+//    pushDataForInitialization("abvgd",2)
+//    pushDataForWhile("a23>1",3, 9)
+//    pushDataForArithmetic("a23-1","a23",4)
+//    pushDataForIf("aa=0",5, 7)
+//    pushDataForArithmetic("-(a23+5)","abvgd",6)
+//
+//    pushDataForInitialization("w",8)
+//
+//    pushDataForOutput("a23+10", 10)
+//    pushDataForOutput("abvgd", 11)
+//    //pushDataForInitialization("clone",4)
     //pushDataForIf_Else("(aa+a=b)||(a=b)",1)
     //pushDataForIf_Else("(2=b)&(a=b)",2)
 //    pushDataForArithmetic("  abvgd","clone",5)
@@ -58,26 +58,25 @@ fun main(){
             }
         }*/
         //var i = index
-        while( index < listOfBlocks.size)
-        {
+        while (index < listOfBlocks.size) {
             listOfBlocks[index].start()
-            if (!listOfBlocks[index].status)
-            {
-                consoleOutput+=listOfBlocks[index].ErrorString
+            if (!listOfBlocks[index].status) {
+                consoleOutput += listOfBlocks[index].ErrorString
                 break
             }
             //print( index)
             index++
         }
- //      println(variables)
+        //      println(variables)
     }
-    fun getTextForConsole(text:String){
+
+    fun getTextForConsole(text: String) {
 
     }
     start()
-        //val a = ContainerVariables()
-        //a.textBar = "aaa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd"
-        //a.indetify()
+    //val a = ContainerVariables()
+    //a.textBar = "aaa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd"
+    //a.indetify()
 //        val b = IfElse()
 
 
@@ -86,4 +85,4 @@ fun main(){
 //    b.assign()
 
 
-    }
+}

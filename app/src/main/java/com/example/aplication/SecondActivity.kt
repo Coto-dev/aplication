@@ -17,13 +17,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.marginStart
+import com.example.aplication.Logic.*
 import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.example.aplication.Logic.createInitialization
-import com.example.aplication.Logic.createArithmetic
-import com.example.aplication.Logic.pushDataForArithmetic
-import com.example.aplication.Logic.pushDataForInitialization
-import com.example.aplication.Logic.main
 import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 
 
@@ -70,20 +66,34 @@ class SecondActivity : AppCompatActivity() {
                 bottomSheetBehavior.peekHeight = 0
                 bottomSheetConsol.peekHeight = 135
 
-                var i = 0
 
                 for (block in listOfBlocks) {
                     if (block.name == "ForCustomView") {
                         var string = (block.view as ForCustomView).GetText1()
                         var string2 = (block.view as ForCustomView).GetText2()
-                        pushDataForArithmetic(string2, string, i)
+                        pushDataForArithmetic(string2, string, block.startInd)
                     }
                     if (block.name == "For_inizalitation") {
                         var string = (block.view as For_inizalitation).GetText2()
-                        pushDataForInitialization(string, i)
+                        pushDataForInitialization(string, block.startInd)
                     }
+                    if (block.name == "IF") {
+                        var string = (block.view as If_block).GetText2()
+                        pushDataForIf(string, block.startInd, block.finishInd)
+                    }
+                    if (block.name == "WHILE") {
+                        var string = (block.view as If_block).GetText2()
+                        pushDataForWhile(string, block.startInd, block.finishInd)
+                    }
+                    if (block.name == "PRINT") {
+                        var string = (block.view as Print_block).GetText2()
+                        pushDataForOutput(string, block.startInd)
+                        var textview = binding.forConsol
+                        for (i in consoleOutput) {
+                            textview.text = i
+                        }
 
-                    i++
+                    }
                 }
                 main()
             }
@@ -94,104 +104,55 @@ class SecondActivity : AppCompatActivity() {
 
         //обработка нажатий на кнопки создания блоков
         binding.forArifmetic.setOnClickListener {
-            createBlock(ForCustomView(this), "MATH", false)
+            createBlock(ForCustomView(this), "ForCustomView", false)
             //listOfBlocks.add(addViewToScreen(ForCustomView(this)))
             createArithmetic()
         }
         binding.forCycleFor.setOnClickListener {
             createBlock(ForCustomView(this), "FOR", true)
-           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forCycleWhile.setOnClickListener {
-            createBlock(ForCustomView(this), "WHILE", true)
-           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            createBlock(If_block(this), "WHILE", true)
+            createWhile()
+            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIf.setOnClickListener {
-             createBlock(ForCustomView(this), "IF", true)
-           // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            createBlock(If_block(this), "IF", true)
+            createIf()
+            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
             createBlock(ForCustomView(this), "IF", true)
             //addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forInitialization.setOnClickListener {
-            createBlock(ForCustomView(this), "INIT", false)
+            createBlock(For_inizalitation(this), "For_inizalitation", false)
             createInitialization()
-           // listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
+            // listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
         binding.forPrint.setOnClickListener {
-            createBlock(ForCustomView(this), "PRINT", false)
-           // listOfBlocks.add(addViewToScreen3(Print_block(this)))
+            createBlock(Print_block(this), "PRINT", false)
+            // listOfBlocks.add(addViewToScreen3(Print_block(this)))
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun createBlock(view: ForCustomView, name: String, isHaveChild: Boolean) {
-        view.setName(name)
+    private fun createBlock(view: View, name: String, isHaveChild: Boolean) {
+        //view.setName(name)
         binding.container.addView(view)
         val start = listOfBlocks.size
-        listOfBlocks.add(Block(view, "", "", start, start))
+        listOfBlocks.add(Block(view, "", name, start, start))
         view.setOnLongClickListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
         if (isHaveChild) {
-            val blockEnd = Block_end(this) //TODO: change forCustomView on blockEnd
+            val blockEnd = Block_end(this)
             binding.container.addView(blockEnd)
             listOfBlocks[start].finishInd++
-            listOfBlocks.add(Block(blockEnd, "", "", start, start + 1))
+            listOfBlocks.add(Block(blockEnd, "", "end", start, start + 1))
             blockEnd.setOnLongClickListener(choiceTouchListener())
             blockEnd.setOnDragListener(choiceDragListener())
         }
-    }
-
-    //появление обычного блока
-    private fun addViewToScreen(view: View): Block {
-        // (view as ForCustomView).SetText(listOfBlocks.size.toString())
-        binding.container.addView(view)
-        view.setOnLongClickListener(choiceTouchListener())
-        view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, "no", "ForCustomView", listOfBlocks.size, listOfBlocks.size)
-        return newBlock
-    }
-
-    private fun addViewToScreen2(view: View): Block {
-        (view as For_inizalitation).SetText(listOfBlocks.size.toString())
-        binding.container.addView(view)
-        view.setOnLongClickListener(choiceTouchListener())
-        view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, "no", "For_inizalitation", listOfBlocks.size, listOfBlocks.size)
-        return newBlock
-    }
-
-    private fun addViewToScreen3(view: View): Block {
-        //(view as Print_block).setName(listOfBlocks.size.toString())
-        binding.container.addView(view)
-        view.setOnLongClickListener(choiceTouchListener())
-        view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, "no", "Print_block", listOfBlocks.size, listOfBlocks.size)
-        return newBlock
-    }
-
-
-    //  пояление вложенного блока
-    private fun addViewToScreen(buff: View, startInd: Int, finishInd: Int) {
-        //for (i in startInd..finishInd) {
-        var view = ForCustomView(this)
-        (view as ForCustomView).setName(listOfBlocks.size.toString())
-        (view as ForCustomView).setName("я вложен")
-        binding.container.addView(view)
-        view.setOnLongClickListener(choiceTouchListener())
-        view.setOnDragListener(choiceDragListener())
-        val newBlock = Block(view, "nested", "ForCustomView", startInd, finishInd)
-        listOfBlocks.add(newBlock)
-        var view2 = ForCustomView(this)
-        (view2 as ForCustomView).setName(listOfBlocks.size.toString())
-        (view2 as ForCustomView).setName("я вложен")
-        binding.container.addView(view2)
-        view2.setOnLongClickListener(choiceTouchListener())
-        view2.setOnDragListener(choiceDragListener())
-        val newBlock2 = Block(view2, "nested", "end", startInd, finishInd)
-        listOfBlocks.add(newBlock2)
-        // }
     }
 
     private lateinit var draggingView: View

@@ -18,17 +18,17 @@ class For_inizalitation  constructor (
     private val binding2 = ForInitializationBinding.inflate(LayoutInflater.from(context), this)
 
 
-    fun SetText(text:String) {
-        val textview= binding2.nupizda
-        if (textview.text!=null){
-            var a:String=textview.text.toString()
-            textview.text=text+" "+a
-        }
-        else{
-            textview.text=text
-        }
-
-    }
+//    fun setName(text:String) {
+//        val textview= binding.nupizda
+//        if (textview.text!=null){
+//            var a:String=textview.text.toString()
+//            textview.text=text+" "+a
+//        }
+//        else{
+//            textview.text=text
+//        }
+//
+//    }
 
     fun GetText2():String {
         val textview2= binding2.forInitialization

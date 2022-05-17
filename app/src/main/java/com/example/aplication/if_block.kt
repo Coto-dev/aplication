@@ -10,15 +10,14 @@ import android.widget.EditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.aplication.databinding.CustomBlockBinding
 import com.example.aplication.databinding.ForInitializationBinding
-import com.example.aplication.Logic.pushDataForArithmetic
-import com.example.aplication.Logic.pushDataForInitialization
-import com.example.aplication.databinding.PrintBlockBinding
+import com.example.aplication.databinding.IfBlockBinding
 
-class Print_block  constructor (
+class If_block  constructor (
     context: Context,
     attrs: AttributeSet?=null,
     defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
-    private val binding = PrintBlockBinding.inflate(LayoutInflater.from(context), this)
+    private val binding2 = IfBlockBinding.inflate(LayoutInflater.from(context), this)
+
 
 //    fun setName(text:String) {
 //        val textview= binding.nupizda
@@ -33,9 +32,10 @@ class Print_block  constructor (
 //    }
 
     fun GetText2():String {
-        val textview= binding.forPrint
-        var a:String=textview.text.toString()
-        return a
+        val textview2= binding2.forInitialization
+        var b:String=textview2.text.toString()
+
+        return b
     }
 
 }
