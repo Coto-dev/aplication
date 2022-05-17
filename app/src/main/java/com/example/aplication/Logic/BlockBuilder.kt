@@ -11,10 +11,20 @@ fun pushDataForIfElse(editText:String,index:Int) {
     a.textBar = editText
     listOfBlocks[index] = a
 }
-fun pushDataForWhile(editText:String,index:Int) {
-    val a = While()
+
+fun pushDataForIf(editText:String,indexStart:Int,indexFinish:Int) {
+    val a = If()
+    a.indStart = indexStart
+    a.indFinish = indexFinish
     a.textBar = editText
-    listOfBlocks[index] = a
+    listOfBlocks[indexStart] = a
+}
+fun pushDataForWhile(editText:String,indexStart:Int,indexFinish:Int) {
+    val a = While()
+    a.indStart = indexStart
+    a.indFinish = indexFinish
+    a.textBar = editText
+    listOfBlocks[indexStart] = a
 }
 fun pushDataForArithmetic(editText:String,variable:String,index:Int){
     val a = Arithmetic()

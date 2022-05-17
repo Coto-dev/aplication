@@ -1,5 +1,6 @@
 package com.example.aplication.Logic
 import com.example.aplication.Logic.MainBlock.Companion.variables
+import com.example.aplication.Logic.MainBlock.Companion.index
 import android.text.TextUtils.replace
 import androidx.core.text.isDigitsOnly
 import java.lang.Error
@@ -11,28 +12,33 @@ class While : MainBlock {
     override var status = true
     val vars = MainBlock.variables
     val name: String? = null
-
+    var indStart = 0;
+    var indFinish = 0;
     val variables = mutableMapOf<String,Int>()
     val listOfBlocks = mutableListOf<MainBlock>()
     val MapArray = mutableMapOf<String,Array<Int>>()
-
+    var i = index
     var textBar: String = ""
 
     override fun start() = assign()
     fun assign() {
         //textBar = (recognize(textBar));
         //pushDataForArithmetic("aa","aa+1",0);
-       while (condition(recognize(textBar)) == 1){
-            for (name in listOfBlocks) {
-                name.start()
-                println(variables);
-                if (!name.status)
-                {
-                    println(name.ErrorString)
-                    break
-                }
-            }
+       if (condition(recognize(textBar)) == 1){
+           index=indStart+1;
+           while( index < indFinish)
+           {
+               MainBlock.listOfBlocks[index].start()
+               if (!MainBlock.listOfBlocks[index].status)
+               {
+                   MainBlock.consoleOutput += MainBlock.listOfBlocks[index].ErrorString
+                   break
+               }
+               index++
+           }
+            index=indStart-1
         }
+        else index=indFinish
     }
 
     private fun assignmentVar(textBar:String): String {

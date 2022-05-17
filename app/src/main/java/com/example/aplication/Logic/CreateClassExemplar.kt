@@ -18,6 +18,10 @@ fun createMassive(){
     listOfBlocks.add(Massive())
 }
 
+fun createNull(){
+
+    listOfBlocks.add(Null())
+}
 fun createIfElse(){
 
     listOfBlocks.add(IfElse())
@@ -26,4 +30,8 @@ fun createIfElse(){
 fun createWhile(){
 
     listOfBlocks.add(While())
+}
+fun createIf(){
+
+    listOfBlocks.add(If())
 }

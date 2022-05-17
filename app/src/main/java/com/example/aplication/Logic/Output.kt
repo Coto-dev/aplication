@@ -283,7 +283,7 @@ class Output : MainBlock {
 
 
         }
-
+        print(consoleOut)
         return(stackString.pop().toInt())
     }
 

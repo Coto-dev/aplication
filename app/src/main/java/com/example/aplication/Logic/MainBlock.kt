@@ -9,6 +9,7 @@ interface MainBlock {
         val variables = mutableMapOf<String,Int>()
         val listOfBlocks = mutableListOf<MainBlock>()
         val MapArray = mutableMapOf<String,Array<Int>>()
+        var index=0
     }
 
 }

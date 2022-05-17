@@ -3,6 +3,7 @@ import com.example.aplication.Logic.MainBlock.Companion.variables
 import android.text.TextUtils.replace
 import androidx.core.text.isDigitsOnly
 import java.lang.Error
+import com.example.aplication.Logic.MainBlock.Companion.index
 import java.util.*
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 
@@ -25,15 +26,18 @@ class If : MainBlock {
     override var status = true
     val vars = MainBlock.variables
     val name: String? = null
+    var indStart = 0;
+    var indFinish = 0;
     val variables = mutableMapOf<String,Int>()
     //val listOfBlocks_YES = mutableListOf<MainBlock>()
     val MapArray = mutableMapOf<String,Array<Int>>()
 
+    //var i =index
     var textBar: String = ""
     var variable: String = ""
     override fun start() = assign()
     fun assign() {
-        textBar = (recognize(textBar));
+        /*textBar = (recognize(textBar));
         if (condition(textBar) == 1){
             for (name in listOfBlocks) {
                 name.start()
@@ -43,7 +47,23 @@ class If : MainBlock {
                     break
                 }
             }
+        }*/
+        if (condition(recognize(textBar)) == 1){
+            index=indStart+1;
+            while( index < indFinish)
+            {
+                MainBlock.listOfBlocks[index].start()
+                if (!MainBlock.listOfBlocks[index].status)
+                {
+                    MainBlock.consoleOutput += MainBlock.listOfBlocks[index].ErrorString
+                    index=listOfBlocks.size+1
+                    break
+                }
+                println(index)
+                index++
+            }
         }
+        else index=indFinish
     }
 
     private fun assignmentVar(textBar:String): String {
