@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <View
-            android:layout_width="320dp"
+            android:layout_width="280dp"
             android:layout_height="50dp"
             android:id="@+id/forArifmetic"
             android:layout_margin="3dp"
@@ -22,22 +22,22 @@
 
         <TextView
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="18dp"
             style="@style/Text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/If"
-            android:textColor="@color/white"/>
+            android:textColor="@color/text_color"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="20dp"
-            android:text="{"
-            android:textColor="@color/white"
+            android:text=") {"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,9 @@
             android:layout_height="30dp"
             android:background="#00000000"
             android:inputType="text"
+            android:hint="@string/expression"
             android:textColor="@color/text_color"
+            android:textColorHint="@color/hint_color"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
