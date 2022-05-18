@@ -19,17 +19,17 @@ class ForCustomView  constructor (
     defStyleAttr: Int=0) :CoordinatorLayout(context, attrs, defStyleAttr) {
     private val binding = CustomBlockBinding.inflate(LayoutInflater.from(context), this)
 
-    fun setName(text:String) {
-       val textview= binding.nupizda
-       if (textview.text!=null){
-           var a:String=textview.text.toString()
-           textview.text=text+" "+a
-       }
-       else{
-           textview.text=text
-       }
-
-    }
+//    fun setName(text:String) {
+//       val textview= binding.nupizda
+//       if (textview.text!=null){
+//           var a:String=textview.text.toString()
+//           textview.text=text+" "+a
+//       }
+//       else{
+//           textview.text=text
+//       }
+//
+//    }
 
     fun GetText1():String {
         val textview= binding.textInput

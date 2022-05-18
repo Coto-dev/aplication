@@ -4,39 +4,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <View
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:id="@+id/forArifmetic"
-            android:layout_margin="3dp"
-            android:background="@drawable/block_button"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/block_button">
 
         <TextView
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="18dp"
+            android:id="@+id/start"
             style="@style/Text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/If"
+            android:padding="20dp"
             android:textColor="@color/text_color"/>
         <TextView
+            android:id="@+id/end"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="20dp"
             android:text=") {"
+            android:padding="20dp"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,18 +33,20 @@
             app:layout_constraintTop_toTopOf="parent"  />
 
         <EditText
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:padding="20dp"
             android:id="@+id/for_if"
             android:layout_width="wrap_content"
-            android:minWidth="70dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:background="#00000000"
             android:inputType="text"
             android:hint="@string/expression"
+            android:textSize="11dp"
             android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@id/end"
+            app:layout_constraintStart_toEndOf="@id/start"
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

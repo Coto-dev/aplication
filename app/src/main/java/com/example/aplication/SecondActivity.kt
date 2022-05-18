@@ -104,7 +104,7 @@ class SecondActivity : AppCompatActivity() {
                         println("jdhbfvjkd $i")
                         var text = TextView(this)
                         binding.containerForTextView.addView(text)
-                        text.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                        text.background = Drawable.createFromPath("drawable/block_button.xml")
                         var string2 = i
                         text.text = string2
                     }
@@ -337,6 +337,13 @@ class SecondActivity : AppCompatActivity() {
         }
         listOfBlocks = buffList
     }
+
+
+//    private fun calculateIndexes( var ind: Int) {
+//      for (block in listOfBlocks){
+//
+//      }
+//    }
 
 
     private fun createMargin() {
