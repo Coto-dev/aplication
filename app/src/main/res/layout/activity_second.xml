@@ -163,6 +163,14 @@
                         android:layout_marginTop="20dp"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/whilecycle" />
+                    <Button
+                        android:id="@+id/for_array"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/button_forbottom"
+                        android:text="@string/array" />
 
                 </LinearLayout>
 
@@ -198,6 +206,15 @@
                     android:id="@+id/container_for_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/go"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/button_forbottom"
+                        android:text="@string/Hello2"/>
                 </LinearLayout>
 
             </ScrollView>

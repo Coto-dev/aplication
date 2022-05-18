@@ -14,5 +14,7 @@
     <string name="Themes">Сменить тему</string>
     <string name="output">Print</string>
     <string name="input">Ввод</string>
+    <string name="array">Массив</string>
+    <string name="Hello2">Go!</string>
 
 </resources>

@@ -12,10 +12,7 @@ import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.*
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isInvisible
@@ -44,7 +41,8 @@ class SecondActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        var buttonGo = binding.go
+        buttonGo.setVisibility(View.INVISIBLE);
         var buttonStop = binding.floating2
         buttonStop.setVisibility(View.INVISIBLE);
 
@@ -111,7 +109,6 @@ class SecondActivity : AppCompatActivity() {
                         text.text = string2
                     }
 
-
                 }
                 if (block.name == "end") {
                     println(block.finishInd)
@@ -125,6 +122,7 @@ class SecondActivity : AppCompatActivity() {
         buttonStop.setOnClickListener {
             frame.setVisibility(View.VISIBLE)
             consol.setVisibility(View.INVISIBLE)
+            bottomSheetConsol.peekHeight = 135
             buttonPlay.setVisibility(View.VISIBLE)
             buttonStop.setVisibility(View.INVISIBLE)
         }
@@ -163,7 +161,18 @@ class SecondActivity : AppCompatActivity() {
             createBlock(Print_block(this), "PRINT", false)
             // listOfBlocks.add(addViewToScreen3(Print_block(this)))
         }
-        binding.forInput
+        binding.forInput.setOnClickListener {
+            frame.setVisibility(View.INVISIBLE)
+            consol.setVisibility(View.VISIBLE)
+            bottomSheetConsol.peekHeight = 135
+            buttonPlay.setVisibility(View.INVISIBLE)
+            buttonStop.setVisibility(View.VISIBLE);
+            var edit = EditText(this)
+            binding.containerForTextView.addView(edit)
+            buttonGo.setVisibility(View.VISIBLE);
+
+        }
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
