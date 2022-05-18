@@ -2,6 +2,7 @@ package com.example.aplication
 
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.nfc.Tag
 import android.os.Build
@@ -13,9 +14,11 @@ import android.view.View
 import android.view.View.*
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isInvisible
 import androidx.core.view.marginStart
 import com.example.aplication.Logic.*
 import com.example.aplication.databinding.ActivitySecondBinding
@@ -42,10 +45,13 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        var buttonStop = binding.floating2
+        buttonStop.setVisibility(View.INVISIBLE);
+
         //консоль и bottom sheet
         val frame = findViewById<FrameLayout>(R.id.sheet)
         val consol = findViewById<FrameLayout>(R.id.sheet2)
-
+        consol.setVisibility(View.INVISIBLE)
         val bottomSheetBehavior: BottomSheetBehavior<*> =
             BottomSheetBehavior.from<View>(frame)
 
@@ -60,55 +66,68 @@ class SecondActivity : AppCompatActivity() {
 
         bottomSheetBehavior.peekHeight = 135
         bottomSheetBehavior.isHideable = false
+        var buttonPlay = binding.floating
 
-        if (bottomSheetBehavior.peekHeight == 135) {
-            binding.floating.setOnClickListener {//компиляция
-                bottomSheetBehavior.peekHeight = 0
-                bottomSheetConsol.peekHeight = 135
+        buttonPlay.setOnClickListener {//кomпиляция
+            frame.setVisibility(View.INVISIBLE)
+            consol.setVisibility(View.VISIBLE)
+            bottomSheetBehavior.peekHeight = 0
+            bottomSheetConsol.peekHeight = 135
+            buttonPlay.setVisibility(View.INVISIBLE)
+            buttonStop.setVisibility(View.VISIBLE);
+            var i = 0
+            for (block in listOfBlocks) {
+                println(block.name)
+                println(block.startInd)
 
-               var i=0
-                for (block in listOfBlocks) {
-                    println(block.name)
-                    println(block.startInd)
-
-                    if (block.name == "ForCustomView") {
-                        var string = (block.view as ForCustomView).GetText1()
-                        var string2 = (block.view as ForCustomView).GetText2()
-                        pushDataForArithmetic(string2, string, i)
-                    }
-                    if (block.name == "For_inizalitation") {
-                        var string = (block.view as For_inizalitation).GetText2()
-                        pushDataForInitialization(string, i)
-                    }
-                    if (block.name == "IF") {
-                        println(block.finishInd)
-                        var string = (block.view as If_block).GetText2()
-                        pushDataForIf(string, i, block.finishInd)
-                    }
-                    if (block.name == "WHILE") {
-                        println(block.finishInd)
-                        var string = (block.view as If_block).GetText2()
-                        pushDataForWhile(string, i, block.finishInd)
-                    }
-                    if (block.name == "PRINT") {
-                        var string = (block.view as Print_block).GetText2()
-                        pushDataForOutput(string, block.startInd)
-                        var textview = binding.forConsol
-                        for (i in consoleOutput) {
-                            textview.text = i
-                        }
-
-                    }
-                    if (block.name == "end") {
-                        println(block.finishInd)
-                        pushDataForEnd(block.finishInd)
-                    }
-                    i++
+                if (block.name == "ForCustomView") {
+                    var string = (block.view as ForCustomView).GetText1()
+                    var string2 = (block.view as ForCustomView).GetText2()
+                    pushDataForArithmetic(string2, string, i)
                 }
-                main()
+                if (block.name == "For_inizalitation") {
+                    var string = (block.view as For_inizalitation).GetText2()
+                    pushDataForInitialization(string, i)
+                }
+                if (block.name == "IF") {
+                    println(block.finishInd)
+                    var string = (block.view as If_block).GetText2()
+                    pushDataForIf(string, i, block.finishInd)
+                }
+                if (block.name == "WHILE") {
+                    println(block.finishInd)
+                    var string = (block.view as If_block).GetText2()
+                    pushDataForWhile(string, i, block.finishInd)
+                }
+                if (block.name == "PRINT") {
+                    var string = (block.view as Print_block).GetText2()
+                    pushDataForOutput(string, i)
+                    for (i in consoleOutput) {
+                        println("jdhbfvjkd $i")
+                        var text = TextView(this)
+                        binding.containerForTextView.addView(text)
+                        text.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                        var string2 = i
+                        text.text = string2
+                    }
+
+
+                }
+                if (block.name == "end") {
+                    println(block.finishInd)
+                    pushDataForEnd(block.finishInd)
+                }
+                i++
             }
+            main()
         }
 
+        buttonStop.setOnClickListener {
+            frame.setVisibility(View.VISIBLE)
+            consol.setVisibility(View.INVISIBLE)
+            buttonPlay.setVisibility(View.VISIBLE)
+            buttonStop.setVisibility(View.INVISIBLE)
+        }
 //        val params=ConstraintLayout.LayoutParams(10000,1)
 //        binding.container.addView(ForCustomView(this),params)
 
@@ -117,10 +136,6 @@ class SecondActivity : AppCompatActivity() {
             createBlock(ForCustomView(this), "ForCustomView", false)
             //listOfBlocks.add(addViewToScreen(ForCustomView(this)))
             createArithmetic()
-        }
-        binding.forCycleFor.setOnClickListener {
-            createBlock(ForCustomView(this), "FOR", true)
-            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forCycleWhile.setOnClickListener {
             createBlock(If_block(this), "WHILE", true)
@@ -144,9 +159,11 @@ class SecondActivity : AppCompatActivity() {
             // listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
         binding.forPrint.setOnClickListener {
+            createOutput()
             createBlock(Print_block(this), "PRINT", false)
             // listOfBlocks.add(addViewToScreen3(Print_block(this)))
         }
+        binding.forInput
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -54,7 +54,6 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:padding="1dp">
-                z
             </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
@@ -92,7 +91,7 @@
                 android:fillViewport="true">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
@@ -109,8 +108,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="90dp"
                         android:background="@drawable/button_forbottom"
-                        android:text="@string/initialization"
-                        android:textColor="@color/white" />
+                        android:text="@string/initialization" />
 
                     <Button
                         android:id="@+id/for_arifmetic"
@@ -119,8 +117,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/button_forbottom"
-                        android:text="@string/Equal"
-                        android:textColor="@color/white" />
+                        android:text="@string/Equal" />
 
                     <Button
                         android:id="@+id/for_print"
@@ -132,6 +129,15 @@
                         android:text="@string/Output" />
 
                     <Button
+                        android:id="@+id/for_input"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/button_forbottom"
+                        android:text="@string/input" />
+
+                    <Button
                         android:id="@+id/for_operator_if"
                         android:layout_width="250dp"
                         android:layout_height="50dp"
@@ -139,24 +145,6 @@
                         android:layout_marginTop="20dp"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/OperatorIf" />
-
-                    <Button
-                        android:id="@+id/for_cycle_while"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/button_forbottom"
-                        android:text="@string/whilecycle" />
-
-                    <Button
-                        android:id="@+id/for_cycle_for"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/button_forbottom"
-                        android:text="@string/forcycle" />
 
                     <Button
                         android:id="@+id/for_operator_if_else"
@@ -168,13 +156,13 @@
                         android:text="@string/OperatorIfElse" />
 
                     <Button
-                        android:id="@+id/for_them"
+                        android:id="@+id/for_cycle_while"
                         android:layout_width="250dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/button_forbottom"
-                        android:text="@string/Themes" />
+                        android:text="@string/whilecycle" />
 
                 </LinearLayout>
 
@@ -187,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:background="@drawable/bottom_sheet"
-            app:behavior_hideable="true"
+            app:behavior_hideable="false"
             app:behavior_peekHeight="40dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -205,10 +193,12 @@
                 android:layout_marginTop="50dp"
                 android:fillViewport="true">
 
-                <TextView
-                    android:id="@+id/for_consol"
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/container_for_text_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+                </LinearLayout>
 
             </ScrollView>
 
@@ -224,6 +214,17 @@
             android:backgroundTint="@color/button_color"
             android:src="@drawable/ic_baseline_play_arrow_24"
             app:layout_anchor="@+id/sheet"
+            app:layout_anchorGravity="top|end" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="@color/button_color"
+            android:src="@drawable/ic_baseline_stop_24"
+            app:layout_anchor="@+id/sheet2"
             app:layout_anchorGravity="top|end" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

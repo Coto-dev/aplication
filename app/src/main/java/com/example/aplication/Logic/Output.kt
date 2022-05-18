@@ -8,7 +8,6 @@ class Output : MainBlock {
     override var ErrorString = ""
     override var status = true
     val vars = variables
-    val consoleOut = consoleOutput
     var textBar: String=""
 
     override fun start() = output()
@@ -36,7 +35,7 @@ class Output : MainBlock {
 //        }
 //    }
     fun output(){
-    consoleOut+=calculate(recognize(textBar)).toString()
+    consoleOutput+=calculate(recognize(textBar)).toString()
     }
     private fun recognize(textBar:String):String{
         var text = textBar
@@ -283,7 +282,7 @@ class Output : MainBlock {
 
 
         }
-        print(consoleOut)
+
         return(stackString.pop().toInt())
     }
 
