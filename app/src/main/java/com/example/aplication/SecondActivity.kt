@@ -136,7 +136,7 @@ class SecondActivity : AppCompatActivity() {
             createArithmetic()
         }
         binding.forCycleWhile.setOnClickListener {
-            createBlock(If_block(this), "WHILE", true)
+            createBlock(While_block(this), "WHILE", true)
             createWhile()
             createNull()
             // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
@@ -161,17 +161,18 @@ class SecondActivity : AppCompatActivity() {
             createBlock(Print_block(this), "PRINT", false)
             // listOfBlocks.add(addViewToScreen3(Print_block(this)))
         }
-        binding.forInput.setOnClickListener {
-            frame.setVisibility(View.INVISIBLE)
-            consol.setVisibility(View.VISIBLE)
-            bottomSheetConsol.peekHeight = 135
-            buttonPlay.setVisibility(View.INVISIBLE)
-            buttonStop.setVisibility(View.VISIBLE);
-            var edit = EditText(this)
-            binding.containerForTextView.addView(edit)
-            buttonGo.setVisibility(View.VISIBLE);
-
-        }
+//        binding.forInput.setOnClickListener {
+//            frame.setVisibility(View.INVISIBLE)
+//            consol.setVisibility(View.VISIBLE)
+//            bottomSheetConsol.peekHeight = 135
+//            buttonPlay.setVisibility(View.INVISIBLE)
+//            buttonStop.setVisibility(View.VISIBLE);
+//            var edit = EditText(this)
+//            binding.containerForTextView.addView(edit)
+//            buttonGo.setVisibility(View.VISIBLE);
+//            edit.width = 150
+//            edit.setTextColor(Color.parseColor("#e3e3e3"))
+//        }
 
     }
 
