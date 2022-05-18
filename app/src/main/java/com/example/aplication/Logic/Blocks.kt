@@ -21,21 +21,28 @@ fun main() {
 //    createInitialization()
 //   createOutput()
 //    createMassive1()
-//    createIfElse()
+    createInitialization()
+    createIfElse()
+    createArithmetic()
+    createNull()
+    createArithmetic()
+    createNull()
+    createInitialization()
 //
 //    createOutput()
 //    createOutput()
 
 
-//    pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
-//    pushDataForArithmetic("10","a23",1)
+    pushDataForInitialization("aa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd",0)
+    pushDataForIfElse("aa<<<<<<<<<<<=3",1,3,5)
+    pushDataForArithmetic("a23+1","a23",2)
 //    pushDataForInitialization("abvgd",2)
 //    pushDataForWhile("a23>1",3, 9)
-//    pushDataForArithmetic("a23-1","a23",4)
+    pushDataForArithmetic("2","a23",4)
 //    pushDataForIf("aa=0",5, 7)
 //    pushDataForArithmetic("-(a23+5)","abvgd",6)
 //
-//    pushDataForInitialization("w",8)
+    pushDataForInitialization("w",6)
 //
 //    pushDataForOutput("a23+10", 10)
 //    pushDataForOutput("abvgd", 11)

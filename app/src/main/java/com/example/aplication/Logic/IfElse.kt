@@ -6,6 +6,7 @@ import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 import java.lang.Error
 import java.util.*
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
+import com.example.aplication.Logic.MainBlock.Companion.index
 
 
 
@@ -30,40 +31,46 @@ class IfElse : MainBlock {
     val name: String? = null
 
     val variables = mutableMapOf<String,Int>()
-    val listOfBlocks_YES = mutableListOf<MainBlock>()
-    val listOfBlocks_NO = mutableListOf<MainBlock>()
-    val MapArray = mutableMapOf<String,Array<Int>>()
+    var indStart = 0;
+    var indElse = 0;
+    var indFinish = 0;
 
     var textBar: String = ""
     var variable: String = ""
     override fun start() = assign()
     fun assign() {
-        //textBar.replace(assignmentVar(variable), calculate(recognize(textBar)))
-        //println(textBar)
-        textBar = (recognize(textBar));
-        //println(textBar)
-        //textBar = equality(textBar);
-        if (condition(textBar) == 1){
-            for (name in listOfBlocks_YES) {
-                name.start()
-                if (!name.status)
+
+        if (condition(recognize(textBar)) == 1){
+            MainBlock.index =indStart+1;
+            while(MainBlock.index < indElse)
+            {
+                MainBlock.listOfBlocks[MainBlock.index].start()
+                if (!MainBlock.listOfBlocks[MainBlock.index].status)
                 {
-                    consoleOutput+=name.ErrorString
-                    status = false
+                    MainBlock.consoleOutput += MainBlock.listOfBlocks[MainBlock.index].ErrorString
+                    MainBlock.index =listOfBlocks.size+1
                     break
                 }
+                println(MainBlock.index)
+                MainBlock.index++
             }
+            MainBlock.index =indFinish+1
         }
         else {
-            for (name in listOfBlocks_NO) {
-                name.start()
-                if (!name.status)
+            MainBlock.index =indElse+1;
+            while(MainBlock.index < indFinish)
+            {
+                MainBlock.listOfBlocks[MainBlock.index].start()
+                if (!MainBlock.listOfBlocks[MainBlock.index].status)
                 {
-                    consoleOutput+=name.ErrorString
-                    status = false
+                    MainBlock.consoleOutput += MainBlock.listOfBlocks[MainBlock.index].ErrorString
+                    MainBlock.index =listOfBlocks.size+1
                     break
                 }
+                println(MainBlock.index)
+                MainBlock.index++
             }
+            MainBlock.index =indFinish
         }
         //println(textBar)
     }

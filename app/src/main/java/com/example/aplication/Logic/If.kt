@@ -29,10 +29,7 @@ class If : MainBlock {
     var indStart = 0;
     var indFinish = 0;
     val variables = mutableMapOf<String,Int>()
-    //val listOfBlocks_YES = mutableListOf<MainBlock>()
-    val MapArray = mutableMapOf<String,Array<Int>>()
 
-    //var i =index
     var textBar: String = ""
     var variable: String = ""
     override fun start() = assign()

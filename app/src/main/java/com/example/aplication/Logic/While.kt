@@ -15,8 +15,6 @@ class While : MainBlock {
     var indStart = 0;
     var indFinish = 0;
     val variables = mutableMapOf<String,Int>()
-    val listOfBlocks = mutableListOf<MainBlock>()
-    val MapArray = mutableMapOf<String,Array<Int>>()
     var i = index
     var textBar: String = ""
 
