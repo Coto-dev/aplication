@@ -25,6 +25,7 @@ import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
+    private var countOfCycli = 0
 
     data class Block(
         var view: View,
@@ -137,17 +138,20 @@ class SecondActivity : AppCompatActivity() {
         }
         binding.forCycleWhile.setOnClickListener {
             createBlock(While_block(this), "WHILE", true)
+            countOfCycli++
             createWhile()
             createNull()
             // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIf.setOnClickListener {
+            countOfCycli++
             createBlock(If_block(this), "IF", true)
             createIf()
             createNull()
             // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
+            countOfCycli++
             createBlock(ForCustomView(this), "IF", true)
             //addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
@@ -179,14 +183,20 @@ class SecondActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun createBlock(view: View, name: String, isHaveChild: Boolean) {
         //view.setName(name)
-        binding.container.addView(view)
+        Log.i("hui","$countOfCycli")
+        var params = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(10, 0, 30 * countOfCycli, 0)
+        binding.container.addView(view, params)
         val start = listOfBlocks.size
         listOfBlocks.add(Block(view, "", name, start, start))
         view.setOnLongClickListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
         if (isHaveChild) {
             val blockEnd = Block_end(this)
-            binding.container.addView(blockEnd)
+            binding.container.addView(blockEnd,params)
             listOfBlocks[start].finishInd++
             listOfBlocks.add(Block(blockEnd, "", "end", start, start + 1))
             blockEnd.setOnLongClickListener(choiceTouchListener())
@@ -360,5 +370,6 @@ class SecondActivity : AppCompatActivity() {
         }
 
     }
+
 
 }
