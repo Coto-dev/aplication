@@ -4,38 +4,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/block_button">
 
-        <View
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:id="@+id/forArifmetic"
-            android:layout_margin="3dp"
-            android:background="@drawable/block_button"
-            app:layout_constraintTop_toTopOf="parent"
+        <TextView
+            android:id="@+id/start"
+            style="@style/Text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:text="@string/Else"
+            android:textColor="@color/text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="18dp"
-            style="@style/Text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:id="@+id/end"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/Else"
-            android:textColor="@color/text_color"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="20dp"
             android:text=") {"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size"
@@ -44,18 +41,23 @@
             app:layout_constraintTop_toTopOf="parent"  />
 
         <EditText
-            android:id="@+id/for_if"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:id="@+id/for_else"
             android:layout_width="wrap_content"
-            android:minWidth="70dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:background="#00000000"
             android:inputType="text"
             android:hint="@string/expression"
+            android:textSize="16dp"
             android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@id/end"
+            app:layout_constraintStart_toEndOf="@id/start"
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

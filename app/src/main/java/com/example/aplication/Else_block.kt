@@ -13,4 +13,9 @@ class Else_block constructor(
 ) : CoordinatorLayout(context, attrs, defStyleAttr) {
     private val binding = ElseBlockBinding.inflate(LayoutInflater.from(context), this)
 
+    fun GetText2():String {
+        val textview= binding.forElse
+        var a:String=textview.text.toString()
+        return a
+    }
 }

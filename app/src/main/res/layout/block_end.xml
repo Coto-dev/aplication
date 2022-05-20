@@ -5,18 +5,17 @@
     tools:parentTag="android.widget.LinearLayout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="220dp"
+        android:layout_width="267dp"
         android:layout_height="50dp"
         android:layout_margin="3dp"
         android:background="@drawable/block_button">
 
         <TextView
-            android:text="}"
+            android:text="  }"
             android:textSize="@dimen/text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:src="@drawable/ic_baseline_drag_handle_24"
             android:textColor="@color/text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
