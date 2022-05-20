@@ -318,7 +318,10 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun calculateNewIndexes() {
-        val buffList = listOfBlocks
+        val buffList = mutableListOf<Block>()
+        for (i in listOfBlocks) {
+            buffList.add(i)
+        }
         val checkList = mutableListOf<Boolean>()
         for (i in 0 until listOfBlocks.size) {
             checkList.add(false)
@@ -331,17 +334,17 @@ class SecondActivity : AppCompatActivity() {
                     listOfBlocks[i].finishInd == listOfBlocks[j].finishInd &&
                     i != j
                 ) {
-                    listOfBlocks[i].startInd = i
-                    listOfBlocks[j].startInd = i
-                    listOfBlocks[i].finishInd = j
-                    listOfBlocks[j].finishInd = j
+                    buffList[i].startInd = i
+                    buffList[j].startInd = i
+                    buffList[i].finishInd = j
+                    buffList[j].finishInd = j
                     checkList[i] = true
                     checkList[j] = true
                 }
             }
             if (!checkList[i]) {
-                listOfBlocks[i].startInd = i
-                listOfBlocks[i].finishInd = i
+                buffList[i].startInd = i
+                buffList[i].finishInd = i
                 checkList[i] = true
             }
         }

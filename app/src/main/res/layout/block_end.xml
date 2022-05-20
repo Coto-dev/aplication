@@ -5,7 +5,7 @@
     tools:parentTag="android.widget.LinearLayout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="294dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:background="@drawable/block_button">
