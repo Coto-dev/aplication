@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.view.View.*
@@ -252,30 +253,37 @@ class SecondActivity : AppCompatActivity() {
             DragEvent.ACTION_DROP -> {
                 if (view != binding.container) {
                     if (view != draggingView) {
-                        var first = listOfBlocks[0]
+                        var dropTo = listOfBlocks[0]
                         var ind = 0
-                        var second = listOfBlocks[0]
+                        var drag = listOfBlocks[0]
                         for (i in listOfBlocks) {
-                            if (view != first.view) {
+                            if (view != dropTo.view) {
                                 ind++
                             }
                             if (i.view == view) {
-                                first = i
+                                dropTo = i
                             } else if (i.view == draggingView) {
-                                second = i
+                                drag = i
                             }
                         }
-                        if (listOfBlocks[second.startInd].view is Else_block && !canAttachElse(
+                        if (listOfBlocks[drag.startInd].view is Else_block && !canAttachElse(
                                 ind - 1,
                                 Point(event.x, event.y)
                             )
                         ) {
                             return@OnDragListener true
                         }
-                        if (first.finishInd != second.finishInd) {
-                            attach(ind - 1, second, Point(event.x, event.y))
+
+                        if (ind != listOfBlocks.size && (listOfBlocks[ind].name == "ELSE" || listOfBlocks[ind - 1].name == "ELSE")) {
+                            Log.i("baby", "yoda")
+                            ///if (drag.name != "IF") {
+                            return@OnDragListener true
+                            //  }
+                        }
+                        if (dropTo.finishInd != drag.finishInd) {
+                            attach(ind - 1, drag, Point(event.x, event.y))
                             calculateNewIndexes()
-                            createMargin()
+                            // createMargin()
                         }
                     }
                 }
@@ -301,6 +309,8 @@ class SecondActivity : AppCompatActivity() {
             ind = 0
         }
         val toBlock = listOfBlocks[ind]
+
+
         val size = listOfBlocks.size - 1
         var finishInd = fromBlock.finishInd
         val startInd = fromBlock.startInd
@@ -378,17 +388,17 @@ class SecondActivity : AppCompatActivity() {
         listOfBlocks = buffList
     }
 
-    private fun createMargin() {
-        val listOfMargin = mutableListOf<Int>()
-        for (i in listOfBlocks) {
-            listOfMargin.add(0)
-        }
-        for (i in listOfBlocks) {
-            for (j in i.startInd + 1 until i.finishInd) {
-                listOfMargin[j]++
-            }
-        }
-    }
+//    private fun createMargin() {
+//        val listOfMargin = mutableListOf<Int>()
+//        for (i in listOfBlocks) {
+//            listOfMargin.add(0)
+//        }
+//        for (i in listOfBlocks) {
+//            for (j in i.startInd + 1 until i.finishInd) {
+//                listOfMargin[j]++
+//            }
+//        }
+//    }
 
     private fun countBlockByName(name: String): Int {
         var count = 0
@@ -401,6 +411,15 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun canAttachElse(toBlockInd: Int, dropPoint: Point): Boolean {
+        if (toBlockInd == -1) {
+            return false
+        }
+        return if (dropPoint.y > listOfBlocks[toBlockInd].view.height / 2)
+            (listOfBlocks[toBlockInd].canHaveElse)
+        else (listOfBlocks[toBlockInd - 1].canHaveElse)
+    }
+
+    private fun canAttachBetweenElse(toBlockInd: Int, dropPoint: Point): Boolean {
         if (toBlockInd == -1) {
             return false
         }
