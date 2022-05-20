@@ -17,6 +17,7 @@
     <string name="output">print</string>
     <string name="input">Ввод</string> 
     <string name="array">Массив</string>
+    <string name="array2">array[size]={...}</string>
     <string name="Hello2">Go!</string>
 
 </resources>

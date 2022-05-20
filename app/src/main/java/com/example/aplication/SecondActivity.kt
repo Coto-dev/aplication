@@ -2,6 +2,7 @@ package com.example.aplication
 
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +20,6 @@ import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
-    //private var countOfCycli = 0
 
     data class Block(
         var view: View,
@@ -34,6 +34,9 @@ class SecondActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySecondBinding.inflate(layoutInflater)
+
+//        binding.container.addView(View(this),LinearLayout.LayoutParams(10000,1))
+//        listOfBlocks[listOfBlocks.size]
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -90,32 +93,40 @@ class SecondActivity : AppCompatActivity() {
                 }
                 if (block.name == "WHILE") {
                     println(block.finishInd)
-                    val string = (block.view as If_block).GetText2()
+                    val string = (block.view as While_block).GetText2()
                     pushDataForWhile(string, i, block.finishInd)
                 }
                 if (block.name == "PRINT") {
                     val string = (block.view as Print_block).GetText2()
                     pushDataForOutput(string, i)
-                    for (count in consoleOutput) {
-                        val text = TextView(this)
-                        binding.containerForTextView.addView(text)
-                        text.background = Drawable.createFromPath("drawable/block_button.xml")
-                        text.text = count
-                    }
+
 
                 }
                 if (block.name == "end") {
                     println(block.finishInd)
                     pushDataForEnd(block.finishInd)
                 }
+                if (block.name == "ARRAY") {
+                    val string = (block.view as Array_block).GetText2()
+                    pushDataForMassive(string, i)
+                }
                 i++
             }
             main()
+            for (count in consoleOutput) {
+                val text = TextView(this)
+                text.textSize = 50f
+                text.setTextColor(Color.parseColor("#e3e3e3"));
+                binding.containerForTextView.addView(text)
+                text.background = Drawable.createFromPath("drawable/block_button.xml")
+                text.text = count
+            }
         }
 
         buttonStop.setOnClickListener {
-            frame.visibility = VISIBLE
             consol.visibility = INVISIBLE
+            frame.visibility = VISIBLE
+            bottomSheetBehavior.peekHeight = 135
             bottomSheetConsol.peekHeight = 135
             buttonPlay.visibility = VISIBLE
             buttonStop.visibility = INVISIBLE
@@ -151,6 +162,11 @@ class SecondActivity : AppCompatActivity() {
             createOutput()
             createBlock(Print_block(this), "PRINT", false)
         }
+        binding.forArray.setOnClickListener {
+            createMassive()
+            createBlock(Array_block(this), "ARRAY", false)
+        }
+
 //        binding.forInput.setOnClickListener {
 //            frame.setVisibility(View.INVISIBLE)
 //            consol.setVisibility(View.VISIBLE)
@@ -275,15 +291,12 @@ class SecondActivity : AppCompatActivity() {
                         }
 
                         if (ind != listOfBlocks.size && (listOfBlocks[ind].name == "ELSE" || listOfBlocks[ind - 1].name == "ELSE")) {
-                            Log.i("baby", "yoda")
-                            ///if (drag.name != "IF") {
                             return@OnDragListener true
-                            //  }
                         }
                         if (dropTo.finishInd != drag.finishInd) {
                             attach(ind - 1, drag, Point(event.x, event.y))
                             calculateNewIndexes()
-                            // createMargin()
+                            createMargin()
                         }
                     }
                 }
@@ -388,17 +401,20 @@ class SecondActivity : AppCompatActivity() {
         listOfBlocks = buffList
     }
 
-//    private fun createMargin() {
-//        val listOfMargin = mutableListOf<Int>()
-//        for (i in listOfBlocks) {
-//            listOfMargin.add(0)
-//        }
-//        for (i in listOfBlocks) {
-//            for (j in i.startInd + 1 until i.finishInd) {
-//                listOfMargin[j]++
-//            }
-//        }
-//    }
+    private fun createMargin() {
+        for (block in listOfBlocks) {
+            block.view.x = 0f
+        }
+
+        for (block in listOfBlocks) {
+            if (block.finishInd - block.startInd >= 2) {
+                for (i in block.startInd + 1..block.finishInd - 1) {
+                    listOfBlocks[i].view.x += 30f
+                }
+            }
+        }
+
+    }
 
     private fun countBlockByName(name: String): Int {
         var count = 0
