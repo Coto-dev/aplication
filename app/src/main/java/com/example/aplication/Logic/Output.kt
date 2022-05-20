@@ -1,5 +1,6 @@
 package com.example.aplication.Logic
 
+import com.example.aplication.Logic.MainBlock.Companion.MapArray
 import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 import com.example.aplication.Logic.MainBlock.Companion.variables
 import java.util.*
@@ -8,38 +9,51 @@ class Output : MainBlock {
     override var ErrorString = ""
     override var status = true
     val vars = variables
+    var map = MapArray
     var textBar: String=""
 
     override fun start() = output()
-//    fun output(){
-//        var text = textBar
-//        if (!textBar?.contains(Regex("""([^\w|,|\s]|((^|,)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})"""))!!) {
-//            val matches = Regex("""[a-zA-Z]+[0-9]*""").findAll(textBar!!)
-//            for(name in matches){
-//                if (vars.containsKey(name.value)) {
-//                   println(vars.getValue(name.value).toString()) // вывести пользователю в консоль эту переменную(хз как потому что эта функция не может возращать значения)
-//                }
-//                else{
-//                    // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
-//                    status = false
-//                    ErrorString = ("Variable is not exist : ${name.value}") // та самая переменная c
-//                    break
-//                }
-//            }
-//
-//        }
-//        else{
-//            //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
-//            ErrorString = "the value of the variable was entered incorrectly : ${Regex("""([^\w|,|\s]|((^|,)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})""").find(textBar)}"
-//            status = false
-//        }
-//    }
+
     fun output(){
     consoleOutput.add(calculate(recognize(textBar)).toString())
     }
     private fun recognize(textBar:String):String{
         var text = textBar
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%|^a-zA-Z])"""))) {
+        var indText = ""
+        // println("text1 $text")
+        if (!textBar.contains(Regex("""([^\d\s^\+\-\/\*\(\)\%^a-zA-Z\[\]])"""))) {
+
+            if (text.contains(Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])"""))) {
+                var matchesForMassive = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(text)
+                //  println("matchesForMassive ${matchesForMassive?.value}")
+                while (matchesForMassive != null) {
+                    // println(map["a"]?.get(0))
+                    val ind = Regex("""(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(matchesForMassive.value)
+                    indText = ind?.value?.replace("""\[""".toRegex(), "").toString()
+                    indText = indText?.replace("""\]""".toRegex(), "")
+                    // println("indText ${ind?.value}")
+                    var indexInt = calculate(recognize(indText))
+                    val nameMas = Regex("""\w+\d*\[""").find(matchesForMassive?.value.toString())
+                    var NameText = nameMas?.value?.replace("""\[""".toRegex(), "")
+
+                    if (map.containsKey(NameText)) {
+                        //
+                        // println("matchesForMassive.range ${matchesForMassive.range}")
+                        // println("map[nameMas?.value.toString()]?.get(ind?.value!!.toInt()).toString() ${map[NameText]?.get(indexInt).toString()}")
+                        text = text.replaceRange(matchesForMassive.range, map[NameText]?.get(indexInt).toString())
+                        // println("text $text")
+                    } else {
+                        // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
+                        //return matches.value // та самая переменная c
+                        status = false
+                        ErrorString = "undefined massive : ${NameText}"
+                        break
+                    }
+                    matchesForMassive = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(text)
+                }
+            }
+
+
             var matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             while (matches != null)
             {
@@ -60,7 +74,7 @@ class Output : MainBlock {
         }
         else{
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
-            val matches = Regex("""([^\d|\s|^\+\-\/\*\(\)\%|^a-zA-Z])""").find(textBar)
+            val matches = Regex("""([^\d\s^\+\-\/\*\(\)\%^a-zA-Z\[\]])""").find(textBar)
             ErrorString = "incorrect expression : ${matches?.value}"
             status = false
         }

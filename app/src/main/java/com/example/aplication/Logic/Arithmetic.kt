@@ -121,15 +121,7 @@ class Arithmetic : MainBlock {
         var indText = ""
        // println("text1 $text")
         if (!textBar.contains(Regex("""([^\d\s^\+\-\/\*\(\)\%^a-zA-Z\[\]])"""))) {
-//            val matches = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(textBar)
-//
-//            val ind = Regex("""(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(textBar)
-//            indText = ind?.value?.replace("""\[""".toRegex(), "").toString()
-//            indText =  indText?.replace("""\]""".toRegex(), "")
-//            var indexInt = calculate(recognize(indText))
-//
-//            val nameMas = Regex("""\w+\d*\[""").find(matches?.value.toString())
-//            var NameText =  nameMas?.value?.replace("""\[""".toRegex(), "")
+
             if (text.contains(Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])"""))) {
                 var matchesForMassive = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(text)
               //  println("matchesForMassive ${matchesForMassive?.value}")
