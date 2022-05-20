@@ -40,8 +40,6 @@ class SecondActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val buttonGo = binding.go
-        buttonGo.visibility = INVISIBLE
         val buttonStop = binding.floating2
         buttonStop.visibility = INVISIBLE
 
@@ -65,7 +63,9 @@ class SecondActivity : AppCompatActivity() {
         bottomSheetBehavior.isHideable = false
         val buttonPlay = binding.floating
 
-        buttonPlay.setOnClickListener {//кomпиляция
+        buttonPlay.setOnClickListener {
+            val text = TextView(this)
+            consoleOutput.clear()
             frame.visibility = INVISIBLE
             consol.visibility = VISIBLE
             bottomSheetBehavior.peekHeight = 0
@@ -73,6 +73,9 @@ class SecondActivity : AppCompatActivity() {
             buttonPlay.visibility = INVISIBLE
             buttonStop.visibility = VISIBLE
             var i = 0
+            if ((listOfBlocks[0].view as For_inizalitation).GetText2()==null){
+                
+            }
             for (block in listOfBlocks) {
                 println(block.name)
                 println(block.startInd)
@@ -87,9 +90,13 @@ class SecondActivity : AppCompatActivity() {
                     pushDataForInitialization(string, i)
                 }
                 if (block.name == "IF") {
-                    println(block.finishInd)
-                    val string = (block.view as If_block).GetText2()
-                    pushDataForIf(string, i, block.finishInd)
+                    if (listOfBlocks[block.finishInd + 1].name == "ELSE"){
+
+                    }
+                    else{
+                        val string = (block.view as If_block).GetText2()
+                        pushDataForIf(string, i, block.finishInd)
+                    }
                 }
                 if (block.name == "WHILE") {
                     println(block.finishInd)
@@ -99,8 +106,6 @@ class SecondActivity : AppCompatActivity() {
                 if (block.name == "PRINT") {
                     val string = (block.view as Print_block).GetText2()
                     pushDataForOutput(string, i)
-
-
                 }
                 if (block.name == "end") {
                     println(block.finishInd)
@@ -114,12 +119,16 @@ class SecondActivity : AppCompatActivity() {
             }
             main()
             for (count in consoleOutput) {
-                val text = TextView(this)
-                text.textSize = 50f
+                binding.containerForTextView.removeAllViewsInLayout()
+                text.textSize = 30f
                 text.setTextColor(Color.parseColor("#e3e3e3"));
                 binding.containerForTextView.addView(text)
                 text.background = Drawable.createFromPath("drawable/block_button.xml")
                 text.text = count
+                binding.scrollForConsol.scrollTo(
+                    binding.scrollForConsol.width,
+                    binding.scrollForConsol.height
+                )
             }
         }
 
@@ -153,6 +162,7 @@ class SecondActivity : AppCompatActivity() {
             if (variable > variable2) {
                 createBlock(Else_block(this), "ELSE", true)
             }
+            createIfElse()
         }
         binding.forInitialization.setOnClickListener {
             createBlock(For_inizalitation(this), "For_inizalitation", false)
@@ -290,7 +300,7 @@ class SecondActivity : AppCompatActivity() {
                             return@OnDragListener true
                         }
 
-                        if (ind != listOfBlocks.size && (listOfBlocks[ind].name == "ELSE" || listOfBlocks[ind - 1].name == "ELSE")) {
+                        if (ind != listOfBlocks.size && ind > 0 && (listOfBlocks[ind].name == "ELSE" || listOfBlocks[ind - 1].name == "ELSE")) {
                             return@OnDragListener true
                         }
                         if (dropTo.finishInd != drag.finishInd) {
