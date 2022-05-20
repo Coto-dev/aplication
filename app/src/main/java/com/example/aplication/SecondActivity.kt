@@ -340,6 +340,7 @@ class SecondActivity : AppCompatActivity() {
                     buffList[j].finishInd = j
                     checkList[i] = true
                     checkList[j] = true
+                    break
                 }
             }
             if (!checkList[i]) {

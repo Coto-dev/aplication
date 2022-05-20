@@ -6,29 +6,35 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="500dp"
-        android:layout_height="wrap_content"
         android:background="@drawable/block_button">
 
         <TextView
             android:id="@+id/start"
             style="@style/Text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:text="@string/If"
-            android:padding="20dp"
-            android:textColor="@color/text_color"/>
+            android:textColor="@color/text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:id="@+id/end"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text=") {"
-            android:padding="20dp"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,8 +42,11 @@
             app:layout_constraintTop_toTopOf="parent"  />
 
         <EditText
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             app:layout_constraintHorizontal_chainStyle="packed"
-            android:padding="20dp"
             android:id="@+id/for_if"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
