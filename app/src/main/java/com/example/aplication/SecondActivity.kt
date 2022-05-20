@@ -2,21 +2,14 @@ package com.example.aplication
 
 import android.annotation.SuppressLint
 import android.content.ClipData
-import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.nfc.Tag
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.DragEvent
-import android.view.MotionEvent
 import android.view.View
 import android.view.View.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isInvisible
-import androidx.core.view.marginStart
 import com.example.aplication.Logic.*
 import com.example.aplication.databinding.ActivitySecondBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -25,7 +18,7 @@ import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
-    private var countOfCycli = 0
+    //private var countOfCycli = 0
 
     data class Block(
         var view: View,
@@ -43,7 +36,7 @@ class SecondActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        var buttonGo = binding.go
+        val buttonGo = binding.go
         buttonGo.setVisibility(View.INVISIBLE);
         var buttonStop = binding.floating2
         buttonStop.setVisibility(View.INVISIBLE);
@@ -145,8 +138,8 @@ class SecondActivity : AppCompatActivity() {
             createNull()
         }
         binding.forOperatorIfElse.setOnClickListener {
-            var variable = countBlock("IF")
-            var variable2 = countBlock("ELSE")
+            var variable = countBlockByName("IF")
+            var variable2 = countBlockByName("ELSE")
             if (variable > variable2) {
                 createBlock(Else_block(this), "ELSE", true)
             }
@@ -177,46 +170,41 @@ class SecondActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun createBlock(view: View, name: String, isHaveChild: Boolean) {
         var flag = false
-        val start = listOfBlocks.size
         if (name == "IF") {
             flag = true
         }
-        if (!(view is Else_block)) {
-            binding.container.addView(view)
-            listOfBlocks.add(Block(view, "", false, name, start, start))
-            view.setOnLongClickListener(choiceTouchListener())
-            view.setOnDragListener(choiceDragListener())
-            if (isHaveChild) {
-                val blockEnd = Block_end(this)
-                listOfBlocks[start].finishInd++
-                listOfBlocks.add(Block(blockEnd, "", flag, "end", start, start + 1))
-                blockEnd.setOnLongClickListener(choiceTouchListener())
-                blockEnd.setOnDragListener(choiceDragListener())
-                binding.container.addView(blockEnd)
-            }
-        } else {
-            for (index in 1..listOfBlocks.size) {
-                if (listOfBlocks[index].canHaveElse) {
-                    binding.container.addView(view, index + 1)
-                    listOfBlocks.add(index + 1, Block(view, "", false, name, index + 1, index + 1))
-                    view.setOnLongClickListener(choiceTouchListener())
-                    view.setOnDragListener(choiceDragListener())
+        var toInd = listOfBlocks.size
+        if(listOfBlocks.size < 2 && view is Else_block) return
+        if(listOfBlocks.size >= 2 && view is Else_block) {
+            toInd = findIndToNewElse()
+        }
+        binding.container.addView(view, toInd)
+        listOfBlocks.add(toInd, Block(view, "", false, name, toInd, toInd))
+        view.setOnLongClickListener(choiceTouchListener())
+        view.setOnDragListener(choiceDragListener())
+        if (isHaveChild) {
+            createEnd(toInd+1, flag)
+        }
+        calculateNewIndexes()
+    }
 
-
-
-                    val blockEnd = Block_end(this)
-                    listOfBlocks.add(
-                        index + 2,
-                        Block(blockEnd, "", false, "end", index + 1, index + 2)
-                    )
-                    blockEnd.setOnLongClickListener(choiceTouchListener())
-                    blockEnd.setOnDragListener(choiceDragListener())
-                    binding.container.addView(blockEnd, index + 2)
-                    calculateNewIndexes()
-                    break
-                }
+    private fun findIndToNewElse(): Int {
+        for(i in 2 .. listOfBlocks.size) {
+            if(listOfBlocks[i-1].canHaveElse && i == listOfBlocks.size) return i
+            if(listOfBlocks[i-1].canHaveElse && listOfBlocks[i].view !is Else_block) {
+                return i
             }
         }
+        return 0
+    }
+
+    private fun createEnd(toInd: Int, flag: Boolean) {
+        val blockEnd = Block_end(this)
+        listOfBlocks[toInd-1].finishInd = toInd
+        listOfBlocks.add(toInd, Block(blockEnd, "", flag, "end", toInd - 1, toInd))
+        blockEnd.setOnLongClickListener(choiceTouchListener())
+        blockEnd.setOnDragListener(choiceDragListener())
+        binding.container.addView(blockEnd, toInd)
     }
 
     private lateinit var draggingView: View
@@ -235,16 +223,28 @@ class SecondActivity : AppCompatActivity() {
         true
     }
 
+
     private fun choiceDragListener() = View.OnDragListener { view, event ->
         when (event.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
-                var second = listOfBlocks[0]
+                var block = listOfBlocks[0]
+
                 for (i in listOfBlocks) {
                     if (i.view == draggingView) {
-                        second = i
+                        block = i
                     }
                 }
-                for (i in second.finishInd downTo second.startInd) {
+                var finishInd = block.finishInd
+                val startInd  = block.startInd
+                if(listOfBlocks[block.startInd].view is If_block) {
+                    if(listOfBlocks.size - 1 > block.finishInd + 1) {
+                        if(listOfBlocks[block.finishInd + 1].view is Else_block) {
+                            finishInd = listOfBlocks[block.finishInd + 1].finishInd
+                        }
+                    }
+                }
+                for (i in finishInd downTo startInd) {
+
                     listOfBlocks[i].view.visibility = INVISIBLE
 //                    if(i != second.finishInd) {
 //                        binding.container.removeView(listOfBlocks[i].view)
@@ -304,13 +304,22 @@ class SecondActivity : AppCompatActivity() {
         }
         val toBlock = listOfBlocks[ind]
         val size = listOfBlocks.size - 1
-        for (i in fromBlock.finishInd downTo fromBlock.startInd) {
+        var finishInd = fromBlock.finishInd
+        val startInd  = fromBlock.startInd
+        if(listOfBlocks[fromBlock.startInd].view is If_block) {
+            if(listOfBlocks.size - 1 > fromBlock.finishInd + 1) {
+                if(listOfBlocks[fromBlock.finishInd + 1].view is Else_block) {
+                    finishInd = listOfBlocks[fromBlock.finishInd + 1].finishInd
+                }
+            }
+        }
+        for (i in finishInd downTo startInd) {
             buff.add(listOfBlocks[i])
         }
 
         val newList = mutableListOf<Block>()
         for (i in 0..size) {
-            if ((fromBlock.startInd > i || i > fromBlock.finishInd) && i != ind) {
+            if ((startInd > i || i > finishInd) && i != ind) {
                 newList.add(listOfBlocks[i])
             } else if (i == ind) {
                 if (dropPoint.y > toBlock.view.height / 2) {
@@ -372,24 +381,21 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun createMargin() {
-        for (block in listOfBlocks) {
-            block.view.x = 0f
+        var listOfMargin = mutableListOf<Int>()
+        for(i in listOfBlocks) {
+            listOfMargin.add(0)
         }
-
-        for (block in listOfBlocks) {
-            if (block.finishInd - block.startInd >= 2) {
-                for (i in block.startInd + 1..block.finishInd - 1) {
-                    listOfBlocks[i].view.x += 30f
-                }
+        for(i in listOfBlocks) {
+            for(j in i.startInd + 1 .. i.finishInd - 1) {
+                listOfMargin[j]++
             }
         }
-
     }
 
-    private fun countBlock(string: String): Int {
+    private fun countBlockByName(name: String): Int {
         var count = 0
         for (block in listOfBlocks) {
-            if (block.name == string) {
+            if (block.name == name) {
                 count++
             }
         }
