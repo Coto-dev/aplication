@@ -6,8 +6,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="500dp"
-        android:layout_marginStart="10dp"
         android:layout_height="wrap_content"
         android:background="@drawable/block_button">
 
@@ -43,7 +44,7 @@
             android:background="#00000000"
             android:inputType="text"
             android:hint="@string/expression"
-            android:textSize="11dp"
+            android:textSize="16dp"
             android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
             app:layout_constraintBottom_toBottomOf="parent"
