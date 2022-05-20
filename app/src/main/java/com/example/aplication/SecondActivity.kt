@@ -128,12 +128,11 @@ class SecondActivity : AppCompatActivity() {
                     val input = EditText(this)
                     alert.setView(input)
 
-                    alert.setPositiveButton("Ok") { dialog, whichButton ->
-                        val string2 = (block.view as Input_block).GetText2()
-                        val string = input.text.toString()
-                        pushDataForInput(string, i)
-                    }
                     alert.show()
+                    val string2 = (block.view as Input_block).GetText2()
+                    val string = input.text.toString()
+                    Log.i("show","$i")
+                    pushDataForInput(string2, string, i)
                 }
                 i++
             }
