@@ -10,16 +10,21 @@ import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.view.View.*
-import android.widget.*
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aplication.Logic.*
-import com.example.aplication.databinding.ActivitySecondBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
+import com.example.aplication.databinding.ActivitySecondBinding
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
+
 
     data class Block(
         var view: View,
@@ -73,9 +78,9 @@ class SecondActivity : AppCompatActivity() {
             buttonPlay.visibility = INVISIBLE
             buttonStop.visibility = VISIBLE
             var i = 0
-            if ((listOfBlocks[0].view as For_inizalitation).GetText2() == null) {
-
-            }
+//            if ((listOfBlocks[0].view as For_inizalitation).GetText2() == null) {
+//
+//            }
             for (block in listOfBlocks) {
                 println(block.name)
                 println(block.startInd)
@@ -91,9 +96,9 @@ class SecondActivity : AppCompatActivity() {
                 }
                 if (block.name == "IF") {
 
-                        val string = (block.view as If_block).GetText2()
-                        pushDataForIf(string, i, block.finishInd)
-                        }
+                    val string = (block.view as If_block).GetText2()
+                    pushDataForIf(string, i, block.finishInd)
+                }
                 if (block.name == "WHILE") {
                     println(block.finishInd)
                     val string = (block.view as While_block).GetText2()
@@ -112,9 +117,23 @@ class SecondActivity : AppCompatActivity() {
                     pushDataForMassive(string, i)
                 }
                 if (block.name == "ELSE") {
-                    val indexIf = listOfBlocks[i-1].startInd
+                    val indexIf = listOfBlocks[i - 1].startInd
                     val string = (listOfBlocks[indexIf].view as If_block).GetText2()
-                    pushDataForIfElse(string, indexIf, i,block.finishInd)
+                    pushDataForIfElse(string, indexIf, i, block.finishInd)
+                }
+                if (block.name == "INPUT") {
+                    val alert = AlertDialog.Builder(this)
+                    alert.setTitle(R.string.prompt)
+
+                    val input = EditText(this)
+                    alert.setView(input)
+
+                    alert.setPositiveButton("Ok") { dialog, whichButton ->
+                        val string2 = (block.view as Input_block).GetText2()
+                        val string = input.text.toString()
+                        pushDataForInput(string, i)
+                    }
+                    alert.show()
                 }
                 i++
             }
@@ -177,6 +196,10 @@ class SecondActivity : AppCompatActivity() {
         binding.forArray.setOnClickListener {
             createMassive()
             createBlock(Array_block(this), "ARRAY", false)
+        }
+        binding.forInput.setOnClickListener {
+            createBlock(Input_block(this), "INPUT", false)
+            createIntput()
         }
 
 //        binding.forInput.setOnClickListener {
@@ -301,20 +324,20 @@ class SecondActivity : AppCompatActivity() {
                         ) {
                             return@OnDragListener true
                         }
-                        if (ind != listOfBlocks.size && (listOfBlocks[ind].name == "ELSE" )) {
+                        if (ind != listOfBlocks.size && (listOfBlocks[ind].name == "ELSE")) {
                             Log.i("baby", "yoda")
                             return@OnDragListener true
                         }
                         if (event.y < listOfBlocks[ind - 1].view.height / 2) {
-                            if (listOfBlocks[ind - 1].name == "ELSE"){
+                            if (listOfBlocks[ind - 1].name == "ELSE") {
                                 return@OnDragListener true
                             }
                         }
-                            if (dropTo.finishInd != drag.finishInd) {
-                                attach(ind - 1, drag, Point(event.x, event.y))
-                                calculateNewIndexes()
-                                createMargin()
-                            }
+                        if (dropTo.finishInd != drag.finishInd) {
+                            attach(ind - 1, drag, Point(event.x, event.y))
+                            calculateNewIndexes()
+                            createMargin()
+                        }
                     }
                 }
             }

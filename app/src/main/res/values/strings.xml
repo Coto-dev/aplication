@@ -19,5 +19,7 @@
     <string name="array">Массив</string>
     <string name="array2">array[size]={...}</string>
     <string name="Hello2">Go!</string>
-
+    <string name="prompt">Введите данные: </string>
+    <string name="inputAlert">Ввод через консоль</string>
+    <string name="input_block">input</string>
 </resources>

@@ -172,6 +172,14 @@
                         android:layout_marginTop="20dp"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/array" />
+                    <Button
+                        android:id="@+id/for_input"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/button_forbottom"
+                        android:text="@string/inputAlert" />
 
                 </LinearLayout>
 

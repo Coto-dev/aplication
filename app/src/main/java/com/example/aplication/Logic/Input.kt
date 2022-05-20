@@ -20,9 +20,9 @@ class Input : MainBlock{
 
             //val matches = Regex("""[a-zA-Z]+[0-9]*""").findAll(textBar)
             //stack = "1 $ 5 7 8"
-            while (stack.contains(Regex("""[^0-9\ ]+"""))) {
-
-            }
+//            while (stack.contains(Regex("""[^0-9\ ]+"""))) {
+//
+//            }
             if (stack.contains(Regex("""[^0-9\ ]+"""))) {
                 val matches =
                     Regex("""[^0-9\ ]+""").find(
