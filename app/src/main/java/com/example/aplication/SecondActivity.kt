@@ -127,43 +127,36 @@ class SecondActivity : AppCompatActivity() {
             buttonPlay.setVisibility(View.VISIBLE)
             buttonStop.setVisibility(View.INVISIBLE)
         }
-//        val params=ConstraintLayout.LayoutParams(10000,1)
-//        binding.container.addView(ForCustomView(this),params)
 
         //обработка нажатий на кнопки создания блоков
         binding.forArifmetic.setOnClickListener {
             createBlock(ForCustomView(this), "ForCustomView", false)
-            //listOfBlocks.add(addViewToScreen(ForCustomView(this)))
             createArithmetic()
         }
         binding.forCycleWhile.setOnClickListener {
             createBlock(While_block(this), "WHILE", true)
-            countOfCycli++
             createWhile()
             createNull()
-            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIf.setOnClickListener {
-            countOfCycli++
             createBlock(If_block(this), "IF", true)
             createIf()
             createNull()
-            // addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
         }
         binding.forOperatorIfElse.setOnClickListener {
-            countOfCycli++
-            createBlock(ForCustomView(this), "IF", true)
-            //addViewToScreen(ForCustomView(this), listOfBlocks.size, listOfBlocks.size + 1)
+            var variable = countBlock("IF")
+            var variable2 = countBlock("ELSE")
+            if (variable > variable2){
+                createBlock(ForCustomView(this), "ELSE", true)
+            }
         }
         binding.forInitialization.setOnClickListener {
             createBlock(For_inizalitation(this), "For_inizalitation", false)
             createInitialization()
-            // listOfBlocks.add(addViewToScreen2(For_inizalitation(this)))
         }
         binding.forPrint.setOnClickListener {
             createOutput()
             createBlock(Print_block(this), "PRINT", false)
-            // listOfBlocks.add(addViewToScreen3(Print_block(this)))
         }
 //        binding.forInput.setOnClickListener {
 //            frame.setVisibility(View.INVISIBLE)
@@ -183,7 +176,7 @@ class SecondActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun createBlock(view: View, name: String, isHaveChild: Boolean) {
         //view.setName(name)
-        Log.i("hui","$countOfCycli")
+        Log.i("hui", "$countOfCycli")
         var params = ConstraintLayout.LayoutParams(
             ConstraintLayout.LayoutParams.WRAP_CONTENT,
             ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -196,7 +189,7 @@ class SecondActivity : AppCompatActivity() {
         view.setOnDragListener(choiceDragListener())
         if (isHaveChild) {
             val blockEnd = Block_end(this)
-            binding.container.addView(blockEnd,params)
+            binding.container.addView(blockEnd, params)
             listOfBlocks[start].finishInd++
             listOfBlocks.add(Block(blockEnd, "", "end", start, start + 1))
             blockEnd.setOnLongClickListener(choiceTouchListener())
@@ -375,5 +368,13 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
-
+    private fun countBlock(string: String): Int {
+        var count = 0
+        for (block in listOfBlocks) {
+            if (block.name == string) {
+                count++
+            }
+        }
+        return count
+    }
 }
