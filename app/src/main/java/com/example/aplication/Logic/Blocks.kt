@@ -21,9 +21,9 @@ fun main() {
     createNull()//12
     createArithmetic()//13
     createNull()//14
-    pushDataForMassive("mas[5]={2,3,6,1,4}",0)
+    pushDataForMassive("mas[8]={9,1,1,2,3,4,5,6}",0)
     pushDataForInitialization("temp,j,i",1)
-    pushDataForArithmetic("4","j",2)
+    pushDataForArithmetic("7","j",2)
     pushDataForWhile("j>=0",3,14)
     pushDataForArithmetic("0","i",4)
     pushDataForWhile("i<j",5,12)
@@ -115,6 +115,11 @@ fun main() {
     println("map ${MapArray["mas"]?.get(2)}")
     println("map ${MapArray["mas"]?.get(3)}")
     println("map ${MapArray["mas"]?.get(4)}")
+    println("map ${MapArray["mas"]?.get(5)}")
+    println("map ${MapArray["mas"]?.get(6)}")
+    println("map ${MapArray["mas"]?.get(7)}")
+
+
 
     //val a = ContainerVariables()
     //a.textBar = "aaa,b,a2,aaw233,  baw23, a ,a23,   adwadwadawdadwa,wdadsawd"

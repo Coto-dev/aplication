@@ -29,7 +29,7 @@ class If : MainBlock {
     var indStart = 0;
     var indFinish = 0;
     val variables = mutableMapOf<String,Int>()
-
+    val map = MainBlock.MapArray
     var textBar: String = ""
     var variable: String = ""
     override fun start() = assign()
@@ -280,7 +280,40 @@ class If : MainBlock {
     }
     private fun recognize(textBar:String):String {
         var text = textBar
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\!\%\>\<\=\&\||^a-zA-Z])"""))) {
+        var indText = ""
+        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\!\%\>\<\=\&\|\[\]|^a-zA-Z])"""))) {
+
+            if (text.contains(Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])"""))) {
+                var matchesForMassive = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(text)
+                println("matchesForMassive ${matchesForMassive?.value}")
+                while (matchesForMassive != null) {
+                    // println(map["a"]?.get(0))
+                    val ind = Regex("""(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(matchesForMassive.value)
+                    indText = ind?.value?.replace("""\[""".toRegex(), "").toString()
+                    indText = indText?.replace("""\]""".toRegex(), "")
+                    println("indText ${ind?.value}")
+                    var indexInt = calculate(recognize(indText))
+                    val nameMas = Regex("""\w+\d*\[""").find(matchesForMassive?.value.toString())
+                    var NameText = nameMas?.value?.replace("""\[""".toRegex(), "")
+
+                    if (map.containsKey(NameText)) {
+                        //
+                        println("matchesForMassive.range ${matchesForMassive.range}")
+                        println("map[nameMas?.value.toString()]?.get(ind?.value!!.toInt()).toString() ${map[NameText]?.get(indexInt.toInt()).toString()}")
+                        text = text.replaceRange(matchesForMassive.range, map[NameText]?.get(indexInt.toInt()).toString())
+                        println("text $text")
+                    } else {
+                        // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
+                        //return matches.value // та самая переменная c
+                        status = false
+                        ErrorString = "undefined massive : ${NameText}"
+                        break
+                    }
+                    matchesForMassive = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(text)
+                }
+            }
+
+
             var matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
             while (matches != null) {
                 if (vars.containsKey(matches.value)) {
