@@ -96,7 +96,9 @@ fun main() {
         index = 0
         while (index < listOfBlocks.size) {
             listOfBlocks[index].start()
-            if (!listOfBlocks[index].status) {
+
+            if (index >= 0 && !listOfBlocks[index].status) {
+
                 consoleOutput += listOfBlocks[index].ErrorString
                 print("break$consoleOutput")
                 break
@@ -120,7 +122,6 @@ fun main() {
 //    println("map ${MapArray["mas"]?.get(5)}")
 //    println("map ${MapArray["mas"]?.get(6)}")
 //    println("map ${MapArray["mas"]?.get(7)}")
-
 
 
     //val a = ContainerVariables()

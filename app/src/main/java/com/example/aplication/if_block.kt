@@ -33,7 +33,6 @@ class If_block  constructor (
     fun GetText2():String {
         val textview2= binding2.forIf
         var b:String=textview2.text.toString()
-
         return b
     }
 

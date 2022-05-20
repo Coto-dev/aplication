@@ -2,6 +2,7 @@ package com.example.aplication
 
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -95,7 +96,6 @@ class SecondActivity : AppCompatActivity() {
                     pushDataForInitialization(string, i)
                 }
                 if (block.name == "IF") {
-
                     val string = (block.view as If_block).GetText2()
                     pushDataForIf(string, i, block.finishInd)
                 }
@@ -128,18 +128,19 @@ class SecondActivity : AppCompatActivity() {
                     val input = EditText(this)
                     alert.setView(input)
 
+                    alert.setPositiveButton("Ok") { dialog, whichButton ->
+                        val string2 = (block.view as Input_block).GetText2()
+                        val string = input.text.toString()
+                        pushDataForInput(string2, string, i)
+                    }
                     alert.show()
-                    val string2 = (block.view as Input_block).GetText2()
-                    val string = input.text.toString()
-                    Log.i("show","$i")
-                    pushDataForInput(string2, string, i)
                 }
                 i++
             }
             main()
             for (count in consoleOutput) {
                 binding.containerForTextView.removeAllViewsInLayout()
-                text.textSize = 30f
+                text.textSize = 20f
                 text.setTextColor(Color.parseColor("#e3e3e3"));
                 binding.containerForTextView.addView(text)
                 text.background = Drawable.createFromPath("drawable/block_button.xml")
@@ -327,9 +328,11 @@ class SecondActivity : AppCompatActivity() {
                             Log.i("baby", "yoda")
                             return@OnDragListener true
                         }
-                        if (event.y < listOfBlocks[ind - 1].view.height / 2) {
-                            if (listOfBlocks[ind - 1].name == "ELSE") {
-                                return@OnDragListener true
+                        if (ind > 0) {
+                            if (event.y < listOfBlocks[ind - 1].view.height / 2) {
+                                if (listOfBlocks[ind - 1].name == "ELSE") {
+                                    return@OnDragListener true
+                                }
                             }
                         }
                         if (dropTo.finishInd != drag.finishInd) {
@@ -474,12 +477,7 @@ class SecondActivity : AppCompatActivity() {
         else (listOfBlocks[toBlockInd - 1].canHaveElse)
     }
 
-    private fun canAttachBetweenElse(toBlockInd: Int, dropPoint: Point): Boolean {
-        if (toBlockInd == -1) {
-            return false
-        }
-        return if (dropPoint.y > listOfBlocks[toBlockInd].view.height / 2)
-            (listOfBlocks[toBlockInd].canHaveElse)
-        else (listOfBlocks[toBlockInd - 1].canHaveElse)
-    }
+//    private fun Remove(fromBlock: Block, dropPoint: Point): Boolean {
+//
+//    }
 }
