@@ -21,7 +21,6 @@ class Arithmetic : MainBlock {
 
             map[assignmentNameMas(variable)]?.set(assignmentIndMas(variable),calculate(recognize(textBar)))
 
-
         }
         else {
            // println("var$variable")

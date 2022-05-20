@@ -4,6 +4,7 @@ import com.example.aplication.Logic.MainBlock.Companion.MapArray
 import com.example.aplication.Logic.MainBlock.Companion.consoleOutput
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 import com.example.aplication.Logic.MainBlock.Companion.index
+import com.example.aplication.Logic.MainBlock.Companion.variables
 
 fun main() {
 //    createMassive()//0
@@ -21,7 +22,7 @@ fun main() {
 //    createNull()//12
 //    createArithmetic()//13
 //    createNull()//14
-//    pushDataForMassive("mas[8]={-9,-1,1,2,3,4,5,6}",0)
+//    pushDataForMassive("mas[8]={-9,-1,-1,-2,-3,-4,-5,-6}",0)
 //    pushDataForInitialization("temp,j,i",1)
 //    pushDataForArithmetic("7","j",2)
 //    pushDataForWhile("j>=0",3,14)
@@ -92,6 +93,7 @@ fun main() {
             }
         }*/
         //var i = index
+        index = 0
         while (index < listOfBlocks.size) {
             listOfBlocks[index].start()
             if (!listOfBlocks[index].status) {
@@ -109,15 +111,15 @@ fun main() {
 
     }
     start()
-    println("norm$consoleOutput")
-    println("map ${MapArray["mas"]?.get(0)}")
-    println("map ${MapArray["mas"]?.get(1)}")
-    println("map ${MapArray["mas"]?.get(2)}")
-    println("map ${MapArray["mas"]?.get(3)}")
-    println("map ${MapArray["mas"]?.get(4)}")
-    println("map ${MapArray["mas"]?.get(5)}")
-    println("map ${MapArray["mas"]?.get(6)}")
-    println("map ${MapArray["mas"]?.get(7)}")
+//    println("norm$consoleOutput")
+//    println("map ${MapArray["mas"]?.get(0)}")
+//    println("map ${MapArray["mas"]?.get(1)}")
+//    println("map ${MapArray["mas"]?.get(2)}")
+//    println("map ${MapArray["mas"]?.get(3)}")
+//    println("map ${MapArray["mas"]?.get(4)}")
+//    println("map ${MapArray["mas"]?.get(5)}")
+//    println("map ${MapArray["mas"]?.get(6)}")
+//    println("map ${MapArray["mas"]?.get(7)}")
 
 
 
