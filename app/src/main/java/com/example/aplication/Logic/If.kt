@@ -63,26 +63,7 @@ class If : MainBlock {
         else index=indFinish
     }
 
-    private fun assignmentVar(textBar:String): String {
-        var variable:String =""
-        if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
-            val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(textBar)
-            if (vars.containsKey(matches?.value))
-                variable = matches?.value.toString()
-            else {
-                ErrorString = "variable is not exist : ${matches?.value}"
-                status = false
-            }
 
-        }
-        else{
-            status = false
-            val matches = Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])""").find(textBar)
-            ErrorString = "the value of the variable was entered incorrectly : ${matches?.value}"
-        }
-
-        return variable
-    }
     private fun calculate(textBar:String):String{
         println(textBar)
         if (textBar.contains(Regex("""((\d\s*\/\s*0))"""))) {

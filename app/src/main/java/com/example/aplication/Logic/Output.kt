@@ -35,7 +35,7 @@ class Output : MainBlock {
 //        }
 //    }
     fun output(){
-    consoleOutput+=calculate(recognize(textBar)).toString()
+    consoleOutput.add(calculate(recognize(textBar)).toString())
     }
     private fun recognize(textBar:String):String{
         var text = textBar
