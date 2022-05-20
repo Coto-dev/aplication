@@ -6,7 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="220dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="3dp"
         android:background="@drawable/block_button">
 
@@ -15,10 +15,6 @@
             android:textSize="@dimen/text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="20dp"
             android:gravity="left"
             android:src="@drawable/ic_baseline_drag_handle_24"
             android:textColor="@color/text_color"

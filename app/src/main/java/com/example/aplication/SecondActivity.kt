@@ -30,6 +30,7 @@ class SecondActivity : AppCompatActivity() {
     data class Block(
         var view: View,
         var type: String,
+        var canHaveElse: Boolean,
         var name: String,
         var startInd: Int,
         var finishInd: Int
@@ -146,8 +147,8 @@ class SecondActivity : AppCompatActivity() {
         binding.forOperatorIfElse.setOnClickListener {
             var variable = countBlock("IF")
             var variable2 = countBlock("ELSE")
-            if (variable > variable2){
-                createBlock(ForCustomView(this), "ELSE", true)
+            if (variable > variable2) {
+                createBlock(Else_block(this), "ELSE", true)
             }
         }
         binding.forInitialization.setOnClickListener {
@@ -175,25 +176,46 @@ class SecondActivity : AppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun createBlock(view: View, name: String, isHaveChild: Boolean) {
-        //view.setName(name)
-        Log.i("hui", "$countOfCycli")
-        var params = ConstraintLayout.LayoutParams(
-            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-            ConstraintLayout.LayoutParams.WRAP_CONTENT
-        )
-        params.setMargins(10, 0, 30 * countOfCycli, 0)
-        binding.container.addView(view, params)
+        var flag = false
         val start = listOfBlocks.size
-        listOfBlocks.add(Block(view, "", name, start, start))
-        view.setOnLongClickListener(choiceTouchListener())
-        view.setOnDragListener(choiceDragListener())
-        if (isHaveChild) {
-            val blockEnd = Block_end(this)
-            binding.container.addView(blockEnd, params)
-            listOfBlocks[start].finishInd++
-            listOfBlocks.add(Block(blockEnd, "", "end", start, start + 1))
-            blockEnd.setOnLongClickListener(choiceTouchListener())
-            blockEnd.setOnDragListener(choiceDragListener())
+        if (name == "IF") {
+            flag = true
+        }
+        if (!(view is Else_block)) {
+            binding.container.addView(view)
+            listOfBlocks.add(Block(view, "", false, name, start, start))
+            view.setOnLongClickListener(choiceTouchListener())
+            view.setOnDragListener(choiceDragListener())
+            if (isHaveChild) {
+                val blockEnd = Block_end(this)
+                listOfBlocks[start].finishInd++
+                listOfBlocks.add(Block(blockEnd, "", flag, "end", start, start + 1))
+                blockEnd.setOnLongClickListener(choiceTouchListener())
+                blockEnd.setOnDragListener(choiceDragListener())
+                binding.container.addView(blockEnd)
+            }
+        } else {
+            for (index in 1..listOfBlocks.size) {
+                if (listOfBlocks[index].canHaveElse) {
+                    binding.container.addView(view, index + 1)
+                    listOfBlocks.add(index + 1, Block(view, "", false, name, index + 1, index + 1))
+                    view.setOnLongClickListener(choiceTouchListener())
+                    view.setOnDragListener(choiceDragListener())
+
+
+
+                    val blockEnd = Block_end(this)
+                    listOfBlocks.add(
+                        index + 2,
+                        Block(blockEnd, "", false, "end", index + 1, index + 2)
+                    )
+                    blockEnd.setOnLongClickListener(choiceTouchListener())
+                    blockEnd.setOnDragListener(choiceDragListener())
+                    binding.container.addView(blockEnd, index + 2)
+                    calculateNewIndexes()
+                    break
+                }
+            }
         }
     }
 
@@ -230,7 +252,6 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
             DragEvent.ACTION_DROP -> {
-                Log.i("hello", "take cumbag")
                 if (view != binding.container) {
                     if (view != draggingView) {
                         var first = listOfBlocks[0]
@@ -246,6 +267,13 @@ class SecondActivity : AppCompatActivity() {
                                 second = i
                             }
                         }
+                        if (listOfBlocks[second.startInd].view is Else_block && !canAttachElse(
+                                ind - 1,
+                                Point(event.x, event.y)
+                            )
+                        ) {
+                            return@OnDragListener true
+                        }
                         if (first.finishInd != second.finishInd) {
                             attach(ind - 1, second, Point(event.x, event.y))
                             calculateNewIndexes()
@@ -260,8 +288,6 @@ class SecondActivity : AppCompatActivity() {
                         i.view.visibility = VISIBLE
                     }
                 }
-
-
             }
         }
         true
@@ -345,14 +371,6 @@ class SecondActivity : AppCompatActivity() {
         listOfBlocks = buffList
     }
 
-
-//    private fun calculateIndexes( var ind: Int) {
-//      for (block in listOfBlocks){
-//
-//      }
-//    }
-
-
     private fun createMargin() {
         for (block in listOfBlocks) {
             block.view.x = 0f
@@ -377,4 +395,14 @@ class SecondActivity : AppCompatActivity() {
         }
         return count
     }
+
+    private fun canAttachElse(toBlockInd: Int, dropPoint: Point): Boolean {
+        if (toBlockInd == -1) {
+            return false
+        }
+        return if (dropPoint.y > listOfBlocks[toBlockInd].view.height / 2)
+            (listOfBlocks[toBlockInd].canHaveElse)
+        else (listOfBlocks[toBlockInd - 1].canHaveElse)
+    }
+
 }
