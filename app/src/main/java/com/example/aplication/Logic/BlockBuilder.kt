@@ -44,6 +44,11 @@ fun pushDataForOutput(editText:String,index:Int){
     a.textBar = editText
     listOfBlocks[index] = a
 }
+fun pushDataForInput(editText:String,index:Int){
+    val a = Input()
+    a.textBar = editText
+    listOfBlocks[index] = a
+}
 fun pushDataForMassive(editText:String,index:Int){
     val a = Massive()
     a.textBar = editText

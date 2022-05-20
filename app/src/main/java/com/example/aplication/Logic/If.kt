@@ -34,6 +34,7 @@ class If : MainBlock {
     var variable: String = ""
     override fun start() = assign()
     fun assign() {
+        print("ага")
         /*textBar = (recognize(textBar));
         if (condition(textBar) == 1){
             for (name in listOfBlocks) {
@@ -65,7 +66,7 @@ class If : MainBlock {
 
 
     private fun calculate(textBar:String):String{
-        println(textBar)
+        //println(textBar)
         if (textBar.contains(Regex("""((\d\s*\/\s*0))"""))) {
             val matches = Regex("""((\d\s*\/\s*0))""").find(textBar)
             ErrorString = "incorrect expression : ${matches?.value}"
@@ -285,7 +286,7 @@ class If : MainBlock {
 
             if (text.contains(Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])"""))) {
                 var matchesForMassive = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(text)
-                println("matchesForMassive ${matchesForMassive?.value}")
+                //println("matchesForMassive ${matchesForMassive?.value}")
                 while (matchesForMassive != null) {
                     // println(map["a"]?.get(0))
                     val ind = Regex("""(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(matchesForMassive.value)
@@ -345,14 +346,14 @@ class If : MainBlock {
             //println(text);
             //ну, чтож теперь заменяем равенства
             matches =
-                Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""")
+                Regex("""\(\-{0,1}[0-9]+[\=><\!]+[0-9]+\)|\-{0,1}[0-9]+[\=><\!]+\-{0,1}[0-9]+""")
                     .find(text)
             //println(matches?.value.toString())
             while (matches != null) {
                 //print(equality(matches.value));
                 text = text.replace(matches.value, equality(matches.value))
                 matches =
-                    Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""").find(
+                    Regex("""\(\-{0,1}[0-9]+[\=><\!]+\-{0,1}[0-9]+\)|\-{0,1}[0-9]+[\=><\!]+\-{0,1}[0-9]+""").find(
                         text
                     )
 
@@ -375,11 +376,12 @@ class If : MainBlock {
     }
 
     private fun equality(textBar: String): String {
-        val x1:  MatchResult? = """([^>=<=!<\?\)\(])+""".toRegex().find(textBar)
+        val x1:  MatchResult? = """([^>=<=!<\)\(])+""".toRegex().find(textBar)
         val x2:  MatchResult? = x1?.next();
-        //println(x1?.value); println(x2?.value);
+        //println(x1?.value); println(x2?.value);//>=1
         if(x1==null || x2==null) {
             ErrorString = "incorrect expression : ${textBar}"
+            status = false
             return "";
         }
         if(textBar.contains(Regex(""">=""")))
@@ -408,6 +410,9 @@ class If : MainBlock {
         }
         if(textBar.contains(Regex(""">""")))
         {
+            print("это оно ")
+            print(x1)
+            println(x2)
             if(x1.value.toInt()>x2.value.toInt())
                 return "1";
             else return "0"
@@ -438,8 +443,11 @@ class If : MainBlock {
         if (!status)
             return 0
         val text = textBar.replace("""\s""".toRegex(), "")
-        if (!text.contains(Regex("""([\|\&])""")))
+        print(text.toInt())
+        if (!text.contains(Regex("""([\|\&])"""))) {
+
             return text.toInt()
+        }
         val stack: Stack<Char> = Stack<Char>()
         var RPN:String = ""
         for (i in text) {
