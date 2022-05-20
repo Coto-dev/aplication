@@ -37,14 +37,14 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val buttonGo = binding.go
-        buttonGo.setVisibility(View.INVISIBLE);
-        var buttonStop = binding.floating2
-        buttonStop.setVisibility(View.INVISIBLE);
+        buttonGo.visibility = INVISIBLE
+        val buttonStop = binding.floating2
+        buttonStop.visibility = INVISIBLE
 
         //консоль и bottom sheet
         val frame = findViewById<FrameLayout>(R.id.sheet)
         val consol = findViewById<FrameLayout>(R.id.sheet2)
-        consol.setVisibility(View.INVISIBLE)
+        consol.visibility = INVISIBLE
         val bottomSheetBehavior: BottomSheetBehavior<*> =
             BottomSheetBehavior.from<View>(frame)
 
@@ -59,49 +59,47 @@ class SecondActivity : AppCompatActivity() {
 
         bottomSheetBehavior.peekHeight = 135
         bottomSheetBehavior.isHideable = false
-        var buttonPlay = binding.floating
+        val buttonPlay = binding.floating
 
         buttonPlay.setOnClickListener {//кomпиляция
-            frame.setVisibility(View.INVISIBLE)
-            consol.setVisibility(View.VISIBLE)
+            frame.visibility = INVISIBLE
+            consol.visibility = VISIBLE
             bottomSheetBehavior.peekHeight = 0
             bottomSheetConsol.peekHeight = 135
-            buttonPlay.setVisibility(View.INVISIBLE)
-            buttonStop.setVisibility(View.VISIBLE);
+            buttonPlay.visibility = INVISIBLE
+            buttonStop.visibility = VISIBLE
             var i = 0
             for (block in listOfBlocks) {
                 println(block.name)
                 println(block.startInd)
 
                 if (block.name == "ForCustomView") {
-                    var string = (block.view as ForCustomView).GetText1()
-                    var string2 = (block.view as ForCustomView).GetText2()
+                    val string = (block.view as ForCustomView).GetText1()
+                    val string2 = (block.view as ForCustomView).GetText2()
                     pushDataForArithmetic(string2, string, i)
                 }
                 if (block.name == "For_inizalitation") {
-                    var string = (block.view as For_inizalitation).GetText2()
+                    val string = (block.view as For_inizalitation).GetText2()
                     pushDataForInitialization(string, i)
                 }
                 if (block.name == "IF") {
                     println(block.finishInd)
-                    var string = (block.view as If_block).GetText2()
+                    val string = (block.view as If_block).GetText2()
                     pushDataForIf(string, i, block.finishInd)
                 }
                 if (block.name == "WHILE") {
                     println(block.finishInd)
-                    var string = (block.view as If_block).GetText2()
+                    val string = (block.view as If_block).GetText2()
                     pushDataForWhile(string, i, block.finishInd)
                 }
                 if (block.name == "PRINT") {
-                    var string = (block.view as Print_block).GetText2()
+                    val string = (block.view as Print_block).GetText2()
                     pushDataForOutput(string, i)
-                    for (i in consoleOutput) {
-                        println("jdhbfvjkd $i")
-                        var text = TextView(this)
+                    for (count in consoleOutput) {
+                        val text = TextView(this)
                         binding.containerForTextView.addView(text)
                         text.background = Drawable.createFromPath("drawable/block_button.xml")
-                        var string2 = i
-                        text.text = string2
+                        text.text = count
                     }
 
                 }
@@ -115,11 +113,11 @@ class SecondActivity : AppCompatActivity() {
         }
 
         buttonStop.setOnClickListener {
-            frame.setVisibility(View.VISIBLE)
-            consol.setVisibility(View.INVISIBLE)
+            frame.visibility = VISIBLE
+            consol.visibility = INVISIBLE
             bottomSheetConsol.peekHeight = 135
-            buttonPlay.setVisibility(View.VISIBLE)
-            buttonStop.setVisibility(View.INVISIBLE)
+            buttonPlay.visibility = VISIBLE
+            buttonStop.visibility = INVISIBLE
         }
 
         //обработка нажатий на кнопки создания блоков
@@ -138,8 +136,8 @@ class SecondActivity : AppCompatActivity() {
             createNull()
         }
         binding.forOperatorIfElse.setOnClickListener {
-            var variable = countBlockByName("IF")
-            var variable2 = countBlockByName("ELSE")
+            val variable = countBlockByName("IF")
+            val variable2 = countBlockByName("ELSE")
             if (variable > variable2) {
                 createBlock(Else_block(this), "ELSE", true)
             }
@@ -174,8 +172,8 @@ class SecondActivity : AppCompatActivity() {
             flag = true
         }
         var toInd = listOfBlocks.size
-        if(listOfBlocks.size < 2 && view is Else_block) return
-        if(listOfBlocks.size >= 2 && view is Else_block) {
+        if (listOfBlocks.size < 2 && view is Else_block) return
+        if (listOfBlocks.size >= 2 && view is Else_block) {
             toInd = findIndToNewElse()
         }
         binding.container.addView(view, toInd)
@@ -183,15 +181,15 @@ class SecondActivity : AppCompatActivity() {
         view.setOnLongClickListener(choiceTouchListener())
         view.setOnDragListener(choiceDragListener())
         if (isHaveChild) {
-            createEnd(toInd+1, flag)
+            createEnd(toInd + 1, flag)
         }
         calculateNewIndexes()
     }
 
     private fun findIndToNewElse(): Int {
-        for(i in 2 .. listOfBlocks.size) {
-            if(listOfBlocks[i-1].canHaveElse && i == listOfBlocks.size) return i
-            if(listOfBlocks[i-1].canHaveElse && listOfBlocks[i].view !is Else_block) {
+        for (i in 2..listOfBlocks.size) {
+            if (listOfBlocks[i - 1].canHaveElse && i == listOfBlocks.size) return i
+            if (listOfBlocks[i - 1].canHaveElse && listOfBlocks[i].view !is Else_block) {
                 return i
             }
         }
@@ -200,7 +198,7 @@ class SecondActivity : AppCompatActivity() {
 
     private fun createEnd(toInd: Int, flag: Boolean) {
         val blockEnd = Block_end(this)
-        listOfBlocks[toInd-1].finishInd = toInd
+        listOfBlocks[toInd - 1].finishInd = toInd
         listOfBlocks.add(toInd, Block(blockEnd, "", flag, "end", toInd - 1, toInd))
         blockEnd.setOnLongClickListener(choiceTouchListener())
         blockEnd.setOnDragListener(choiceDragListener())
@@ -212,7 +210,7 @@ class SecondActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     fun choiceTouchListener() = OnLongClickListener { view ->
         val data = ClipData.newPlainText("", "")
-        val shadowBuilder = View.DragShadowBuilder(view)
+        val shadowBuilder = DragShadowBuilder(view)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             @Suppress("DEPRECATION")
             view.startDrag(data, shadowBuilder, view, 0)
@@ -224,7 +222,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
 
-    private fun choiceDragListener() = View.OnDragListener { view, event ->
+    private fun choiceDragListener() = OnDragListener { view, event ->
         when (event.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
                 var block = listOfBlocks[0]
@@ -235,10 +233,10 @@ class SecondActivity : AppCompatActivity() {
                     }
                 }
                 var finishInd = block.finishInd
-                val startInd  = block.startInd
-                if(listOfBlocks[block.startInd].view is If_block) {
-                    if(listOfBlocks.size - 1 > block.finishInd + 1) {
-                        if(listOfBlocks[block.finishInd + 1].view is Else_block) {
+                val startInd = block.startInd
+                if (listOfBlocks[block.startInd].view is If_block) {
+                    if (listOfBlocks.size - 1 > block.finishInd + 1) {
+                        if (listOfBlocks[block.finishInd + 1].view is Else_block) {
                             finishInd = listOfBlocks[block.finishInd + 1].finishInd
                         }
                     }
@@ -305,10 +303,10 @@ class SecondActivity : AppCompatActivity() {
         val toBlock = listOfBlocks[ind]
         val size = listOfBlocks.size - 1
         var finishInd = fromBlock.finishInd
-        val startInd  = fromBlock.startInd
-        if(listOfBlocks[fromBlock.startInd].view is If_block) {
-            if(listOfBlocks.size - 1 > fromBlock.finishInd + 1) {
-                if(listOfBlocks[fromBlock.finishInd + 1].view is Else_block) {
+        val startInd = fromBlock.startInd
+        if (listOfBlocks[fromBlock.startInd].view is If_block) {
+            if (listOfBlocks.size - 1 > fromBlock.finishInd + 1) {
+                if (listOfBlocks[fromBlock.finishInd + 1].view is Else_block) {
                     finishInd = listOfBlocks[fromBlock.finishInd + 1].finishInd
                 }
             }
@@ -381,12 +379,12 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun createMargin() {
-        var listOfMargin = mutableListOf<Int>()
-        for(i in listOfBlocks) {
+        val listOfMargin = mutableListOf<Int>()
+        for (i in listOfBlocks) {
             listOfMargin.add(0)
         }
-        for(i in listOfBlocks) {
-            for(j in i.startInd + 1 .. i.finishInd - 1) {
+        for (i in listOfBlocks) {
+            for (j in i.startInd + 1 until i.finishInd) {
                 listOfMargin[j]++
             }
         }
@@ -410,5 +408,4 @@ class SecondActivity : AppCompatActivity() {
             (listOfBlocks[toBlockInd].canHaveElse)
         else (listOfBlocks[toBlockInd - 1].canHaveElse)
     }
-
 }
