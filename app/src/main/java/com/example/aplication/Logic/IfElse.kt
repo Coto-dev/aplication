@@ -54,7 +54,7 @@ class IfElse : MainBlock {
                 println(MainBlock.index)
                 MainBlock.index++
             }
-            MainBlock.index =indFinish+1
+            MainBlock.index =indFinish
         }
         else {
             MainBlock.index =indElse+1;

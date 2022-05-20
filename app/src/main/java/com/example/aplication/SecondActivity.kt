@@ -90,13 +90,8 @@ class SecondActivity : AppCompatActivity() {
                     pushDataForInitialization(string, i)
                 }
                 if (block.name == "IF") {
-                    if (listOfBlocks[block.finishInd + 1].name == "ELSE"){
-
-                    }
-                    else{
                         val string = (block.view as If_block).GetText2()
                         pushDataForIf(string, i, block.finishInd)
-                    }
                 }
                 if (block.name == "WHILE") {
                     println(block.finishInd)
@@ -114,6 +109,11 @@ class SecondActivity : AppCompatActivity() {
                 if (block.name == "ARRAY") {
                     val string = (block.view as Array_block).GetText2()
                     pushDataForMassive(string, i)
+                }
+                if (block.name == "ELSE") {
+                    val indexIf = listOfBlocks[i-1].startInd
+                    val string = (listOfBlocks[indexIf].view as If_block).GetText2()
+                    pushDataForIfElse(string, indexIf, i,block.finishInd)
                 }
                 i++
             }
@@ -163,6 +163,7 @@ class SecondActivity : AppCompatActivity() {
                 createBlock(Else_block(this), "ELSE", true)
             }
             createIfElse()
+            createNull()
         }
         binding.forInitialization.setOnClickListener {
             createBlock(For_inizalitation(this), "For_inizalitation", false)
