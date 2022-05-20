@@ -343,14 +343,14 @@ class IfElse : MainBlock {
             //println(text);
             //ну, чтож теперь заменяем равенства
             matches =
-                Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""")
+                Regex("""\(\-{0,1}[0-9]+[\=><\!]+\-{0,1}[0-9]+\)|\-{0,1}[0-9]+[\=><\!]+\-{0,1}[0-9]+""")
                     .find(text)
             //println(matches?.value.toString())
             while (matches != null) {
                 //print(equality(matches.value));
                 text = text.replace(matches.value, equality(matches.value))
                 matches =
-                    Regex("""\([0-9]+[\=><\!]+[0-9]+\)|[0-9]+[\=><\!]+[0-9]+""").find(
+                    Regex("""\(\-{0,1}[0-9]+[\=><\!]+\-{0,1}[0-9]+\)|\-{0,1}[0-9]+[\=><\!]+\-{0,1}[0-9]+""").find(
                         text
                     )
 
