@@ -15,7 +15,7 @@
     <string name="expression">expression</string>
     <string name="Themes">Сменить тему</string>
     <string name="output">print</string>
-    <string name="input">Ввод</string>
+    <string name="input">Ввод</string> 
     <string name="array">Массив</string>
     <string name="Hello2">Go!</string>
 
