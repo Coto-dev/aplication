@@ -244,5 +244,16 @@
             android:src="@drawable/ic_baseline_stop_24"
             app:layout_anchor="@+id/sheet2"
             app:layout_anchorGravity="top|end" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/trash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_marginEnd="340dp"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="@color/button_color"
+            android:src="@drawable/ic_baseline_restore_from_trash_24"
+            app:layout_anchor="@+id/sheet"
+            app:layout_anchorGravity="top|end" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

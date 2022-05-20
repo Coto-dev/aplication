@@ -317,6 +317,15 @@ class SecondActivity : AppCompatActivity() {
                                 drag = i
                             }
                         }
+
+                        Log.i("baby3","$binding.trash.scaleX")
+//                        if (event.x == binding.trash.getPos) {
+
+                            if (event.y == binding.trash.scaleX) {
+                                Remove(ind - 1, drag)
+                            }
+                        }
+
                         if (listOfBlocks[drag.startInd].view is Else_block && !canAttachElse(
                                 ind - 1,
                                 Point(event.x, event.y)
@@ -477,7 +486,9 @@ class SecondActivity : AppCompatActivity() {
         else (listOfBlocks[toBlockInd - 1].canHaveElse)
     }
 
-//    private fun Remove(fromBlock: Block, dropPoint: Point): Boolean {
-//
-//    }
+    private fun Remove(index: Int, fromBlock: Block) {
+        binding.container.removeViewAt(index)
+        listOfBlocks.removeAt(index)
+        calculateNewIndexes()
+    }
 }
