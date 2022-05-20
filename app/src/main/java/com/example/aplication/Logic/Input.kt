@@ -16,13 +16,9 @@ class Input : MainBlock{
 
     fun input() {
         print(textBar)
+        //исключение пользователь ввел переменные
         if (textBar?.contains(Regex("""[a-zA-Z]+[0-9]*(\ *\,*[a-zA-Z]+[0-9]*)*"""))!!) {
-
-            //val matches = Regex("""[a-zA-Z]+[0-9]*""").findAll(textBar)
-            //stack = "1 $ 5 7 8"
-//            while (stack.contains(Regex("""[^0-9\ ]+"""))) {
-//
-//            }
+            //исключение ввели не цифры и пробелы
             if (stack.contains(Regex("""[^0-9\ ]+"""))) {
                 val matches =
                     Regex("""[^0-9\ ]+""").find(
@@ -45,13 +41,13 @@ class Input : MainBlock{
             if (textBar.contains(Regex("""[a-zA-Z]+[0-9]*""")))
                 index--
         } else {
-            //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
+            //исключение пользователь не ввел переменные
             val text = textBar
             val matches =
                 Regex("""([^\w|,|\s]|((^|,)\s*([0-9]+[a-zA-Z]+|\d+))|(\w+\s+\w+)|,{2,})""").find(
                     text
                 )
-            ErrorString = "the value of the variable was entered incorrectly ${matches?.value}"
+            ErrorString = "empty variables"
             status = false
         }
     }
