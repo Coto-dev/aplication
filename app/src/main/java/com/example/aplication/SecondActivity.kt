@@ -73,8 +73,8 @@ class SecondActivity : AppCompatActivity() {
             buttonPlay.visibility = INVISIBLE
             buttonStop.visibility = VISIBLE
             var i = 0
-            if ((listOfBlocks[0].view as For_inizalitation).GetText2()==null){
-                
+            if ((listOfBlocks[0].view as For_inizalitation).GetText2() == null) {
+
             }
             for (block in listOfBlocks) {
                 println(block.name)
@@ -90,9 +90,10 @@ class SecondActivity : AppCompatActivity() {
                     pushDataForInitialization(string, i)
                 }
                 if (block.name == "IF") {
+
                         val string = (block.view as If_block).GetText2()
                         pushDataForIf(string, i, block.finishInd)
-                }
+                        }
                 if (block.name == "WHILE") {
                     println(block.finishInd)
                     val string = (block.view as While_block).GetText2()
@@ -300,15 +301,20 @@ class SecondActivity : AppCompatActivity() {
                         ) {
                             return@OnDragListener true
                         }
-
-                        if (ind != listOfBlocks.size && ind > 0 && (listOfBlocks[ind].name == "ELSE" || listOfBlocks[ind - 1].name == "ELSE")) {
+                        if (ind != listOfBlocks.size && (listOfBlocks[ind].name == "ELSE" )) {
+                            Log.i("baby", "yoda")
                             return@OnDragListener true
                         }
-                        if (dropTo.finishInd != drag.finishInd) {
-                            attach(ind - 1, drag, Point(event.x, event.y))
-                            calculateNewIndexes()
-                            createMargin()
+                        if (event.y < listOfBlocks[ind - 1].view.height / 2) {
+                            if (listOfBlocks[ind - 1].name == "ELSE"){
+                                return@OnDragListener true
+                            }
                         }
+                            if (dropTo.finishInd != drag.finishInd) {
+                                attach(ind - 1, drag, Point(event.x, event.y))
+                                calculateNewIndexes()
+                                createMargin()
+                            }
                     }
                 }
             }
