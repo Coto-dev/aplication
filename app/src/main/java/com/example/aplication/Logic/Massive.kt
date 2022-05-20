@@ -9,8 +9,8 @@ class Massive : MainBlock {
     var textBar: String=""
     override fun start() = indetify()
     fun indetify(){
-        if (!textBar?.contains(Regex("""([^\w,\s={}\[\]]|((^)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})"""))) {
-            val matches = Regex("""(\w+\d*\[\s*\d+\s*\]\s*(=\s*\{\s*((\d+\s*(,|\})\s*)+\s*)\s*)?)""").findAll(textBar)
+        if (!textBar?.contains(Regex("""([^\w,\s={}\[\]\-]|((^)\s*([0-9]+[a-zA-Z]|\d+))|(\w+\s+\w+)|,{2,})"""))) {
+            val matches = Regex("""(\w+\d*\[\s*\-?\d+\s*\]\s*(=\s*\{\s*((\-?\d+\s*(,|\})\s*)+\s*)\s*)?)""").findAll(textBar)
 
             for(name in matches){
 //                name.value =  name.value.replace("""\s+""".toRegex(), " ")
@@ -22,14 +22,22 @@ class Massive : MainBlock {
 //                println(matches?.value)
 //                println(size?.value)
 //                println(nameMas?.value)
-                val massValue = Regex("""(\s*\{\s*((\d+\s*(,|\})\s*)+\s*)\s*)""").find(name?.value.toString())
+                val massValue = Regex("""(\s*\{\s*((\-?\d+\s*(,|\})\s*)+\s*)\s*)""").find(name?.value.toString())
                 if (massValue?.value?.isEmpty() == false) {
-                    val value = Regex("""\d+""").findAll(massValue?.value.toString())
+                    val value = Regex("""\-?\d+""").findAll(massValue?.value.toString())
                     val mas = Array(size?.value!!.toInt(),{0})
                     var ind = 0
                     for (name in value) {
+
+                        if (name.value.contains(Regex("""\-"""))) {
+                            mas[ind] = name.value.toInt()
+
+                        }
+                            else
                         mas[ind]=name.value.toInt()
+                       // println("name value ${ mas[ind]}")
                         ind++
+
                     }
                     map.put(nameMas!!.value.toString() ,  mas)
                 }
@@ -46,7 +54,8 @@ class Massive : MainBlock {
             status = false
         }
         //(map["a"]?.set(1,3))
-//        println(map["a"]?.get(0))
+        println("-99999999999999999999999")
+        println(map["mas"]?.get(0))
 //        println(map["a"]?.get(1))
     }
 }

@@ -18,18 +18,13 @@ class Arithmetic : MainBlock {
     override fun start() = assign()
     fun assign(){
         if (variable.contains(Regex("""(\[([\w\+\s*\-\/\*\(\)\%]+)\])"""))){
-            //(map["a"]?.set(1,3))
-           // println(map["a"]?.get(0))
-               //println(recognize(textBar))
-//            println(assignmentNameMas(variable))
-//    println("assignmentIndMas(variable)")
-//            println(assignmentIndMas(variable))
+
             map[assignmentNameMas(variable)]?.set(assignmentIndMas(variable),calculate(recognize(textBar)))
-          // println(map[recognize(variable)]?.get(assignmentIndMas(variable)))
+
 
         }
         else {
-            println("var$variable")
+           // println("var$variable")
             vars.replace(assignmentVar(variable), calculate(recognize(textBar)))
         }
     }
@@ -116,7 +111,7 @@ class Arithmetic : MainBlock {
             status = false
             val matches = Regex("""([^\d|\s|^\+\-\/\*\(\)\%|^a-zA-Z])""").find(textBar)
             ErrorString = "the value of the variable was entered incorrectly : ${matches?.value}"
-            println("textbar variavle $textBar")
+          //  println("textbar variavle $textBar")
         }
 
         return variable
@@ -124,7 +119,7 @@ class Arithmetic : MainBlock {
     private fun recognize(textBar:String):String{
         var text = textBar
         var indText = ""
-        println("text1 $text")
+       // println("text1 $text")
         if (!textBar.contains(Regex("""([^\d\s^\+\-\/\*\(\)\%^a-zA-Z\[\]])"""))) {
 //            val matches = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(textBar)
 //
@@ -137,23 +132,23 @@ class Arithmetic : MainBlock {
 //            var NameText =  nameMas?.value?.replace("""\[""".toRegex(), "")
             if (text.contains(Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])"""))) {
                 var matchesForMassive = Regex("""\w+\d*(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(text)
-                println("matchesForMassive ${matchesForMassive?.value}")
+              //  println("matchesForMassive ${matchesForMassive?.value}")
                 while (matchesForMassive != null) {
                     // println(map["a"]?.get(0))
                     val ind = Regex("""(\[\s*((\d+|[a-zA-Z]+\d*)\s*([\+\-\/\*\(\)\%]\s*(\d+|[a-zA-Z]+\d*)\s*)*)+\])""").find(matchesForMassive.value)
                     indText = ind?.value?.replace("""\[""".toRegex(), "").toString()
                     indText = indText?.replace("""\]""".toRegex(), "")
-                    println("indText ${ind?.value}")
+                   // println("indText ${ind?.value}")
                     var indexInt = calculate(recognize(indText))
                     val nameMas = Regex("""\w+\d*\[""").find(matchesForMassive?.value.toString())
                     var NameText = nameMas?.value?.replace("""\[""".toRegex(), "")
 
                     if (map.containsKey(NameText)) {
                         //
-                        println("matchesForMassive.range ${matchesForMassive.range}")
-                        println("map[nameMas?.value.toString()]?.get(ind?.value!!.toInt()).toString() ${map[NameText]?.get(indexInt).toString()}")
+                       // println("matchesForMassive.range ${matchesForMassive.range}")
+                       // println("map[nameMas?.value.toString()]?.get(ind?.value!!.toInt()).toString() ${map[NameText]?.get(indexInt).toString()}")
                         text = text.replaceRange(matchesForMassive.range, map[NameText]?.get(indexInt).toString())
-                        println("text $text")
+                       // println("text $text")
                     } else {
                         // исключение : тут пользователь ввел переменную которую не задавал(к примеру 1+2+a+c)(словарь: a=0,b=0)
                         //return matches.value // та самая переменная c
