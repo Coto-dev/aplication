@@ -318,13 +318,13 @@ class SecondActivity : AppCompatActivity() {
                             }
                         }
 
-                        Log.i("baby3","$binding.trash.scaleX")
-//                        if (event.x == binding.trash.getPos) {
-
-                            if (event.y == binding.trash.scaleX) {
-                                Remove(ind - 1, drag)
-                            }
-                        }
+//                        Log.i("baby3","$binding.trash.scaleX")
+////                        if (event.x == binding.trash.getPos) {
+//
+//                            if (event.y == binding.trash.scaleX) {
+//                                Remove(ind - 1, drag)
+//                            }
+//                        }
 
                         if (listOfBlocks[drag.startInd].view is Else_block && !canAttachElse(
                                 ind - 1,
