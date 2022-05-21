@@ -7,17 +7,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginEnd="@dimen/marginEnd"
+        android:layout_marginStart="@dimen/marginStart"
+        android:layout_margin="@dimen/block_margin"
         android:background="@drawable/block_button">
 
         <ImageView
             android:id="@+id/equalView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:paddingStart="25dp"
-            android:paddingEnd="25dp"
+            android:paddingTop="@dimen/paddingHeight"
+            android:paddingBottom="@dimen/paddingHeight"
+            android:paddingStart="@dimen/padding"
+            android:paddingEnd="@dimen/padding"
             android:src="@drawable/ic_baseline_drag_handle_24"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,10 +28,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:paddingEnd="25dp"
-            android:paddingStart="25dp"
+            android:paddingTop="@dimen/paddingHeight"
+            android:paddingBottom="@dimen/paddingHeight"
+            android:paddingEnd="@dimen/padding"
+            android:paddingStart="@dimen/padding"
             android:id="@+id/text_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,8 +54,8 @@
             android:background="@color/transparent"
             android:hint="@string/expression"
             android:inputType="text"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingTop="@dimen/paddingHeight"
+            android:paddingBottom="@dimen/paddingHeight"
             android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
             app:layout_constraintBottom_toBottomOf="parent"

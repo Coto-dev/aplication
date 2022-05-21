@@ -7,14 +7,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
+        android:layout_marginEnd="@dimen/marginEnd"
+        android:layout_marginStart="@dimen/marginStart"
+        android:layout_margin="@dimen/block_margin"
         android:layout_height="wrap_content">
 
         <View
             android:id="@+id/forArifmetic"
-            android:layout_width="300dp"
-            android:minWidth="320dp"
-            android:layout_height="50dp"
-            android:layout_margin="3dp"
+            android:layout_width="@dimen/block_size"
+            android:layout_height="@dimen/block_height"
+            android:layout_margin="@dimen/block_margin"
             android:background="@drawable/block_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +36,7 @@
             android:inputType="text"
             android:background="@color/transparent"
             android:textColor="@color/text_color"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/marginStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

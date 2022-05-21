@@ -5,9 +5,9 @@
     tools:parentTag="android.widget.LinearLayout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="270dp"
-        android:layout_height="50dp"
-        android:layout_margin="3dp"
+        android:layout_width="272dp"
+        android:layout_height="@dimen/block_height"
+        android:layout_margin="@dimen/block_margin"
         android:background="@drawable/block_button">
 
         <TextView

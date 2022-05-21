@@ -7,15 +7,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginEnd="@dimen/marginEnd"
+        android:layout_marginStart="@dimen/marginStart"
+        android:layout_margin="@dimen/block_margin"
         android:background="@drawable/block_button">
 
-
         <EditText
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:paddingEnd="110dp"
-            android:paddingStart="110dp"
+            android:paddingTop="@dimen/paddingHeight"
+            android:paddingBottom="@dimen/paddingHeight"
+            android:paddingEnd="@dimen/paddingName"
+            android:paddingStart="@dimen/paddingName"
             android:id="@+id/for_array"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

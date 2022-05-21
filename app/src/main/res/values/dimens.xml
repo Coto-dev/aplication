@@ -2,4 +2,13 @@
 <resources>
     <dimen name="buttonMargin">40dp</dimen>
     <dimen name="text_size">20sp</dimen>
+    <dimen name="block_size">268dp</dimen>
+    <dimen name="block_height">50dp</dimen>
+    <dimen name="block_margin">3dp</dimen>
+    <dimen name="marginEnd">120dp</dimen>
+    <dimen name="marginStart">10dp</dimen>
+    <dimen name="padding">25dp</dimen>
+    <dimen name="paddingHeight">15dp</dimen>
+    <dimen name="paddingStart">22dp</dimen>
+    <dimen name="paddingName">110dp</dimen>
 </resources>
