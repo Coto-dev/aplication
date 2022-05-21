@@ -13,8 +13,8 @@
         <EditText
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:paddingEnd="70dp"
-            android:paddingStart="70dp"
+            android:paddingEnd="79dp"
+            android:paddingStart="78dp"
             android:id="@+id/for_array"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

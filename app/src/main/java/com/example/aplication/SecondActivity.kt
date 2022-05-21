@@ -11,9 +11,7 @@ import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.view.View.*
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aplication.Logic.*
@@ -41,8 +39,10 @@ class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySecondBinding.inflate(layoutInflater)
 
-//        binding.container.addView(View(this),LinearLayout.LayoutParams(10000,1))
-//        listOfBlocks[listOfBlocks.size]
+//        val mu = View(this)
+//        binding.container.addView(mu, LinearLayout.LayoutParams(10000, 1))
+//        mu.x = 1000f
+//        mu.y = 600f
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -70,18 +70,15 @@ class SecondActivity : AppCompatActivity() {
         val buttonPlay = binding.floating
 
         buttonPlay.setOnClickListener {
-            val text = TextView(this)
             consoleOutput.clear()
             frame.visibility = INVISIBLE
             consol.visibility = VISIBLE
-            bottomSheetBehavior.peekHeight = 0
+            binding.trash.visibility = INVISIBLE
             bottomSheetConsol.peekHeight = 135
             buttonPlay.visibility = INVISIBLE
             buttonStop.visibility = VISIBLE
             var i = 0
-//            if ((listOfBlocks[0].view as For_inizalitation).GetText2() == null) {
-//
-//            }
+
             for (block in listOfBlocks) {
                 println(block.name)
                 println(block.startInd)
@@ -139,22 +136,19 @@ class SecondActivity : AppCompatActivity() {
             }
             main()
             for (count in consoleOutput) {
-                binding.containerForTextView.removeAllViewsInLayout()
+                val text = TextView(this)
                 text.textSize = 20f
                 text.setTextColor(Color.parseColor("#e3e3e3"));
                 binding.containerForTextView.addView(text)
                 text.background = Drawable.createFromPath("drawable/block_button.xml")
                 text.text = count
-                binding.scrollForConsol.scrollTo(
-                    binding.scrollForConsol.width,
-                    binding.scrollForConsol.height
-                )
             }
         }
 
         buttonStop.setOnClickListener {
             consol.visibility = INVISIBLE
             frame.visibility = VISIBLE
+            binding.trash.visibility = VISIBLE
             bottomSheetBehavior.peekHeight = 135
             bottomSheetConsol.peekHeight = 135
             buttonPlay.visibility = VISIBLE
@@ -201,19 +195,6 @@ class SecondActivity : AppCompatActivity() {
             createBlock(Input_block(this), "INPUT", false)
             createIntput()
         }
-
-//        binding.forInput.setOnClickListener {
-//            frame.setVisibility(View.INVISIBLE)
-//            consol.setVisibility(View.VISIBLE)
-//            bottomSheetConsol.peekHeight = 135
-//            buttonPlay.setVisibility(View.INVISIBLE)
-//            buttonStop.setVisibility(View.VISIBLE);
-//            var edit = EditText(this)
-//            binding.containerForTextView.addView(edit)
-//            buttonGo.setVisibility(View.VISIBLE);
-//            edit.width = 150
-//            edit.setTextColor(Color.parseColor("#e3e3e3"))
-//        }
 
     }
 
