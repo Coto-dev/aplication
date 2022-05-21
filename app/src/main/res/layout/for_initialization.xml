@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_marginEnd="@dimen/marginEnd"
         android:layout_marginStart="@dimen/marginStart"
-        android:layout_margin="@dimen/block_margin"
+        android:layout_marginTop="@dimen/block_margin"
         android:layout_height="wrap_content">
 
         <View
