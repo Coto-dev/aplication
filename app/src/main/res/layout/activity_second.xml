@@ -14,7 +14,7 @@
                 android:scrollbars="vertical|horizontal"
                 app:transformation="centerInside"
                 app:transformationGravity="auto"
-                app:alignment="left"
+                app:alignment="top|left"
                 app:overScrollHorizontal="true"
                 app:overScrollVertical="true"
                 app:overPinchable="true"
@@ -28,7 +28,7 @@
                 app:threeFingersScrollEnabled="true"
                 app:minZoom="0.01"
                 app:minZoomType="zoom"
-                app:maxZoom="0.4"
+                app:maxZoom="0.5"
                 app:maxZoomType="zoom"
                 app:animationDuration="280"
                 app:hasClickableChildren="true"
@@ -59,7 +59,7 @@
         </HorizontalScrollView>
     </ScrollView>
 
-<!--            </com.otaliastudios.zoom.ZoomLayout>-->
+            </com.otaliastudios.zoom.ZoomLayout>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
