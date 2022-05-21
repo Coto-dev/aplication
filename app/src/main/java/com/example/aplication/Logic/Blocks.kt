@@ -22,7 +22,7 @@ fun main() {
 //    createNull()//12
 //    createArithmetic()//13
 //    createNull()//14
-//    pushDataForMassive("mas[8]={-9,-1,-1,-2,-3,-4,-5,-6}",0)
+//    pushDataForMassive("mas[8]={-9,-1,1,-2,3,-4,5,-6}",0)
 //    pushDataForInitialization("temp,j,i",1)
 //    pushDataForArithmetic("7","j",2)
 //    pushDataForWhile("j>=0",3,14)

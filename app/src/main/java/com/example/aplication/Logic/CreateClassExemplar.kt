@@ -2,40 +2,46 @@ package com.example.aplication.Logic
 
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 
-fun createInitialization(){
+fun createInitialization() {
     listOfBlocks.add(Initialization())
 }
-fun createArithmetic(){
+
+fun createArithmetic() {
 
     listOfBlocks.add(Arithmetic())
 }
-fun createOutput(){
+
+fun createOutput() {
 
     listOfBlocks.add(Output())
 }
-fun createIntput(){
+
+fun createIntput() {
 
     listOfBlocks.add(Input())
 }
-fun createMassive(){
+
+fun createMassive() {
 
     listOfBlocks.add(Massive())
 }
 
-fun createNull(){
+fun createNull() {
 
     listOfBlocks.add(Null())
 }
-fun createIfElse(){
+
+fun createIfElse() {
 
     listOfBlocks.add(IfElse())
 }
 
-fun createWhile(){
+fun createWhile() {
 
     listOfBlocks.add(While())
 }
-fun createIf(){
+
+fun createIf() {
 
     listOfBlocks.add(If())
 }
