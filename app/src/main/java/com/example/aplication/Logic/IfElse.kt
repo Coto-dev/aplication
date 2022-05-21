@@ -1,4 +1,5 @@
 package com.example.aplication.Logic
+
 import com.example.aplication.Logic.MainBlock.Companion.variables
 import android.text.TextUtils.replace
 import androidx.core.text.isDigitsOnly
@@ -7,7 +8,6 @@ import java.lang.Error
 import java.util.*
 import com.example.aplication.Logic.MainBlock.Companion.listOfBlocks
 import com.example.aplication.Logic.MainBlock.Companion.index
-
 
 
 //class IfElse : MainBlock() {
@@ -23,14 +23,13 @@ import com.example.aplication.Logic.MainBlock.Companion.index
 //package Logic
 
 
-
 class IfElse : MainBlock {
     override var ErrorString = ""
     override var status = true
     val vars = MainBlock.variables
     val name: String? = null
 
-    val variables = mutableMapOf<String,Int>()
+    val variables = mutableMapOf<String, Int>()
     var indStart = 0;
     var indElse = 0;
     var indFinish = 0;
@@ -40,43 +39,38 @@ class IfElse : MainBlock {
     override fun start() = assign()
     fun assign() {
 
-        if (condition(recognize(textBar)) == 1){
-            MainBlock.index =indStart+1;
-            while(MainBlock.index < indElse)
-            {
+        if (condition(recognize(textBar)) == 1) {
+            MainBlock.index = indStart + 1;
+            while (MainBlock.index < indElse) {
                 MainBlock.listOfBlocks[MainBlock.index].start()
-                if (!MainBlock.listOfBlocks[MainBlock.index].status)
-                {
+                if (!MainBlock.listOfBlocks[MainBlock.index].status) {
                     MainBlock.consoleOutput += MainBlock.listOfBlocks[MainBlock.index].ErrorString
-                    MainBlock.index =listOfBlocks.size+1
+                    MainBlock.index = listOfBlocks.size + 1
                     break
                 }
                 println(MainBlock.index)
                 MainBlock.index++
             }
-            MainBlock.index =indFinish
-        }
-        else {
-            MainBlock.index =indElse+1;
-            while(MainBlock.index < indFinish)
-            {
+            MainBlock.index = indFinish
+        } else {
+            MainBlock.index = indElse + 1;
+            while (MainBlock.index < indFinish) {
                 MainBlock.listOfBlocks[MainBlock.index].start()
-                if (!MainBlock.listOfBlocks[MainBlock.index].status)
-                {
+                if (!MainBlock.listOfBlocks[MainBlock.index].status) {
                     MainBlock.consoleOutput += MainBlock.listOfBlocks[MainBlock.index].ErrorString
-                    MainBlock.index =listOfBlocks.size+1
+                    MainBlock.index = listOfBlocks.size + 1
                     break
                 }
                 println(MainBlock.index)
                 MainBlock.index++
             }
-            MainBlock.index =indFinish
+            MainBlock.index = indFinish
         }
         //println(textBar)
     }
 
-    private fun assignmentVar(textBar:String): String {
-        var variable:String =""
+    private fun assignmentVar(textBar: String): String {
+        var variable: String = ""
         if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])"""))) {
             val matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(textBar)
             if (vars.containsKey(matches?.value))
@@ -86,8 +80,7 @@ class IfElse : MainBlock {
                 status = false
             }
 
-        }
-        else{
+        } else {
             status = false
             val matches = Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])""").find(textBar)
             ErrorString = "the value of the variable was entered incorrectly : ${matches?.value}"
@@ -95,7 +88,8 @@ class IfElse : MainBlock {
 
         return variable
     }
-    private fun calculate(textBar:String):String{
+
+    private fun calculate(textBar: String): String {
         println(textBar)
         if (textBar.contains(Regex("""((\s*\/\s*0))"""))) {
             val matches = Regex("""((\s*\/\s*0))""").find(textBar)
@@ -108,47 +102,43 @@ class IfElse : MainBlock {
         if (!text.contains(Regex("""([\+\-\/\*\%])""")))
             return text.toString()
         val stack: Stack<Char> = Stack<Char>()
-        var RPN:String = ""
+        var RPN: String = ""
         for (i in text) {
-            if(i.isDigit()){
-                RPN+=i
-            }
-            else{
+            if (i.isDigit()) {
+                RPN += i
+            } else {
 
-                RPN+=' '
+                RPN += ' '
 
-                if (i == '-' || i == '+'){
-                    if(!stack.isEmpty()) {
-                        if (stack.peek() == '-' || stack.peek() == '+' || stack.peek() == '/' || stack.peek() == '*'|| stack.peek() == '%') {
-                            if (!(RPN[RPN.length-1] == '-' || RPN[RPN.length-1] == '+' || RPN[RPN.length-1] == '/' || RPN[RPN.length-1] == '*' || RPN[RPN.length-1] ==  '%')) {
+                if (i == '-' || i == '+') {
+                    if (!stack.isEmpty()) {
+                        if (stack.peek() == '-' || stack.peek() == '+' || stack.peek() == '/' || stack.peek() == '*' || stack.peek() == '%') {
+                            if (!(RPN[RPN.length - 1] == '-' || RPN[RPN.length - 1] == '+' || RPN[RPN.length - 1] == '/' || RPN[RPN.length - 1] == '*' || RPN[RPN.length - 1] == '%')) {
                                 RPN += stack.pop()
                                 RPN += ' '
                             }
 
                         }
                         stack.push(i)
-                    }
-                    else stack.push(i)
+                    } else stack.push(i)
                 }
-                if (i == '*' || i == '/'|| i == '%') {
-                    if(!stack.isEmpty()) {
-                        if (stack.peek() == '/' || stack.peek() == '*'|| stack.peek() == '%') {
+                if (i == '*' || i == '/' || i == '%') {
+                    if (!stack.isEmpty()) {
+                        if (stack.peek() == '/' || stack.peek() == '*' || stack.peek() == '%') {
                             RPN += stack.pop()
-                            RPN+=' '
+                            RPN += ' '
                         }
                         stack.push(i)
-                    }
-                    else stack.push(i)
+                    } else stack.push(i)
                 }
 
-                if (i == '(' || i ==')') {
-                    if (i == '('){
+                if (i == '(' || i == ')') {
+                    if (i == '(') {
                         stack.push(i)
-                    }
-                    else {
-                        while(stack.peek() != '('){
-                            RPN+= stack.pop()
-                            RPN+=' '
+                    } else {
+                        while (stack.peek() != '(') {
+                            RPN += stack.pop()
+                            RPN += ' '
                         }
                         stack.pop()
                     }
@@ -157,24 +147,23 @@ class IfElse : MainBlock {
 
         }
 
-        while(!stack.isEmpty()){
-            RPN+=' '
-            RPN+= stack.pop()
+        while (!stack.isEmpty()) {
+            RPN += ' '
+            RPN += stack.pop()
         }
 
         RPN = RPN.replace("""\s+""".toRegex(), " ")
         RPN = RPN.replace("""^\s+""".toRegex(), "")
         val stackString: Stack<String> = Stack<String>()
         var value = ""
-        var temp:String = ""
-        for (i in RPN.indices){
-            if (RPN[i]==' ') {
-                if(value!="")
+        var temp: String = ""
+        for (i in RPN.indices) {
+            if (RPN[i] == ' ') {
+                if (value != "")
                     stackString.push(value)
                 value = ""
-            }
-            else if(RPN[i].isDigit()) value += RPN[i]
-            if (temp!= "" && stackString.size>1) {
+            } else if (RPN[i].isDigit()) value += RPN[i]
+            if (temp != "" && stackString.size > 1) {
                 if (temp == "+") {
                     var x = stackString.pop()
                     if (!stackString.isEmpty()) {
@@ -191,9 +180,8 @@ class IfElse : MainBlock {
                             val y = stackString.pop()
                             val count = y.toInt() - x.toInt()
                             stackString.push(count.toString())
-                        }
-                        else{
-                            val count =-x.toInt()
+                        } else {
+                            val count = -x.toInt()
                             stackString.push(count.toString())
                         }
 
@@ -218,8 +206,7 @@ class IfElse : MainBlock {
                                 }
 
 
-                            }
-                            else
+                            } else
                                 if (temp == "%") {
                                     var x = stackString.pop()
                                     if (!stackString.isEmpty()) {
@@ -232,7 +219,7 @@ class IfElse : MainBlock {
                                 }
                 temp = ""
             }
-            if (RPN[i] == '-' || RPN[i] == '+' || RPN[i] == '/' || RPN[i] == '*'|| RPN[i] == '%') {
+            if (RPN[i] == '-' || RPN[i] == '+' || RPN[i] == '/' || RPN[i] == '*' || RPN[i] == '%') {
 
                 if (RPN[i] == '+') {
                     var x = stackString.pop()
@@ -240,8 +227,7 @@ class IfElse : MainBlock {
                         val y = stackString.pop()
                         val count = y.toInt() + x.toInt()
                         stackString.push(count.toString())
-                    }
-                    else{
+                    } else {
                         stackString.push(x)
                         temp = RPN[i].toString()
                     }
@@ -253,9 +239,8 @@ class IfElse : MainBlock {
                             val y = stackString.pop()
                             val count = y.toInt() - x.toInt()
                             stackString.push(count.toString())
-                        }
-                        else{
-                            val count =-x.toInt()
+                        } else {
+                            val count = -x.toInt()
                             stackString.push(count.toString())
                         }
 // (-5+2)*-5
@@ -267,8 +252,7 @@ class IfElse : MainBlock {
                                 val y = stackString.pop()
                                 val count = y.toInt() * x.toInt()
                                 stackString.push(count.toString())
-                            }
-                            else{
+                            } else {
                                 stackString.push(x)
                                 temp = RPN[i].toString()
                             }
@@ -280,22 +264,19 @@ class IfElse : MainBlock {
                                     val y = stackString.pop()
                                     val count = y.toInt() / x.toInt()
                                     stackString.push(count.toString())
-                                }
-                                else{
+                                } else {
                                     stackString.push(x)
                                     temp = RPN[i].toString()
                                 }
 
-                            }
-                            else
+                            } else
                                 if (RPN[i] == '%') {
                                     var x = stackString.pop()
                                     if (!stackString.isEmpty()) {
                                         val y = stackString.pop()
                                         val count = y.toInt() % x.toInt()
                                         stackString.push(count.toString())
-                                    }
-                                    else{
+                                    } else {
                                         stackString.push(x)
                                         temp = RPN[i].toString()
                                     }
@@ -307,9 +288,10 @@ class IfElse : MainBlock {
 
         }
 
-        return(stackString.pop().toString())
+        return (stackString.pop().toString())
     }
-    private fun recognize(textBar:String):String {
+
+    private fun recognize(textBar: String): String {
         var text = textBar
         if (!textBar.contains(Regex("""([^\d|\s|^\+\-\/\*\(\)\!\%\>\<\=\&\||^a-zA-Z])"""))) {
             var matches = Regex("""(([a-zA-Z]+[0-9]*)|([0-9]+[a-zA-Z]+))""").find(text)
@@ -356,8 +338,7 @@ class IfElse : MainBlock {
 
             }
             //print(text);
-        }
-        else{
+        } else {
             //исключение(тут надо в UX выдать пользователю ошибку типо ввел невозможную переменную e.g "12awd","@#!aue" и тд)
             val matches = Regex("""([^\d|\s|^\+\-\/\*\(\)\%\>\<\=\&\||^a-zA-Z])""").find(textBar)
             ErrorString = "incorrect expression : ${matches?.value}"
@@ -369,56 +350,50 @@ class IfElse : MainBlock {
             status = false
         }
         //print(text);
-            return text
+        return text
     }
 
     private fun equality(textBar: String): String {
-        val x1:  MatchResult? = """([^>=<=!<\?\)\(])+""".toRegex().find(textBar)
-        val x2:  MatchResult? = x1?.next();
+        val x1: MatchResult? = """([^>=<=!<\?\)\(])+""".toRegex().find(textBar)
+        val x2: MatchResult? = x1?.next();
         //println(x1?.value); println(x2?.value);
-        if(x1==null || x2==null) {
+        if (x1 == null || x2 == null) {
             ErrorString = "incorrect expression : ${textBar}"
             return "";
         }
-        if(textBar.contains(Regex(""">=""")))
-        {
-            if(x1.value.toInt()>=x2.value.toInt())
+        if (textBar.contains(Regex(""">="""))) {
+            if (x1.value.toInt() >= x2.value.toInt())
                 return "1";
             else return "0"
         }
-        if(textBar.contains(Regex("""<=""")))
-        {
-            if(x1.value.toInt()<=x2.value.toInt())
+        if (textBar.contains(Regex("""<="""))) {
+            if (x1.value.toInt() <= x2.value.toInt())
                 return "1";
             else return "0"
         }
-        if(textBar.contains(Regex("""!=|<>|><""")))
-        {
-            if(x1.value.toInt()!=x2.value.toInt())
+        if (textBar.contains(Regex("""!=|<>|><"""))) {
+            if (x1.value.toInt() != x2.value.toInt())
                 return "1";
             else return "0"
         }
-        if(textBar.contains(Regex("""=""")))
-        {
-            if(x1.value.toInt()==x2.value.toInt())
+        if (textBar.contains(Regex("""="""))) {
+            if (x1.value.toInt() == x2.value.toInt())
                 return "1";
             else return "0"
         }
-        if(textBar.contains(Regex(""">""")))
-        {
-            if(x1.value.toInt()>x2.value.toInt())
+        if (textBar.contains(Regex(""">"""))) {
+            if (x1.value.toInt() > x2.value.toInt())
                 return "1";
             else return "0"
         }
-        if(textBar.contains(Regex("""<""")))
-        {
-            if(x1.value.toInt()<x2.value.toInt())
+        if (textBar.contains(Regex("""<"""))) {
+            if (x1.value.toInt() < x2.value.toInt())
                 return "1";
             else return "0"
         }
-        if (textBar=="0")
+        if (textBar == "0")
             return "0";
-        if (textBar=="1")
+        if (textBar == "1")
             return "1";
         ErrorString = "incorrect expression : ${textBar}"
         status = false
@@ -426,7 +401,7 @@ class IfElse : MainBlock {
     }
 
 
-    private fun condition(textBar:String):Int{
+    private fun condition(textBar: String): Int {
         println(textBar)
         if (textBar.contains(Regex("""((\s*\/\s*0))"""))) {
             val matches = Regex("""((\s*\/\s*0))""").find(textBar)
@@ -439,47 +414,43 @@ class IfElse : MainBlock {
         if (!text.contains(Regex("""([\|\&])""")))
             return text.toInt()
         val stack: Stack<Char> = Stack<Char>()
-        var RPN:String = ""
+        var RPN: String = ""
         for (i in text) {
-            if(i.isDigit()){
-                RPN+=i
-            }
-            else{
+            if (i.isDigit()) {
+                RPN += i
+            } else {
 
-                RPN+=' '
+                RPN += ' '
 
-                if (i == '|'){
-                    if(!stack.isEmpty()) {
+                if (i == '|') {
+                    if (!stack.isEmpty()) {
                         if (stack.peek() == '|') {
-                            if (!( RPN[RPN.length-1] == '|' )) {
+                            if (!(RPN[RPN.length - 1] == '|')) {
                                 RPN += stack.pop()
                                 RPN += ' '
                             }
 
                         }
                         stack.push(i)
-                    }
-                    else stack.push(i)
+                    } else stack.push(i)
                 }
                 if (i == '&') {
-                    if(!stack.isEmpty()) {
+                    if (!stack.isEmpty()) {
                         if (stack.peek() == '&') {
                             RPN += stack.pop()
-                            RPN+=' '
+                            RPN += ' '
                         }
                         stack.push(i)
-                    }
-                    else stack.push(i)
+                    } else stack.push(i)
                 }
 
-                if (i == '(' || i ==')') {
-                    if (i == '('){
+                if (i == '(' || i == ')') {
+                    if (i == '(') {
                         stack.push(i)
-                    }
-                    else {
-                        while(stack.peek() != '('){
-                            RPN+= stack.pop()
-                            RPN+=' '
+                    } else {
+                        while (stack.peek() != '(') {
+                            RPN += stack.pop()
+                            RPN += ' '
                         }
                         stack.pop()
                     }
@@ -488,9 +459,9 @@ class IfElse : MainBlock {
 
         }
 
-        while(!stack.isEmpty()){
-            RPN+=' '
-            RPN+= stack.pop()
+        while (!stack.isEmpty()) {
+            RPN += ' '
+            RPN += stack.pop()
         }
 
         RPN = RPN.replace("""\s+""".toRegex(), " ")
@@ -499,64 +470,61 @@ class IfElse : MainBlock {
         RPN = RPN.replace("""^\s+""".toRegex(), "")
         val stackString: Stack<String> = Stack<String>()
         var value = ""
-        var temp:String = ""
-        for (i in RPN.indices){
-            if (RPN[i]==' ') {
-                if(value!="")
+        var temp: String = ""
+        for (i in RPN.indices) {
+            if (RPN[i] == ' ') {
+                if (value != "")
                     stackString.push(value)
                 value = ""
-            }
-            else if(RPN[i].isDigit()) value += RPN[i]
-            if (temp!= "" && stackString.size>1) {
+            } else if (RPN[i].isDigit()) value += RPN[i]
+            if (temp != "" && stackString.size > 1) {
                 if (temp == "|") {
                     var x = stackString.pop()
                     if (!stackString.isEmpty()) {
                         val y = stackString.pop()
                         val count = y.toInt() + x.toInt()
-                        if(count==0)
-                        stackString.push("0")
+                        if (count == 0)
+                            stackString.push("0")
                         else stackString.push("1")
                     }
                 } else
-                        if (temp == "&") {
-                            var x = stackString.pop()
+                    if (temp == "&") {
+                        var x = stackString.pop()
 
-                            if (!stackString.isEmpty()) {
-                                val y = stackString.pop()
-                                val count = y.toInt() * x.toInt()
-                                stackString.push(count.toString())
-                            }
+                        if (!stackString.isEmpty()) {
+                            val y = stackString.pop()
+                            val count = y.toInt() * x.toInt()
+                            stackString.push(count.toString())
                         }
+                    }
                 temp = ""
             }
 
-                if (RPN[i] == '|') {
+            if (RPN[i] == '|') {
+                var x = stackString.pop()
+                if (!stackString.isEmpty()) {
+                    val y = stackString.pop()
+                    val count = y.toInt() + x.toInt()
+                    stackString.push(count.toString())
+                } else {
+                    stackString.push(x)
+                    temp = RPN[i].toString()
+                }
+            } else
+                if (RPN[i] == '&') {
                     var x = stackString.pop()
                     if (!stackString.isEmpty()) {
                         val y = stackString.pop()
-                        val count = y.toInt() + x.toInt()
+                        val count = y.toInt() * x.toInt()
                         stackString.push(count.toString())
-                    }
-                    else{
+                    } else {
                         stackString.push(x)
                         temp = RPN[i].toString()
                     }
-                } else
-                        if (RPN[i] == '&') {
-                            var x = stackString.pop()
-                            if (!stackString.isEmpty()) {
-                                val y = stackString.pop()
-                                val count = y.toInt() * x.toInt()
-                                stackString.push(count.toString())
-                            }
-                            else{
-                                stackString.push(x)
-                                temp = RPN[i].toString()
-                            }
-                        }
-            }
+                }
+        }
         println(stackString.pop().toInt())
-        return(stackString.pop().toInt())
+        return (stackString.pop().toInt())
     }
 }
 
