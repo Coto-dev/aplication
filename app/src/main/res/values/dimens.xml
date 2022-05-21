@@ -11,4 +11,7 @@
     <dimen name="paddingHeight">15dp</dimen>
     <dimen name="paddingStart">22dp</dimen>
     <dimen name="paddingName">110dp</dimen>
+    <dimen name="bottomsheet">400dp</dimen>
+    <dimen name="buttonWidth">250dp</dimen>
+    <dimen name="marginTop">20dp</dimen>
 </resources>

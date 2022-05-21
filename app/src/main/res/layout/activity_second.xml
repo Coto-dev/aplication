@@ -70,7 +70,7 @@
         <FrameLayout
             android:id="@+id/sheet"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="@dimen/bottomsheet"
             android:background="@drawable/bottom_sheet"
             app:behavior_hideable="true"
             app:behavior_peekHeight="40dp"
@@ -88,7 +88,7 @@
                 android:id="@+id/scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/block_height"
                 android:fillViewport="true">
 
                 <LinearLayout
@@ -104,8 +104,8 @@
 
                     <Button
                         android:id="@+id/for_initialization"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
                         android:layout_marginTop="90dp"
                         android:background="@drawable/button_forbottom"
@@ -113,71 +113,63 @@
 
                     <Button
                         android:id="@+id/for_arifmetic"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/marginTop"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/Equal" />
 
                     <Button
                         android:id="@+id/for_print"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/marginTop"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/Output" />
 
-<!--                    <Button-->
-<!--                        android:id="@+id/for_input"-->
-<!--                        android:layout_width="250dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:background="@drawable/button_forbottom"-->
-<!--                        android:text="@string/input" />-->
 
                     <Button
                         android:id="@+id/for_operator_if"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/marginTop"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/OperatorIf" />
 
                     <Button
                         android:id="@+id/for_operator_if_else"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/marginTop"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/OperatorIfElse" />
 
                     <Button
                         android:id="@+id/for_cycle_while"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/marginTop"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/whilecycle" />
                     <Button
                         android:id="@+id/for_array"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/marginTop"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/array" />
                     <Button
                         android:id="@+id/for_input"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/buttonWidth"
+                        android:layout_height="@dimen/block_height"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/marginTop"
                         android:background="@drawable/button_forbottom"
                         android:text="@string/inputAlert" />
 
@@ -190,7 +182,7 @@
         <FrameLayout
             android:id="@+id/sheet2"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="@dimen/bottomsheet"
             android:background="@drawable/bottom_sheet"
             app:behavior_hideable="false"
             app:behavior_peekHeight="40dp"
