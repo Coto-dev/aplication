@@ -10,11 +10,12 @@
         android:layout_margin="3dp"
         android:background="@drawable/block_button">
 
+
         <EditText
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:paddingEnd="79dp"
-            android:paddingStart="78dp"
+            android:paddingEnd="110dp"
+            android:paddingStart="110dp"
             android:id="@+id/for_array"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,7 +25,6 @@
             android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

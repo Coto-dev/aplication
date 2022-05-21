@@ -2,29 +2,40 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:minWidth="120dp"
     tools:parentTag="android.widget.LinearLayout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:background="@drawable/block_button">
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/forArifmetic"
+            android:layout_width="300dp"
+            android:minWidth="320dp"
+            android:layout_height="50dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/block_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <EditText
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:paddingEnd="110dp"
-            android:paddingStart="110dp"
+            android:textColorHint="@color/hint_color"
             android:id="@+id/for_initialization"
             android:layout_width="wrap_content"
+            android:minWidth="120dp"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
             android:hint="@string/name"
+            android:gravity="start"
             android:inputType="text"
+            android:background="@color/transparent"
             android:textColor="@color/text_color"
-            android:textColorHint="@color/hint_color"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -142,6 +142,9 @@ class SecondActivity : AppCompatActivity() {
                 binding.containerForTextView.addView(text)
                 text.background = Drawable.createFromPath("drawable/block_button.xml")
                 text.text = count
+//                binding.scrollForConsol.post{
+//                    binding.scrollForConsol.fullScroll(View.FOCUS_DOWN)
+//                }
             }
         }
 
